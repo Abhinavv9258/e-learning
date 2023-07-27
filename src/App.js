@@ -2,7 +2,7 @@ import * as React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as getDataList from './redux/actions/getAction';
-import Index from './pages/App'
+import Index from './pages/Index'
 import RegisterPage from './pages/RegisterPage'
 import UserLoginPage from './pages/UserLoginPage'
 import AdminLoginPage from './pages/AdminLoginPage'
