@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 export const useWebsiteTitle = (title) => {
     useEffect(() => {
-        document.title = `${title} - WebsiteName`;
+        document.title = `${title}`;
     }, [title]);
 
     return null;
