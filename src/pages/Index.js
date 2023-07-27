@@ -14,6 +14,7 @@ import { GrLinkNext } from "react-icons/gr";
 import adminLogin from '../assets/images/561-removebg.png'
 import userLogin from '../assets/images/558-removebg.png'
 import { Link } from "react-router-dom";
+import { useWebsiteTitle } from '../hooks/WebsiteTitle';
 
 const Index = () => {
     
@@ -82,6 +83,7 @@ const Index = () => {
     //     </React.Fragment>
     // );
 
+    useWebsiteTitle("E-Learn");
     return (
         <>
             <div className="homepage-boby">
