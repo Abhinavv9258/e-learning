@@ -1,0 +1,119 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fname": "Abhinav",
+      "lname": "Verma",
+      "email": "abhinavv218@gmail.com",
+      "phone": "9044653235",
+      "address": "Kharar, Punjab",
+      "details": "CSE Student"
+    },
+    {
+      "id": 2,
+      "fname": "Harsh",
+      "lname": "Rastogi",
+      "email": "harsh28@gmail.com",
+      "phone": "9044653235",
+      "address": "Kharar, Punjab",
+      "details": "CSE Student"
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "details": "",
+      "id": 3
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "details": "",
+      "id": 4
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "details": "",
+      "id": 5
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 6
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 7
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 8
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 9
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 10
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 11
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 12
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 13
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "name": "Verma",
+      "id": 14
+    }
+  ],
+  "admin": [
+    {
+      "name": "Abhinav Verma",
+      "email": "abhinavv218@gmail.com",
+      "username": "abhi9258",
+      "password": "Abhi@#4567",
+      "id": 1
+    },
+    {
+      "name": "Harsh",
+      "email": "harsh@gmail.com",
+      "username": "",
+      "password": "",
+      "id": 2
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+.register-form-title{
+    font-size: 20;
+    color: black;
+    margin:10px;
+}
+
+.register-input-label{
+    margin-bottom: 10px !important;
+    display: flex;
+}
+
+.register-myBtn{
+    margin-top: 10;
+    width: 30%;
+    height: 10%;
+    display: flex;
+}
+
+@media (max-width: 992px){
+    .content{
+        display:flex;
+        flex-direction: column !important;
+        justify-content: center;
+        align-items: center;
+    }
+    .register-image-col{
+        width: 540px !important;
+        height: 360px !important;
+    }
+}
