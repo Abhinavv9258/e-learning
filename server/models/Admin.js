@@ -10,6 +10,7 @@ const schema = mongoose.Schema(
         phone:'String',
         address:'String',
         stream:'String',
+        addedCouses:'String',
     },
     {timestamps: true}
 )
