@@ -6,6 +6,7 @@ import Index from './pages/Index'
 import RegisterPage from './pages/RegisterPage'
 import UserLoginPage from './pages/UserLoginPage'
 import AdminLoginPage from './pages/AdminLoginPage'
+import Homepage from './components/Homepage';
 
 // const App = () => {
 //     const dispatch = useDispatch();
@@ -33,8 +34,9 @@ const App = () => {
         return (
         <BrowserRouter>
               <Routes>
-                    <Route path='/' element={ <Index/> } />
+                    <Route path='/' element={ <Homepage/> } />
                     <Route path='/RegisterPage' element={ <RegisterPage/> } />
+                    <Route path='/Homepage' element={ <Homepage/> } />
                     <Route path='/Index' element={ <Index/> } />
                     <Route path='/adminLoginPage' element={ <AdminLoginPage/> } />
                     <Route path='/userLoginPage' element={ <UserLoginPage/> } />

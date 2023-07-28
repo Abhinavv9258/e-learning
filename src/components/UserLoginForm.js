@@ -13,25 +13,46 @@ import {
 } from '@material-ui/core';
 import '../assets/css/RegisterForm.css'
 import 'bootstrap/dist/css/bootstrap.css';
-
+import { userLogin } from '../service/api'
 
 const UserLoginForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [inputData, setInputData] = React.useState({ 
-        fname: '',
-        lname: '',
-        email:'',
-        phone:'',
-        address:'',
-        details:''
-    });
+    // const [inputData, setInputData] = React.useState({ 
+    //     fname: '',
+    //     lname: '',
+    //     email:'',
+    //     phone:'',
+    //     address:'',
+    //     details:''
+    // });
 
-    const handleSubmit = (e) => {
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     dispatch(addActionList.addData(inputData));
+    //     alert('Data added successfully');
+    //     navigate('/');
+    // }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(addActionList.addData(inputData));
-        alert('Data added successfully');
-        navigate('/');
+        // await userLogin({username: username, password: password});
+        try{
+            // console.log(data);
+            // await axios.get(`${URL}/login`, { username, password });
+            await axios.post(`${URL}/login`, { username, password });
+            // if (response.data.success) {
+            //     alert(response.data.message);
+            // } else {
+            //     alert(response.data.message);
+            // }
+        }catch(error){
+            console.log('Error while calling Api', error);
+        }
+        // navigate('/');
     }
 
     return (
@@ -54,11 +75,11 @@ const UserLoginForm = () => {
                                     </FormControl>
                                     <FormControl className='register-input-label'>
                                         <InputLabel>User-Name/Email</InputLabel>
-                                        <Input type="string" name="fname" onChange={(e) => setInputData({ ...inputData, name: e.target.value })}/>
+                                        <Input type="string" name="username" onChange={(e) => setUsername(e.target.value)}/>
                                     </FormControl>
                                     <FormControl className='register-input-label' >
                                         <InputLabel>Password</InputLabel>
-                                        <Input type="string" name="lname" onChange={(e) => setInputData({ ...inputData, name: e.target.value })}/>
+                                        <Input type="string" name="password" onChange={(e) => setPassword(e.target.value)}/>
                                     </FormControl>
                                     <FormControl style={{display:"flex","justify-content":"space-evenly",alignItems:"center","flex-direction":"row"}}>
                                         <Button className='homepage-btn' type="submit" value="submit" > LogIn </Button>

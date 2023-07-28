@@ -86,8 +86,8 @@ const Index = () => {
     useWebsiteTitle("E-Learn");
     return (
         <>
-            <div className="homepage-boby">
-                <div className="homepage-text">
+            <div className="index-boby">
+                <div className="index-text">
                     <strong>
                         E-Learn&nbsp;
                         <Typed strings={['E-Learning', 'Online Courses', 'Website.']} typeSpeed={200} backSpeed={70} loop />
@@ -99,11 +99,11 @@ const Index = () => {
                     </p>
                 </div>
 
-                <div className="d-flex homepage-card-deck" style={{width:"75%","justify-content":"space-evenly"}}>
-                    <Card className="homepage-cards" sx={{ maxWidth: 345 }}  style={{background:"transparent","margin":"10px"}}>
+                <div className="d-flex index-card-deck" style={{width:"75%","justify-content":"space-evenly"}}>
+                    <Card className="index-cards" sx={{ maxWidth: 345 }}  style={{background:"transparent","margin":"10px"}}>
                         <CardActionArea style={{cursor:"default"}}>
                             <CardMedia
-                            className="homepage-card-media"
+                            className="index-card-media"
                             component="img"
                             height="auto"
                             image={adminLogin}
@@ -117,7 +117,7 @@ const Index = () => {
                         </CardActionArea>
                         <CardActions className="d-flex justify-content-center">
                             <Link to='/RegisterPage'>
-                                <Button className="homepage-btn" >
+                                <Button className="index-btn" >
                                     Admin Login&nbsp;&nbsp;<GrLinkNext/>
                                 </Button>
                             </Link>
@@ -125,10 +125,10 @@ const Index = () => {
                         
                     </Card>
 
-                    <Card className="homepage-cards" sx={{ maxWidth: 345 }} style={{background:"transparent","margin":"10px"}}>
+                    <Card className="index-cards" sx={{ maxWidth: 345 }} style={{background:"transparent","margin":"10px"}}>
                         <CardActionArea style={{cursor:"default"}}>
                             <CardMedia
-                            className="homepage-card-media"
+                            className="index-card-media"
                             component="img"
                             height="auto"
                             image={userLogin}
@@ -143,7 +143,7 @@ const Index = () => {
 
                         <CardActions className="d-flex justify-content-center">
                             <Link to='/RegisterPage'>
-                                <Button className="homepage-btn" >
+                                <Button className="index-btn" >
                                     User Login&nbsp;&nbsp;<GrLinkNext/>
                                 </Button>
                             </Link>
