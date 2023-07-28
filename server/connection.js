@@ -9,7 +9,7 @@ const connectionParams = {
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.l5gayqw.mongodb.net/E-Learn?retryWrites=true&w=majority`;
 
 const connexion = mongoose.connect(uri, connectionParams)
-.then(() => console.log('connection established'))
-.catch((error) => console.log(error));
+.then(() => console.log('Connection established with database..!!'))
+.catch((error) => console.log('Error while connecting to database..!!',error));
 
 module.exports =  connexion
