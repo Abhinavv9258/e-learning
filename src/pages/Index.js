@@ -116,7 +116,7 @@ const Index = () => {
                             </CardContent>
                         </CardActionArea>
                         <CardActions className="d-flex justify-content-center">
-                            <Link to='/RegisterPage'>
+                            <Link to='/AdminLoginPage'>
                                 <Button className="index-btn" >
                                     Admin Login&nbsp;&nbsp;<GrLinkNext/>
                                 </Button>

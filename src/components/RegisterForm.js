@@ -13,7 +13,7 @@ import {
 import '../assets/css/RegisterForm.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
-import { addUser } from '../service/api'
+import { addUser } from '../service/api';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const RegisterForm = () => {
         e.preventDefault();
         await addUser(inputData);
         alert('Data added successfully');
-        navigate('/');
+        // navigate('/');
     }
 
     return (
