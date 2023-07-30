@@ -41,7 +41,7 @@ const Section1 = () => {
                         {/* <Link to='/RegisterPage'> */}
                             <Button
                                 className="section1-btn"
-                                // onClick={() => navigate("/signup")}
+                                onClick={() => navigate("/")}
                             >
                                 Get Started
                             </Button>

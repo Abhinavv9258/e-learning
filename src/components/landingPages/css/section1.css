@@ -157,8 +157,12 @@
     font-size: 1.5rem !important;
     outline: transparent solid 2px;
     outline-offset: 2px;
-    color: rgb(0, 86, 210);
+    color: #f76363;
     font-weight: 700;
+}
+
+.section2-companies:hover{
+    color: #f76363;
 }
 
 .section2-grid{
