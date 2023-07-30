@@ -8,9 +8,9 @@ Website Link : [https://e-learn-c3ab.onrender.com/](https://e-learn-c3ab.onrende
 
 E-Learn is an innovative online learning portal that utilizes a robust tech stack to deliver a seamless and engaging learning experience. The portal's tech stack includes the following technologies:<br/>
 <ul type = "square">
-  <li><strong>Programming Languages:</strong> JavaScript, Node.js</li>
   <li><strong>Front-end:</strong> ReactJS, HTML5, CSS, Bootstrap</li>
   <li><strong>UI Library:</strong> Material-UI</li>
+  <li><strong>Programming Languages:</strong> JavaScript, Node.js</li>
   <li><strong>Database:</strong> MongoDB</li>
   <li><strong>Version Control:</strong> Git</li>
 </ul>
