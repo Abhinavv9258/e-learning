@@ -70,17 +70,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 <hr />
-<hr />
 
 ## About Project (E-Learn) 
-<br/>
+
 ### Admin Login Credentials
- Username: deep12 
- <br/>
- Password: deep123
- <br/>
- <br/>
+
+<br/>
+Username: deep12 
+<br/>
+Password: deep123
+<br/>
+<br/>
+
 ### User Login Credentials
- Username: deep12 
- <br/>
- Password: deep123
+
+<br/>
+Username: deep12 
+<br/>
+Password: deep123
