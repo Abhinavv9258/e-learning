@@ -1,5 +1,5 @@
 import React from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/Footer.css'
 import {
     FormControl,
@@ -7,7 +7,12 @@ import {
     Input,
     Button,
 } from '@material-ui/core';
+import { FaYoutube,FaTwitter,FaFacebookSquare } from "react-icons/fa";
+import '../assets/css/Footer.css';
+import { useNavigate } from "react-router-dom";
+
 const Footer = () => {
+    const navigate = useNavigate();
     return (
         <>
         <footer id="footer" class="footer-1" style={{"margin-top":"20px",padding:"15px 0 15px 0","box-shadow": "0px -3px 1px -2px rgba(0,0,0,0.2), 0px -2px 2px 0px rgba(0,0,0,0.14), 0px -1px 5px 0px rgba(0,0,0,0.12)"}}>
@@ -31,10 +36,14 @@ const Footer = () => {
                             <span style={{"background":"#839FAD none repeat scroll 0 0","display":"block",height:"1.5px","margin-top":"5px","width":"50%"}}></span>                            </h5>
                             <ul class="thumbnail-widget" style={{"padding-left": 0, "list-style": "none"}}>
                                 <li>
-                                    <div class="thumb-content"><a href="#.">&nbsp;Get Started</a></div> 
+                                    <div class="thumb-content" onClick={() => navigate("/")}><a href="">
+                                    {/* &nbsp; */}
+                                    Get Started</a></div> 
                                 </li>
                                 <li>
-                                    <div class="thumb-content"><a href="#.">&nbsp;Top Leaders</a></div> 
+                                    <div class="thumb-content" onClick={() => navigate("/")}><a href="">
+                                    {/* &nbsp; */}
+                                    Top Performers</a></div> 
                                 </li>
                             </ul>
                         </div>
@@ -45,9 +54,11 @@ const Footer = () => {
                             <h5 class="widget-title" style={{"margin-bottom": "20px"}}>Follow up
                             <span style={{"background": "#839FAD none repeat scroll 0 0","display":"block","height":"1.5px","margin-top":"10px","position":"relative","width":"20%"}}></span>
                             <span style={{"background":"#839FAD none repeat scroll 0 0","display":"block",height:"1.5px","margin-top":"5px","width":"50%"}}></span>                            </h5>
-                            <a href="#"> <i class="fa fa-facebook"> </i> </a>
-                            <a href="#"> <i class="fa fa-twitter"> </i> </a>
-                            <a href="#"> <i class="fa fa-youtube"> </i> </a>
+                                <section className='social-section'>
+                                    <Button className="social-btn btn-outline-dark btn-floating m-1" href="#!"><FaYoutube className='social-icon'/></Button>
+                                    <Button className="social-btn btn-outline-dark btn-floating m-1" href="#!"><FaFacebookSquare className='social-icon'/></Button>
+                                    <Button className="social-btn btn-outline-dark btn-floating m-1" href="#!"><FaTwitter className='social-icon'/></Button>
+                                </section>
                         </div>
                     </div>
                     <br/>
