@@ -40,5 +40,14 @@ userRoute.post('/login', async (req, res) => {
     }
 });
 
+userRoute.get('/all',async(req,res)=>{
+    try{
+        const userInfo = await userModel.find({});
+        res.json(userInfo);
+    }catch(error){
+        res.status(500).send(error);
+    }
+})
+
 
 module.exports = { userRoute };

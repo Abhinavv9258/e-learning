@@ -20,7 +20,6 @@ app.use("/courses", courseRoute);
 app.use("/admin", adminRoute);
 app.use("/user", userRoute);
 
-
 // CRUD OPERATIONS
 // app.post('/',async(req,res)=>{
 //     const {title,content} = req.body;
