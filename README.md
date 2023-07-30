@@ -14,7 +14,6 @@ E-Learn is an innovative online learning portal that utilizes a robust tech stac
   <li><strong>Database:</strong> MongoDB</li>
   <li><strong>Version Control:</strong> Git</li>
 </ul>
-<br/>
 
 E-Learn is a comprehensive online learning portal with various functionalities and pages that cater to both users and administrators. Here's a list of its key features and pages: Landing Page, Separate Accounts for User & Admin, Sign-In/Sign-Out Functionality, Course Page (Admin can Add, Remove, Update Courses), CRUD Operation (Create, Read, Update, Delete).<br/><br/>
 E-Learn has a feature-rich platform which aims to provide a seamless learning experience for users, while administrators have the necessary tools to manage course content and user accounts effectively.<br/><br/>
