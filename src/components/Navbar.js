@@ -33,7 +33,7 @@ const NavbarComponent = () => {
                                 </NavDropdown>
                           </Nav>
                     </Navbar.Collapse>
-                    <Navbar.Brand href="#home"><Link to='/Index'><Button className='navbar-btn'>LogIn/SignUp</Button></Link></Navbar.Brand>
+                    <Navbar.Brand><Link to='/Index'><Button className='navbar-btn'>LogIn/SignUp</Button></Link></Navbar.Brand>
                 </Container>
             </Navbar>
         </>

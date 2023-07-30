@@ -20,7 +20,7 @@ const Footer = () => {
                             <span style={{"background": "#839FAD none repeat scroll 0 0","display":"block","height":"1.5px","margin-top":"10px","position":"relative","width":"20%"}}></span>
                             <span style={{"background":"#839FAD none repeat scroll 0 0","display":"block",height:"1.5px","margin-top":"5px","width":"50%"}}></span>
                             </h5>
-                            <p>About the company, little description will goes here.. </p>
+                            <p>E-Learn is an innovative online learning portal that utilizes a robust tech stack to deliver a seamless and engaging learning experience.  </p>
                         </div>
                     </div>
 
@@ -59,14 +59,14 @@ const Footer = () => {
                             <span style={{"background":"#839FAD none repeat scroll 0 0","display":"block","height":"1.5px","margin-top":"10px","width":"20%"}}></span>
                             <span style={{"background":"#839FAD none repeat scroll 0 0","display":"block","height":"1.5px","margin-top":"5px","width":"50%"}}></span>                            
                             </h5>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                            <p>Subscribe us for daily updates and news.</p>
                             <div class="emailfield">
                                 {/* <input type="text" name="email" placeholder='Email'/> */}
                                     <FormControl className='input-label' style={{width:"75%","padding-bottom":"10px",display:"flex","justify-content":"center","align-items":"center"}} >
                                         <InputLabel>Email</InputLabel>
                                         <Input type="email" name="email" style={{width:"100%"}}/>
                                     </FormControl>  
-                                <Button variant="contained" style={{width:"75%"}} type="submit" value="submit"> Subscribe </Button>
+                                <Button className='navbar-btn' style={{width:"75%"}} type="submit" value="submit"> Subscribe </Button>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ const Footer = () => {
                 <div class="container" >
                     <div class="row">
                         <div class="col-md-12 text-center" >
-                            <p>Copyright Design Sherif Hamdy © 2019. All rights reserved.</p>
+                            <p>Copyright Abhinav Verma © 2023. All rights reserved.</p>
                         </div>
                     </div>
                 </div>
