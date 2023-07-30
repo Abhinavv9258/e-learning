@@ -50,3 +50,11 @@ export const adminLogin = async ({ username, password }) => {
         console.log('Error while calling Api', error);
     }
 }
+
+export const addCourse = async (data) => {
+    try{
+        return await axios.post(`${URL}/courses/add`, data);
+    }catch(error){
+        console.log('Error while calling Api', error);
+    }
+}

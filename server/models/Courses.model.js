@@ -1,31 +1,46 @@
 const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
+    adminUsername:{
+        type: String,
+        // require:true
+    },
     title: {
         type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
+        // required: true
     },
     category:{
         type:String,
-        require:true
+        // require:true
     },
-    admin:{
+    subCategory:{
+        type:String,
+        // require:true
+    },
+    topic:{
+        type:String,
+        // require:true
+    },
+    description: {
         type: String,
-        require:true
+        // required: true
     },
-    adminID:{
-        type: mongoose.Schema.Types.ObjectId,
-        require:true
+    language:{
+        type:String,
+        // require:true
+    },
+    videoDuration:{
+        type:String,
+        // require:true
     },
     price:{
         type:Number,
-        require:true,
-    }
-    ,
+        // require:true,
+    },
+    thumbnail:{
+        type:String,
+        // require:true,
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -33,8 +48,8 @@ const schema = mongoose.Schema({
     updateAt: {
         type: Date,
         default: Date.now
-    },
-    videos: [{type: mongoose.Schema.Types.ObjectId, ref: "videos"}],
+    }
+    // videos: [{type: mongoose.Schema.Types.ObjectId, ref: "videos"}],
 });
 
 const Courses = mongoose.model('Courses',schema);
