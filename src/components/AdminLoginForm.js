@@ -116,7 +116,7 @@ const AdminLoginForm = () => {
         e.preventDefault();
         await adminLogin(inputData);
         alert('Login successfully');
-        // navigate('/');
+        navigate('/AdminDashboard');
     }
     return(
         <>

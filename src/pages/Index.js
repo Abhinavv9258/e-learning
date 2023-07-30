@@ -15,6 +15,9 @@ import adminLogin from '../assets/images/561-removebg.png'
 import userLogin from '../assets/images/558-removebg.png'
 import { Link } from "react-router-dom";
 import { useWebsiteTitle } from '../hooks/WebsiteTitle';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+
 
 const Index = () => {
     
@@ -86,6 +89,7 @@ const Index = () => {
     useWebsiteTitle("E-Learn");
     return (
         <>
+        <Navbar />
             <div className="index-boby">
                 <div className="index-text">
                     <strong>
@@ -118,7 +122,7 @@ const Index = () => {
                         <CardActions className="d-flex justify-content-center">
                             <Link to='/AdminLoginPage'>
                                 <Button className="index-btn" >
-                                    Admin Login&nbsp;&nbsp;<GrLinkNext/>
+                                    Admin Login&nbsp;&nbsp;<GrLinkNext className="index-btn-icon"/>
                                 </Button>
                             </Link>
                         </CardActions>
@@ -151,6 +155,7 @@ const Index = () => {
                     </Card>
                 </div>
             </div>
+            <Footer />
         </>
     );
 };

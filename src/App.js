@@ -6,7 +6,8 @@ import Index from './pages/Index'
 import RegisterPage from './pages/RegisterPage'
 import UserLoginPage from './pages/UserLoginPage'
 import AdminLoginPage from './pages/AdminLoginPage'
-import Homepage from './components/Homepage';
+import AdminDashboard from './pages/AdminDashboard'
+import Homepage from './pages/Homepage';
 
 // const App = () => {
 //     const dispatch = useDispatch();
@@ -29,6 +30,7 @@ import Homepage from './components/Homepage';
 //         </BrowserRouter>
 //     );
 // }
+export const URL = process.env.REACT_APP_SERVER_URL;
 
 const App = () => {
         return (
@@ -37,6 +39,7 @@ const App = () => {
                     <Route path='/' element={ <Homepage/> } />
                     <Route path='/RegisterPage' element={ <RegisterPage/> } />
                     <Route path='/Homepage' element={ <Homepage/> } />
+                    <Route path='/AdminDashboard' element={ <AdminDashboard/> } />
                     <Route path='/Index' element={ <Index/> } />
                     <Route path='/adminLoginPage' element={ <AdminLoginPage/> } />
                     <Route path='/userLoginPage' element={ <UserLoginPage/> } />

@@ -3,8 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin: 20px;
     /* background-color: rgba(14,14,14,0.76); */
 }
 
@@ -61,6 +60,19 @@
 
 .index-btn:hover {
     transition: all ease 0.3s;
+    color: #f76363 !important;
+}
+
+.index-btn:active{
+    color: #f76363 !important;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+}
+
+.index-btn-icon{
+    color: red !important;
 }
 
 /*----------Resposive--------*/
