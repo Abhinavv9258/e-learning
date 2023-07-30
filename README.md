@@ -42,9 +42,9 @@ Website Link : [https://e-learn-c3ab.onrender.com/](https://e-learn-c3ab.onrende
 
 ### Description
 
-E-Learn is an innovative online learning portal that utilizes a robust tech stack to deliver a seamless and engaging learning experience. The portal's tech stack includes the following technologies: ReactJS, Material-UI, HTML5, CSS, JavaScript, and Bootstrap, Node.js, MongoDB.<br/>
-E-Learn is a comprehensive online learning portal with various functionalities and pages that cater to both users and administrators. Here's a list of its key features and pages: Landing Page, Separate Accounts for User & Admin, Sign-In/Sign-Out Functionality, Course Page (Admin can Add, Remove, Update Courses), CRUD Operation (Create, Read, Update, Delete).<br/>
-E-Learn has a feature-rich platform which aims to provide a seamless learning experience for users, while administrators have the necessary tools to manage course content and user accounts effectively.<br/>
+E-Learn is an innovative online learning portal that utilizes a robust tech stack to deliver a seamless and engaging learning experience. The portal's tech stack includes the following technologies: ReactJS, Material-UI, HTML5, CSS, JavaScript, and Bootstrap, Node.js, MongoDB.<br/><br/>
+E-Learn is a comprehensive online learning portal with various functionalities and pages that cater to both users and administrators. Here's a list of its key features and pages: Landing Page, Separate Accounts for User & Admin, Sign-In/Sign-Out Functionality, Course Page (Admin can Add, Remove, Update Courses), CRUD Operation (Create, Read, Update, Delete).<br/><br/>
+E-Learn has a feature-rich platform which aims to provide a seamless learning experience for users, while administrators have the necessary tools to manage course content and user accounts effectively.<br/><br/>
 In the E-Learn project, an API for LogIn, SignUp, and CRUD operations has been implemented using Node.js, and MongoDB is utilized as the database for data storage and administration. The API facilitates the management of user accounts, course data, and other relevant information necessary for the smooth functioning of the online learning platform. The combination of Node.js, MongoDB, and the implemented API makes E-Learn a powerful and user-friendly online learning platform, providing a seamless learning experience for its users.<br/>
 
 
