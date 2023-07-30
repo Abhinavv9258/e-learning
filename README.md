@@ -1,4 +1,4 @@
-# E-Learn
+# E-Learn: Online Learning Portal
 
 ### Deployed Site Link
 
