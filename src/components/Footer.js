@@ -21,7 +21,7 @@ const Footer = () => {
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="widget subscribe no-box">
-                            <h5 class="widget-title" style={{"margin-bottom": "20px"}}>COMPANY NAME
+                            <h5 class="widget-title" style={{"margin-bottom": "20px"}}>E-Learn: Online Learning Portal
                             <span style={{"background": "#839FAD none repeat scroll 0 0","display":"block","height":"1.5px","margin-top":"10px","position":"relative","width":"20%"}}></span>
                             <span style={{"background":"#839FAD none repeat scroll 0 0","display":"block",height:"1.5px","margin-top":"5px","width":"50%"}}></span>
                             </h5>
