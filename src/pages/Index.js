@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Typed from "react-typed"; // You need to install 'react-typed' via npm or yarn
 import '../assets/css/Index.css'
 import Card from '@mui/material/Card';

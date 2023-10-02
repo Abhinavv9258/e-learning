@@ -7,7 +7,7 @@ import UserLoginPage from './pages/UserLoginPage'
 // import AdminDashboard from './pages/AdminDashboard'
 import Homepage from './pages/Homepage';
 import './App.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for styling
 
 
