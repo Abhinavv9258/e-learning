@@ -1,3 +1,4 @@
+/*
 const express = require("express");
 const userModel = require("../models/Users.model");
 const userRoute = express.Router();
@@ -51,3 +52,77 @@ userRoute.get('/all',async(req,res)=>{
 
 
 module.exports = { userRoute };
+
+*/
+
+const express = require('express');
+const userRoutes = express.Router();
+const {
+    updateUser,
+    deleteUser,
+    getUser,
+    getAllUsers
+} = require('../controllers/users.controllers.js')
+
+const { verifyToken, verifyUser, verifyAdmin } = require('../utils/verifyToken.js')
+
+
+userRoutes.get("/checkauthentication", verifyToken, (req, res, next) => {
+    // res.send("Hello user you are logged in.")
+    try {
+        // Assuming that the user information is available in req.user
+        const user = req.user;
+        res.json(user);
+    } catch (error) {
+        // Handle errors
+        console.error("Error checking authentication:", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+userRoutes.get("/checkuser/:id", verifyUser, (req, res, next) => {
+    // res.send("Hello user, you are logged in & you can delete your account.")
+    try {
+        // Assuming that the user information is available in req.user
+        const user = req.user;
+        res.send(`Hello ${user.name}, you are logged in & you can delete your account.`);
+    } catch (error) {
+        // Handle errors
+        console.error("Error checking user:", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+userRoutes.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {
+    // res.send("Hello admin, you are logged in & you can delete all accounts.")
+    try {
+        // Assuming that the user information is available in req.user
+        const user = req.user;
+        res.send(`Hello ${user.name}, you are logged in & you can delete all accounts.`);
+    } catch (error) {
+        // Handle errors
+        console.error("Error checking admin:", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+//CREATE
+// userRoutes.post("/", createUser);
+
+//UPDATE
+userRoutes.put("/:id", verifyUser, updateUser);
+
+//DELETE
+userRoutes.delete("/:id", verifyUser, deleteUser);
+
+//GET
+userRoutes.get("/:id", verifyUser, getUser);
+
+//GET ALL
+userRoutes.get("/", verifyAdmin, getAllUsers);
+
+
+module.exports = { userRoutes };

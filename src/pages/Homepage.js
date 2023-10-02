@@ -10,7 +10,7 @@ import Navbar from '../components/Navbar';
 
 const Homepage = () => {
     return (
-        <div>
+        <div className='app-container'>
             <Navbar />
             <Section1 />
             <Section2 />

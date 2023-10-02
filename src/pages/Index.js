@@ -17,6 +17,9 @@ import { Link } from "react-router-dom";
 import { useWebsiteTitle } from '../hooks/WebsiteTitle';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import '../App.css'; // Import your CSS
+import { ToastContainer } from 'react-toastify';
+
 
 
 const Index = () => {
@@ -88,9 +91,9 @@ const Index = () => {
 
     useWebsiteTitle("E-Learn");
     return (
-        <>
+        <div className ="app-container">
         <Navbar />
-            <div className="index-boby">
+            <div className="index-body">
                 <div className="index-text">
                     <strong>
                         E-Learn&nbsp;
@@ -155,8 +158,9 @@ const Index = () => {
                     </Card>
                 </div>
             </div>
+            <ToastContainer/>
             <Footer />
-        </>
+        </div>
     );
 };
 

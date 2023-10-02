@@ -1,13 +1,13 @@
 import * as React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import * as getDataList from './redux/actions/getAction';
 import Index from './pages/Index'
 import RegisterPage from './pages/RegisterPage'
 import UserLoginPage from './pages/UserLoginPage'
-import AdminLoginPage from './pages/AdminLoginPage'
-import AdminDashboard from './pages/AdminDashboard'
+// import AdminLoginPage from './pages/AdminLoginPage'
+// import AdminDashboard from './pages/AdminDashboard'
 import Homepage from './pages/Homepage';
+import './App.css';
+
 
 // const App = () => {
 //     const dispatch = useDispatch();
@@ -39,9 +39,9 @@ const App = () => {
                     <Route path='/' element={ <Homepage/> } />
                     <Route path='/RegisterPage' element={ <RegisterPage/> } />
                     <Route path='/Homepage' element={ <Homepage/> } />
-                    <Route path='/AdminDashboard' element={ <AdminDashboard/> } />
+                    {/* <Route path='/AdminDashboard' element={ <AdminDashboard/> } /> */}
                     <Route path='/Index' element={ <Index/> } />
-                    <Route path='/adminLoginPage' element={ <AdminLoginPage/> } />
+                    {/* <Route path='/adminLoginPage' element={ <AdminLoginPage/> } /> */}
                     <Route path='/userLoginPage' element={ <UserLoginPage/> } />
               </Routes>
         </BrowserRouter>

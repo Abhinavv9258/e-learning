@@ -1,20 +1,25 @@
 const express = require('express');
-const db = require('./connection');
 const app = express();
 const cors = require('cors');
 const dotenv = require('dotenv');
-const port = process.env.PORT;
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+
+// database config
+const db = require('./connection');
+const port = process.env.PORT || 3030;
 
 //import routes
-const { userRoute } = require("./routes/users.route");
-const { courseRoute } = require("./routes/courses.route");
+const { auth } = require("./middlewares/auth");
+const { userRoutes } = require("./routes/users.route");
+const { courseRoutes } = require("./routes/courses.route");
 const { adminRoute } = require("./routes/admin.route");
 
-
+// config env
 dotenv.config();
+
+app.use(cors());
 
 mongoose.connection.on("disconnected", () => {
     console.log("MongoDB connection disconnected.");
@@ -24,23 +29,23 @@ mongoose.connection.on("connected", () => {
     console.log("MongoDB connection connected.");
 });
 
-app.use(cors());
-app.use(express.urlencoded({extended: true}));
-// app.use(express.json());
-// app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb', extended: true}));
 
+// middleware routes
+app.use(cookieParser());
+app.use(express.json());
+app.use(morgan('dev'));
+app.use("/api/auth", auth);
+
+
+// routes
+app.use("/api/users", userRoutes);
+app.use("/api/courses", courseRoutes);
+
+
+/*
 // courses routes
-app.use("/courses", courseRoute);
-app.use("/admin", adminRoute);
-app.use("/user", userRoute);
+// app.use("/user", userRoute);
 
-// bodyParser = {
-//   json: {limit: '50mb', extended: true},
-//   urlencoded: {limit: '50mb', extended: true}
-// };
 
 // CRUD OPERATIONS
 // app.post('/',async(req,res)=>{
@@ -54,7 +59,7 @@ app.use("/user", userRoute);
 // });
 
 
-// user registeration
+// user registration
 // app.post('/RegisterPage',async(req,res)=>{
 //     const user = req.body;
 //     const data = new userModel(user);
@@ -137,7 +142,21 @@ app.use("/user", userRoute);
 //     }
 // })
 
+*/
+
+// error handler
+app.use((err, req, res, next) => {
+    const errorStatus = err.status || 500
+    const errorMessage = err.message || "Something went wrong!"
+    return res.status(errorStatus).json({
+        success: false,
+        status: errorStatus,
+        message: errorMessage,
+        stack: err.stack,
+    })
+})
+
 
 app.listen(port, () => {
-    console.log('listening on port ' + port + '........');
+    console.log(`Server running on port ${port} ........`);
 })
