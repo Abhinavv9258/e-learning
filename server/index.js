@@ -2,13 +2,27 @@ const express = require('express');
 const db = require('./connection');
 const app = express();
 const cors = require('cors');
-const crypto = require('crypto');
-var bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const port = process.env.PORT;
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 //import routes
 const { userRoute } = require("./routes/users.route");
 const { courseRoute } = require("./routes/courses.route");
 const { adminRoute } = require("./routes/admin.route");
+
+
+dotenv.config();
+
+mongoose.connection.on("disconnected", () => {
+    console.log("MongoDB connection disconnected.");
+});
+
+mongoose.connection.on("connected", () => {
+    console.log("MongoDB connection connected.");
+});
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
@@ -124,6 +138,6 @@ app.use("/user", userRoute);
 // })
 
 
-app.listen(3030, () => {
-    console.log('Listning to port 3030...');
+app.listen(port, () => {
+    console.log('listening on port ' + port + '........');
 })
