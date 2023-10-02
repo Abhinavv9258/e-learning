@@ -11,6 +11,8 @@ import { useUser } from '../context/AuthContext'; // Import the AuthContext
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import logo from '../assets/images/logo.png'
+
 
 const NavbarComponent = () => {
     const { user, setUser } = useUser();
@@ -30,10 +32,13 @@ const NavbarComponent = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Navbar.Brand href="#home"><Link className='navbar-brand-link' to='/'>E-Learn</Link></Navbar.Brand>
-                            <Nav.Link href="#home"><Link className='navbar-link' to='/'>Home</Link></Nav.Link>
-                            <Nav.Link href="#link"><Link className='navbar-link' to='/'>About Us</Link></Nav.Link>
-                                <NavDropdown title="Courses" id="basic-nav-dropdown" >
+                            <Navbar.Brand><Link className='navbar-brand-link' to='/'>                        
+                                <img src={logo} className='e-learn-logo' alt="logo" />
+                                E-Learn</Link>
+                            </Navbar.Brand>
+                            <Nav.Link className='navbar-link'><Link className='nav-link' to='/'>Home</Link></Nav.Link>
+                            <Nav.Link className='navbar-link'><Link className='nav-link' to='/'>About Us</Link></Nav.Link>
+                            <NavDropdown className='navbar-link-dropdown' title="Courses" id="basic-nav-dropdown" >
                                 <div >
                                     <NavDropdown.Item href="#action/3.1" className='nav-dropdown-item'>
                                         <Link className='navbar-action-link' to='/'>All Courses</Link>

@@ -8,6 +8,8 @@
 
 .navbar-brand-link{
     color: black;
+    display: flex;
+    align-items: center;
     text-decoration: none;
     background-color: transparent;
 }
@@ -23,10 +25,34 @@
     color: #f76363;
 }
 
-.navbar-link{
+.e-learn-logo{
+    height: 45px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.navbar-link, .nav-link{
     color: rgba(0,0,0,.5);
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
+}
+
+.nav-link:hover{
+    color: #f76363 !important;
+    text-decoration: none;
+    background-color: transparent;
+    transition: all ease 0.3s;
+}
+
+.nav-link:active{
+    color: #f76363 !important;
+}
+
+.nav-link:focus{
+    color: #f76363 !important;
 }
 
 .navbar-link:hover{
@@ -109,8 +135,53 @@
     margin-top:10px !important;
 }
 
-@media(max-width:992px){
-    .dropdown-menu{
-        margin-top: 2px !important;
-    }   
+@media(max-width:992px){ 
+    .e-learn-logo{
+        height: 45px;
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+    .navbar-link-dropdown{
+        justify-content: flex-start !important;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+    #basic-nav-dropdown{
+        justify-content: flex-start !important;
+    }
+    .navbar-link{
+        color: rgba(0,0,0,.5);
+        text-decoration: none;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: transparent;
+    }
+}
+
+@media(max-width:576px){ 
+    .main-navbar{
+        padding-left: 11px !important;
+        padding-right: 11px !important;
+    }
+    .e-learn-logo{
+        height: 45px;
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+    .navbar-link-dropdown{
+        justify-content: flex-start !important;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+    #basic-nav-dropdown{
+        justify-content: flex-start !important;
+    }
+    .navbar-link{
+        color: rgba(0,0,0,.5);
+        text-decoration: none;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: transparent;
+    }
+
 }
