@@ -53,8 +53,8 @@ const UserLoginForm = () => {
 
                 if (data.status === 200) {
                     // Login successful
+                    try{
                     const res = await data.json();
-                    console.log(res.user.username);
                     // Assuming the server response includes the user's name
                     setUser({
                         username: res.user.username, // Adjust this according to your server response
@@ -69,6 +69,14 @@ const UserLoginForm = () => {
 
                     // Redirect to a different page, e.g., the user's dashboard
                     navigate("/");
+                } catch (jsonError) {
+                    // Handle JSON parsing error
+                    console.error("Error parsing JSON response:", jsonError);
+                    toast.error("An error occurred during login. Please try again later.", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                }
                 } else {
                     // Login failed, handle the error message from the server
                     const response = await data.json();
