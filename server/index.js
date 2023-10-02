@@ -18,7 +18,11 @@ const { adminRoute } = require("./routes/admin.route");
 // config env
 dotenv.config();
 
-app.use(cors());
+app.use(cors({
+credentials: true,
+    origin: [`${process.env.REACT_APP_CLIENT_URL}`, `${process.env.REACT_APP_SERVER_URL}`]
+}));
+
 
 mongoose.connection.on("disconnected", () => {
     console.log("MongoDB connection disconnected.");
