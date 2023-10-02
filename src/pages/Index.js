@@ -18,8 +18,6 @@ import { useWebsiteTitle } from '../hooks/WebsiteTitle';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import '../App.css'; // Import your CSS
-import { ToastContainer } from 'react-toastify';
-
 
 
 const Index = () => {
@@ -88,6 +86,7 @@ const Index = () => {
     //         <Footer />
     //     </React.Fragment>
     // );
+    
 
     useWebsiteTitle("E-Learn");
     return (
@@ -158,7 +157,6 @@ const Index = () => {
                     </Card>
                 </div>
             </div>
-            <ToastContainer/>
             <Footer />
         </div>
     );

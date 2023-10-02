@@ -7,6 +7,8 @@ import UserLoginPage from './pages/UserLoginPage'
 // import AdminDashboard from './pages/AdminDashboard'
 import Homepage from './pages/Homepage';
 import './App.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for styling
 
 
 // const App = () => {
@@ -35,6 +37,7 @@ export const URL = process.env.REACT_APP_SERVER_URL;
 const App = () => {
         return (
         <BrowserRouter>
+            <ToastContainer />
               <Routes>
                     <Route path='/' element={ <Homepage/> } />
                     <Route path='/RegisterPage' element={ <RegisterPage/> } />

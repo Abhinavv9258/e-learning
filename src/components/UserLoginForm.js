@@ -50,13 +50,6 @@ const UserLoginForm = () => {
                         password
                     })
                 });
-                // const res = await data.json();
-                // console.log(res);
-                // toast.success(`User Logged In! Welcome, ${username}`, {
-                //     position: toast.POSITION.TOP_RIGHT, 
-                //     autoClose: 3000, 
-                // });
-                // navigate("/")
 
                 if (data.status === 200) {
                     // Login successful
@@ -75,7 +68,7 @@ const UserLoginForm = () => {
                     localStorage.setItem("access_token", res.token);
 
                     // Redirect to a different page, e.g., the user's dashboard
-                    // navigate("/");
+                    navigate("/");
                 } else {
                     // Login failed, handle the error message from the server
                     const response = await data.json();

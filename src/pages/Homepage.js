@@ -8,11 +8,13 @@ import Cards from '../components/landingPages/Cards';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
+
 const Homepage = () => {
     return (
         <div className='app-container'>
             <Navbar />
             <Section1 />
+
             <Section2 />
             {/* <Section3 />
             <Section4 />

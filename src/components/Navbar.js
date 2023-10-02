@@ -9,17 +9,17 @@ import {Link}  from 'react-router-dom'
 import '../assets/css/Navbar.css'
 import { useUser } from '../context/AuthContext'; // Import the AuthContext
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NavbarComponent = () => {
-    const { user, setUser } = useUser(); // Access user data and setUser function from the context
+    const { user, setUser } = useUser();
     const navigate = useNavigate();
-    
+
     const handleLogout = () => {
-        // Clear the user data and token
         setUser(null);
-        // Remove the token from local storage
         localStorage.removeItem("access_token");
-        // Redirect to the home page or any other page as needed
+        toast.success("Successfully Logged Out");
         navigate("/");
     };
 
@@ -47,15 +47,21 @@ const NavbarComponent = () => {
                                 </NavDropdown>
                           </Nav>
                     </Navbar.Collapse>
-                    {/* <Navbar.Brand><Link to='/Index'><Button className='navbar-btn'>LogIn/SignUp</Button></Link></Navbar.Brand> */}
-                    {/* Conditional rendering based on user login */}
+
                     {user ? (
-                        <Navbar.Brand >
-                            <NavDropdown title={user.username} id="user-dropdown">
-                                <NavDropdown.Item>Profile</NavDropdown.Item>
-                                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-                            </NavDropdown>
-                        </Navbar.Brand>
+                        <Button className='navbar-btn navbar-user-dropdown'>                        
+                            <Navbar.Brand className='navbar-user-dropdown'>
+                                <NavDropdown
+                                    className='navbar-user-dropdown-items'
+                                    title={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
+                                    id="user-dropdown"
+                                >
+                                        <NavDropdown.Item className='nav-dropdown-item'>Profile</NavDropdown.Item>
+                                        <NavDropdown.Item className='nav-dropdown-item' onClick={handleLogout}>Logout</NavDropdown.Item>
+                                </NavDropdown>
+                            </Navbar.Brand>
+                        </Button>
+
                     ) : (
                         <Navbar.Brand><Link to='/Index'><Button className='navbar-btn'>LogIn/SignUp</Button></Link></Navbar.Brand>
                     )}
