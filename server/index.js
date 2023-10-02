@@ -4,7 +4,6 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
 
 // database config
 const db = require('./connection');
@@ -33,7 +32,6 @@ mongoose.connection.on("connected", () => {
 // middleware routes
 app.use(cookieParser());
 app.use(express.json());
-app.use(morgan('dev'));
 app.use("/api/auth", auth);
 
 
