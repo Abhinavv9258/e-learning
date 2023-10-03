@@ -21,6 +21,7 @@ const register = async (req, res, next) => {
         // Return the user object without the password field
         const userWithoutPassword = { ...savedUser._doc };
         delete userWithoutPassword.password;
+        console.log(userWithoutPassword);
         res.status(201).send({ user: userWithoutPassword });
     } catch (err) {
         next(err);
@@ -60,6 +61,7 @@ const login = async (req, res, next) => {
         //     })
         //     .status(200)
         //     .send({ ...otherDetails });
+        console.log(otherDetails);
         res.status(200).send({ user: otherDetails, token });
     } catch (err) {
         next(err);
