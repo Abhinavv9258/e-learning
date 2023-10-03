@@ -137,7 +137,7 @@ const RegisterForm = () => {
                         stream
                     })
                 });
-
+                console.log('status code : ',data.status);
                 if (data.status === 201) {
                     // Registration successful
                     navigate("/");

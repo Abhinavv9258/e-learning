@@ -50,17 +50,13 @@ const UserLoginForm = () => {
                         password
                     })
                 });
-
+                console.log('status code : ', data.status);
                 if (data.status === 200) {
                     // Login successful
                     try {
-                        const text = await data.text();
-                        // console.log(data.json());
-                        console.log('text: ',text);
-                        // if (text && text.user && text.token) {
-                        if (text) {
-                            const res = JSON.parse(text);
-                            console.log('res: ',res);
+                        const res = await data.json();
+                        if (res && res.user && res.token) {
+
                             // Assuming the server response includes the user's name
                             setUser({
                                 username: res.user.username, // Adjust this according to your server response
@@ -77,7 +73,7 @@ const UserLoginForm = () => {
                             navigate("/");
                         } else {
                             // Handle unexpected response structure
-                            console.error("Unexpected response structure:", text);
+                            console.error("Unexpected response structure:", res);
                             toast.error("An error occurred during login. Please try again later.", {
                                 position: toast.POSITION.TOP_RIGHT,
                                 autoClose: 3000,
