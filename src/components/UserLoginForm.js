@@ -51,7 +51,7 @@ const UserLoginForm = () => {
                         password
                     })
                 });
-                console.log('status code : ', data.status);
+
                 if (data.status === 200) {
                     // Login successful
                     try {
