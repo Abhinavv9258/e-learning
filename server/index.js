@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const dotenv = require('dotenv');
+require("dotenv").config()
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 // database config
-const db = require('./connection');
+const { connexion } = require('./connection');
+
 const port = process.env.PORT || 3030;
 
 //import routes
@@ -15,11 +16,9 @@ const { userRoutes } = require("./routes/users.route");
 const { courseRoutes } = require("./routes/courses.route");
 const { adminRoute } = require("./routes/admin.route");
 
-// config env
-dotenv.config();
 
 app.use(cors({
-credentials: true,
+    credentials: true,
     origin: [`${process.env.REACT_APP_CLIENT_URL}`, `${process.env.REACT_APP_SERVER_URL}`]
 }));
 

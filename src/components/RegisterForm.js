@@ -16,6 +16,7 @@ import '../App.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from "../context/AuthContext";
+import { URL } from '../App';
 
 
 const RegisterForm = () => {
@@ -122,7 +123,7 @@ const RegisterForm = () => {
             });
         } else {
             try {
-                const data = await fetch("/api/auth/register", {
+                const data = await fetch(`${URL}/api/auth/register`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

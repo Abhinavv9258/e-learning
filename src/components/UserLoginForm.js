@@ -14,6 +14,7 @@ import '../App.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for styling
 import { useUser } from "../context/AuthContext"; // Import the useUser hook
+import { URL } from '../App';
 
 
 const UserLoginForm = () => {
@@ -40,7 +41,7 @@ const UserLoginForm = () => {
             });
         } else {
             try {
-                const data = await fetch("/api/auth/login", {
+                const data = await fetch(`${URL}/api/auth/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
