@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import login from '../assets/images/566.jpg'
 import {
     FormControl,
@@ -75,7 +75,7 @@ const RegisterForm = () => {
     //         });
 
     //         const res = await data.json();
-            
+
     //         if (res.status === 201) {
     //             // Registration successful, set the user data in the context
     //             setUser({
@@ -106,7 +106,7 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { email, username, password } = credentials;
+        const { name, email, username, password, phone, address, stream } = credentials;
 
         if (!username) {
             toast.error("username is required!", {
@@ -128,9 +128,13 @@ const RegisterForm = () => {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        username,
-                        email,
-                        password
+                        name,
+                        email, 
+                        username, 
+                        password, 
+                        phone, 
+                        address, 
+                        stream
                     })
                 });
 
@@ -175,58 +179,58 @@ const RegisterForm = () => {
                 <div className="card border-0">
                     <div className="content row no-gutters">
                         <div className="register-image-col col">
-                        <img src={login} className="card-img img-fluid" alt="..."/>
+                            <img src={login} className="card-img img-fluid" alt="..." />
                         </div>
                         <div className='form-col col'>
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
-                                <FormGroup>
-                                    <FormControl className='register-form-title card-title'>
-                                        <h5 class="widget-title" style={{"margin-bottom": "20px"}}> Sign up and start learning 
-                                            <span style={{"background": "#839FAD none repeat scroll 0 0","display":"block","height":"1.5px","margin-top":"10px","position":"relative","width":"20%"}}></span>
-                                            <span style={{"background":"#839FAD none repeat scroll 0 0","display":"block",height:"1.5px","margin-top":"5px","width":"50%"}}></span>
-                                        </h5>
-                                    </FormControl>
-                                    <FormControl className='register-input-label' >
-                                        <InputLabel>Name</InputLabel>
+                                    <FormGroup>
+                                        <FormControl className='register-form-title card-title'>
+                                            <h5 class="widget-title" style={{ "margin-bottom": "20px" }}> Sign up and start learning
+                                                <span style={{ "background": "#839FAD none repeat scroll 0 0", "display": "block", "height": "1.5px", "margin-top": "10px", "position": "relative", "width": "20%" }}></span>
+                                                <span style={{ "background": "#839FAD none repeat scroll 0 0", "display": "block", height: "1.5px", "margin-top": "5px", "width": "50%" }}></span>
+                                            </h5>
+                                        </FormControl>
+                                        <FormControl className='register-input-label' >
+                                            <InputLabel>Name</InputLabel>
                                             <Input type="text" id="name" onChange={handleChange} />
-                                    </FormControl>
-                                    <FormControl className='register-input-label' >
-                                        <InputLabel>Email</InputLabel>
+                                        </FormControl>
+                                        <FormControl className='register-input-label' >
+                                            <InputLabel>Email</InputLabel>
                                             <Input type="text" id="email" onChange={handleChange} />
-                                    </FormControl>  
-                                    <FormControl className='register-input-label' >
-                                        <InputLabel>Username</InputLabel>
+                                        </FormControl>
+                                        <FormControl className='register-input-label' >
+                                            <InputLabel>Username</InputLabel>
                                             <Input type="text" id="username" onChange={handleChange} />
-                                    </FormControl>               
-                                    <FormControl className='register-input-label' >
-                                        <InputLabel>Phone</InputLabel>
+                                        </FormControl>
+                                        <FormControl className='register-input-label' >
+                                            <InputLabel>Phone</InputLabel>
                                             <Input type="number" id="phone" onChange={handleChange} />
-                                    </FormControl>
-                                    <FormControl className='register-input-label' >
-                                        <InputLabel>Address</InputLabel>
+                                        </FormControl>
+                                        <FormControl className='register-input-label' >
+                                            <InputLabel>Address</InputLabel>
                                             <Input type="text" id="address" onChange={handleChange} />
-                                    </FormControl>                
-                                    <FormControl className='register-input-label' >
-                                        <InputLabel>Stream</InputLabel>
+                                        </FormControl>
+                                        <FormControl className='register-input-label' >
+                                            <InputLabel>Stream</InputLabel>
                                             <Input type="text" id="stream" onChange={handleChange} />
-                                    </FormControl> 
-                                    <FormControl className='register-input-label' >
-                                        <InputLabel>Password</InputLabel>
+                                        </FormControl>
+                                        <FormControl className='register-input-label' >
+                                            <InputLabel>Password</InputLabel>
                                             <Input type="password" id="password" onChange={handleChange} />
-                                    </FormControl> 
-                                    <FormControl style={{display:"flex","justify-content":"space-evenly",alignItems:"center","flex-direction":"row"}}>
-                                        <Button className='register-myBtn' variant="contained" type="submit" value="submit" > SignUp </Button>
-                                        {/* <Button className='register-myBtn' variant="contained" type="submit" value="submit" > LogIn </Button> */}
-                                    </FormControl>
-                                    <h5 class="widget-title" style={{"margin-bottom": "20px"}}> Already have an account? <Link to='/userLoginPage' style={{backgroundColor:"white"}}>SignIn</Link>  </h5>
-                                </FormGroup>
+                                        </FormControl>
+                                        <FormControl style={{ display: "flex", "justify-content": "space-evenly", alignItems: "center", "flex-direction": "row" }}>
+                                            <Button className='register-myBtn' variant="contained" type="submit" value="submit" > SignUp </Button>
+                                            {/* <Button className='register-myBtn' variant="contained" type="submit" value="submit" > LogIn </Button> */}
+                                        </FormControl>
+                                        <h5 class="widget-title" style={{ "margin-bottom": "20px" }}> Already have an account? <Link to='/userLoginPage' style={{ backgroundColor: "white" }}>SignIn</Link>  </h5>
+                                    </FormGroup>
                                 </form>
                                 <ToastContainer />
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </>
     );
