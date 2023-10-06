@@ -12,11 +12,27 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import logo from '../assets/images/logo.png'
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 
 const NavbarComponent = () => {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
+    const [isDarkBackground, setIsDarkBackground] = React.useState(
+        localStorage.getItem('isDarkBackground') === 'true' ? true : false
+    );
+
+    const toggleBackground = () => {
+        const newMode = !isDarkBackground;
+        setIsDarkBackground(newMode);
+        localStorage.setItem('isDarkBackground', newMode);    
+    };
+
+    React.useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkBackground);
+    }, [isDarkBackground]);
+
 
     const handleLogout = () => {
         setUser(null);
@@ -27,7 +43,7 @@ const NavbarComponent = () => {
 
     return (
         <>
-            <Navbar expand="lg" className="main-navbar bg-body-tertiary sticky-lg-top" >
+            <Navbar expand="lg" className={`main-navbar bg-body-tertiary sticky-lg-top ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}>
                 <Container>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -52,6 +68,21 @@ const NavbarComponent = () => {
                                 </NavDropdown>
                           </Nav>
                     </Navbar.Collapse>
+
+                    <Navbar.Brand>    
+                        <div >
+                            <FormControlLabel
+                                control={<Switch checked={isDarkBackground} onChange={toggleBackground} />}
+                                label={
+                                    isDarkBackground ? (
+                                        <span style={{ color: 'white' }}>Dark Mode</span>
+                                    ) : (
+                                        <span style={{ color: 'black' }}>Light Mode</span>
+                                    )
+                                }
+                            />
+                        </div>
+                    </Navbar.Brand>
 
                     {user ? (
                         <Button className='navbar-btn navbar-user-dropdown'>                        
