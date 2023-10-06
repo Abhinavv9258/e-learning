@@ -2,14 +2,18 @@ const courseModel = require("../models/Courses.model.js");
 const { createError } = require('../utils/error.js');
 
 const createCourse = async (req, res, next) => {
-    const newCourse = new courseModel(
-        req.body
-    );
+    // const newCourse = new courseModel(
+    //     req.body
+    // );
     try {
+        let data = req.body;
+        // if(data.thumbnail){
+        //     data.thumbnail = JSON.stringify({base64:data.thumbnail});
+        // }
+        const newCourse = new courseModel({ ...data, adminUsername: req.body.username });
         const savedCourse = await newCourse.save();
         res.status(200).json(savedCourse);
     } catch (err) {
-        // res.status(500).json({ message: err.message }, err);
         next(err);
     }
 }

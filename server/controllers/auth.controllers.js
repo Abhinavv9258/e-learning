@@ -50,8 +50,6 @@ const login = async (req, res, next) => {
             // secure: process.env.NODE_ENV === "production",
             sameSite: 'strict'
         });
-
-        // localStorage.setItem("access_token", token);
         
         const { password, isAdmin, ...otherDetails } = user._doc;
         // res

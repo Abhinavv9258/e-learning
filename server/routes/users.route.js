@@ -68,9 +68,7 @@ const { verifyToken, verifyUser, verifyAdmin } = require('../utils/verifyToken.j
 
 
 userRoutes.get("/checkauthentication", verifyToken, (req, res, next) => {
-    // res.send("Hello user you are logged in.")
     try {
-        // Assuming that the user information is available in req.user
         const user = req.user;
         res.json(user);
     } catch (error) {
@@ -82,9 +80,7 @@ userRoutes.get("/checkauthentication", verifyToken, (req, res, next) => {
 
 
 userRoutes.get("/checkuser/:id", verifyUser, (req, res, next) => {
-    // res.send("Hello user, you are logged in & you can delete your account.")
     try {
-        // Assuming that the user information is available in req.user
         const user = req.user;
         res.send(`Hello ${user.name}, you are logged in & you can delete your account.`);
     } catch (error) {
@@ -96,9 +92,7 @@ userRoutes.get("/checkuser/:id", verifyUser, (req, res, next) => {
 
 
 userRoutes.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {
-    // res.send("Hello admin, you are logged in & you can delete all accounts.")
     try {
-        // Assuming that the user information is available in req.user
         const user = req.user;
         res.send(`Hello ${user.name}, you are logged in & you can delete all accounts.`);
     } catch (error) {
