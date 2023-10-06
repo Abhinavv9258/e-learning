@@ -12,10 +12,9 @@ import '../assets/css/RegisterForm.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import '../App.css';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useUser } from "../context/AuthContext"; 
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for styling
+import { useUser } from "../context/AuthContext"; // Import the useUser hook
 import { URL } from '../App';
-import '../assets/css/LoginForm.css'
 
 
 const UserLoginForm = () => {

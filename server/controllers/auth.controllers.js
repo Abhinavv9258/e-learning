@@ -51,6 +51,7 @@ const login = async (req, res, next) => {
             sameSite: 'strict'
         });
 
+        // localStorage.setItem("access_token", token);
         
         const { password, isAdmin, ...otherDetails } = user._doc;
         // res
