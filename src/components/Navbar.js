@@ -33,7 +33,6 @@ const NavbarComponent = () => {
         document.body.classList.toggle('dark-mode', isDarkBackground);
     }, [isDarkBackground]);
 
-
     const handleLogout = () => {
         setUser(null);
         localStorage.removeItem("access_token");
@@ -70,7 +69,7 @@ const NavbarComponent = () => {
                     </Navbar.Collapse>
 
                     <Navbar.Brand>    
-                        <div >
+                        <div>
                             <FormControlLabel
                                 control={<Switch checked={isDarkBackground} onChange={toggleBackground} />}
                                 label={

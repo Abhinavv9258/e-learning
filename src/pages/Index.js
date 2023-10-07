@@ -28,7 +28,7 @@ const Index = () => {
     //     alert('Data added successfully');
     //     navigate('/');
     // }
-
+//
     // return (
     //     <React.Fragment>
     //         <Navbar />

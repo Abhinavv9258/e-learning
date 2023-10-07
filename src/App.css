@@ -7,5 +7,6 @@
 
 .footer-1 {
   margin-top: auto !important; /* Push the footer to the bottom */
-  padding: 10px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
 }
