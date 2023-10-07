@@ -7,8 +7,9 @@ import {
     InputLabel,
     Input
 } from '@material-ui/core';
+
 import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material'
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // importing styles 
@@ -21,10 +22,13 @@ import { URL } from '../App';
 import login from '../assets/images/566-removebg.png'
 
 // importing components
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+
 import { useUser } from "../context/AuthContext";
 
+const Login = () => {
 
-const UserLoginForm = () => {
     const navigate = useNavigate();
     const { setUser } = useUser(); // Access the setUser function from the context
     const [credentials, setCredentials] = useState({
@@ -43,7 +47,7 @@ const UserLoginForm = () => {
             toast.warning("Both username and password are required!", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000,
-            });
+            });    
         } else {
             try {
                 const data = await fetch(`${URL}/api/auth/login`, {
@@ -63,8 +67,9 @@ const UserLoginForm = () => {
                         const res = await data.json();
                         if (res && res.user && res.token) {
 
+                            // Assuming the server response includes the user's name
                             setUser({
-                                username: res.user.username,
+                                username: res.user.username, // Adjust this according to your server response
                                 token: res.token,
                             });
                             toast.success(`User Logged In! Welcome, ${res.user.username}`, {
@@ -73,8 +78,11 @@ const UserLoginForm = () => {
                             });
 
                             localStorage.setItem("access_token", res.token);
+
+                            // Redirect to a different page, e.g., the user's dashboard
                             navigate("/");
                         } else {
+                            // Handle unexpected response structure
                             console.error("Unexpected response structure:", res);
                             toast.error("An error occurred during login. Please try again later.", {
                                 position: toast.POSITION.TOP_RIGHT,
@@ -116,52 +124,54 @@ const UserLoginForm = () => {
 
     return (
         <>
-            <div className='container form-container'>
-                <Card className="form-card">
-                    <div className="content row no-gutters from-content">
-                        <CardMedia className="form-image col">
-                            <img src={login} className="card-img img-fluid" alt="..." />
-                        </CardMedia>
-                        <div style={{ width: '100%' }} className='form-col col d-flex'>
-                            <Card className="card-body d-flex " style={{ alignItems: 'center', justifyContent: 'center' }}>
-                                <CardContent className='card-content'>
-                                    <FormGroup>
-                                        <FormControl>
-                                            <Typography variant="h5">
-                                                Login In to your account and start learning
-                                                <span className="upper-line"></span>
-                                                <span className="lower-line"></span>
-                                            </Typography>
-                                        </FormControl>
-                                        <FormControl className='form-input-label'>
-                                            <InputLabel>User-Name/Email</InputLabel>
-                                            <Input type="text" id="username"
-                                                onChange={handleChange}
-                                                value={credentials.username}
-                                            />
-                                        </FormControl>
-                                        <FormControl className='form-input-label' >
-                                            <InputLabel>Password</InputLabel>
-                                            <Input type="password" id="password"
-                                                onChange={handleChange}
-                                                value={credentials.password}
-                                            />
-                                        </FormControl>
-                                        <FormControl style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center", flexDirection: "row" }}>
-                                            <Button className='navbar-btn' type="submit" onClick={handleSubmit}> LogIn </Button>
-                                        </FormControl>
-                                        <Typography> New to E-Learn?
-                                            <Link to='/registerPage'>SignUp</Link>
-                                        </Typography>
-                                    </FormGroup>
-                                </CardContent>
-                            </Card>
+            <div className="app-container">
+                <Navbar />
+                <div className='container form-container'>
+                    <Card className="form-card">
+                        <div className="content row no-gutters from-content">
+                            <CardMedia className="form-image col">
+                                <img src={login} className="card-img img-fluid" alt="..." />
+                            </CardMedia>
+                            <div style={{ width: '100%' }} className='form-col col d-flex'>
+                                <Card className="card-body d-flex " style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                    <CardContent className='card-content'>
+                                        <FormGroup>
+                                            <FormControl>
+                                                <h5>
+                                                    Login In to your account and start learning
+                                                    <span className="upper-line"></span>
+                                                    <span className="lower-line"></span>
+                                                </h5>
+                                            </FormControl>
+                                            <FormControl className='form-input-label'>
+                                                <InputLabel>User-Name/Email</InputLabel>
+                                                <Input type="text" id="username"
+                                                    onChange={handleChange}
+                                                    value={credentials.username} // Bind the input value to state
+                                                />
+                                            </FormControl>
+                                            <FormControl className='form-input-label' >
+                                                <InputLabel>Password</InputLabel>
+                                                <Input type="password" id="password"
+                                                    onChange={handleChange}
+                                                    value={credentials.password} // Bind the input value to state
+                                                />
+                                            </FormControl>
+                                            <FormControl style={{ display: "flex", "justify-content": "space-evenly", alignItems: "center", "flex-direction": "row" }}>
+                                                <Button className='navbar-btn' type="submit" onClick={handleSubmit}> LogIn </Button>
+                                            </FormControl>
+                                            <Typography> New to E-Learn? <Link to='/registerPage'>SignUp</Link>  </Typography>
+                                        </FormGroup>
+                                    </CardContent>
+                                </Card>
+                            </div>
                         </div>
-                    </div>
-                </Card>
+                    </Card>
+                </div>
+                <Footer />
             </div>
         </>
     );
 };
 
-export default UserLoginForm;
+export default Login;

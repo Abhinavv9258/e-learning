@@ -1,22 +1,26 @@
-import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
-import login from '../assets/images/566.jpg'
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
     FormControl,
     FormGroup,
     InputLabel,
-    Input,
-    Button,
+    Input
 } from '@material-ui/core';
-import '../assets/css/RegisterForm.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import { Link } from 'react-router-dom';
-import '../App.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useUser } from "../context/AuthContext";
+
+// importing styles 
+import 'bootstrap/dist/css/bootstrap.css';
+import '../App.css';
+import '../assets/css/Form.css'
+
+// importing images
 import { URL } from '../App';
+import login from '../assets/images/566-removebg.png'
+
+// importing components
+import { useUser } from "../context/AuthContext";
 
 
 const RegisterForm = () => {
@@ -33,76 +37,6 @@ const RegisterForm = () => {
         address: undefined,
         stream: undefined,
     });
-
-
-    // const handleSubmit = async(e) => {
-    //     e.preventDefault();
-    //     // await addUser(credentials);
-    //     navigate("/userLoginPage");
-    //     alert('Data added successfully');
-    // }
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     const { email, username, password } = credentials;
-
-    //     // if (!name) {
-    //     //     toast.warning("name is required!", {
-    //     //         position: "top-center"
-    //     //     });
-    //     // } else 
-    //     if (!username) {
-    //         toast.error("username is required!", {
-    //             position: "top-center"
-    //         });
-    //     } else if (!email) {
-    //         toast.error("email is required!", {
-    //             position: "top-center"
-    //         });
-    //     } else if (!password) {
-    //         toast.error("password is required!", {
-    //             position: "top-center"
-    //         });
-    //     } else {
-    //         const data = await fetch("/api/auth/register", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //             body: JSON.stringify({
-    //                 username, email, password
-    //             })
-    //         });
-
-    //         const res = await data.json();
-
-    //         if (res.status === 201) {
-    //             // Registration successful, set the user data in the context
-    //             setUser({
-    //                 username: res.username, // Assuming the response contains the user's name
-    //                 token: res.token, // Assuming the response contains the JWT token
-    //             });
-    //             navigate("/userLoginPage");
-    //             alert("Data added successfully");
-    //         } else {
-    //             // Registration failed, set the error message
-    //             setError("Registration failed. Please try again."); // Customize the error message as needed
-    //         }
-
-    //         // console.log(res.status);
-    //         // navigate("/userLoginPage");
-    //         // alert('Data added successfully');
-
-
-    //         // if (res.status === 201) {
-    //         //     toast.success("Registration Successfully done 😃!", {
-    //         //         position: "top-center"
-    //         //     });
-    //         //     setCredentials({ ...credentials, name: "", email: "", password: "", username: "" });
-    //         // }
-    //     }
-    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -130,11 +64,11 @@ const RegisterForm = () => {
                     },
                     body: JSON.stringify({
                         name,
-                        email, 
-                        username, 
-                        password, 
-                        phone, 
-                        address, 
+                        email,
+                        username,
+                        password,
+                        phone,
+                        address,
                         stream
                     })
                 });
@@ -142,7 +76,9 @@ const RegisterForm = () => {
                 if (data.status === 201) {
                     // Registration successful
                     navigate("/");
-                    alert('Registration successful!');
+                    toast.success("Registration Successfully 😃!", {
+                        position: "top-center"
+                    });
                 } else {
                     // Registration failed, handle the error message from the server
                     const response = await data.json();
@@ -176,62 +112,63 @@ const RegisterForm = () => {
                     {error}
                 </div>
             )}
-            <div className='container main'>
-                <div className="card border-0">
-                    <div className="content row no-gutters">
-                        <div className="register-image-col col">
+            <div className='container form-container'>
+                <Card className="form-card">
+                    <div className="content row no-gutters from-content">
+                        <CardMedia className="form-image col d-flex align-items-center">
                             <img src={login} className="card-img img-fluid" alt="..." />
-                        </div>
-                        <div className='form-col col'>
-                            <div className="card-body">
-                                <form onSubmit={handleSubmit}>
+                        </CardMedia>
+                        <div style={{ width: '100%' }} className='form-col col d-flex'>
+                            <Card className="card-body d-flex " style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                <CardContent className='card-content'>
                                     <FormGroup>
-                                        <FormControl className='register-form-title card-title'>
-                                            <h5 class="widget-title" style={{ "margin-bottom": "20px" }}> Sign up and start learning
-                                                <span style={{ "background": "#839FAD none repeat scroll 0 0", "display": "block", "height": "1.5px", "margin-top": "10px", "position": "relative", "width": "20%" }}></span>
-                                                <span style={{ "background": "#839FAD none repeat scroll 0 0", "display": "block", height: "1.5px", "margin-top": "5px", "width": "50%" }}></span>
-                                            </h5>
+                                        <FormControl>
+                                            <Typography variant="h5">
+                                                Sign Up and start learning
+                                                <span className="upper-line"></span>
+                                                <span className="lower-line"></span>
+                                            </Typography>
                                         </FormControl>
-                                        <FormControl className='register-input-label' >
+                                        <FormControl className='form-input-label' >
                                             <InputLabel>Name</InputLabel>
                                             <Input type="text" id="name" onChange={handleChange} />
                                         </FormControl>
-                                        <FormControl className='register-input-label' >
+                                        <FormControl className='form-input-label' >
                                             <InputLabel>Email</InputLabel>
                                             <Input type="text" id="email" onChange={handleChange} />
                                         </FormControl>
-                                        <FormControl className='register-input-label' >
+                                        <FormControl className='form-input-label' >
                                             <InputLabel>Username</InputLabel>
                                             <Input type="text" id="username" onChange={handleChange} />
                                         </FormControl>
-                                        <FormControl className='register-input-label' >
+                                        <FormControl className='form-input-label' >
                                             <InputLabel>Phone</InputLabel>
                                             <Input type="number" id="phone" onChange={handleChange} />
                                         </FormControl>
-                                        <FormControl className='register-input-label' >
+                                        <FormControl className='form-input-label' >
                                             <InputLabel>Address</InputLabel>
                                             <Input type="text" id="address" onChange={handleChange} />
                                         </FormControl>
-                                        <FormControl className='register-input-label' >
+                                        <FormControl className='form-input-label' >
                                             <InputLabel>Stream</InputLabel>
                                             <Input type="text" id="stream" onChange={handleChange} />
                                         </FormControl>
-                                        <FormControl className='register-input-label' >
+                                        <FormControl className='form-input-label' >
                                             <InputLabel>Password</InputLabel>
                                             <Input type="password" id="password" onChange={handleChange} />
                                         </FormControl>
-                                        <FormControl style={{ display: "flex", "justify-content": "space-evenly", alignItems: "center", "flex-direction": "row" }}>
-                                            <Button className='register-myBtn' variant="contained" type="submit" value="submit" > SignUp </Button>
-                                            {/* <Button className='register-myBtn' variant="contained" type="submit" value="submit" > LogIn </Button> */}
+                                        <FormControl style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center", flexDirection: "row" }}>
+                                            <Button className='navbar-btn' type="submit" onClick={handleSubmit}> SignUp </Button>
                                         </FormControl>
-                                        <h5 class="widget-title" style={{ "margin-bottom": "20px" }}> Already have an account? <Link to='/userLoginPage' style={{ backgroundColor: "white" }}>SignIn</Link>  </h5>
+                                        <Typography> Already have an account?
+                                            <Link to='/userLoginPage'>LogIn</Link>
+                                        </Typography>
                                     </FormGroup>
-                                </form>
-                                <ToastContainer />
-                            </div>
+                                </CardContent>
+                            </Card>
                         </div>
                     </div>
-                </div>
+                </Card>
             </div>
         </>
     );
