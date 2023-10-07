@@ -27,7 +27,7 @@ import Footer from '../components/Footer'
 
 import { useUser } from "../context/AuthContext";
 
-const Login = () => {
+const Login = ({ toggleBackground }) => {
 
     const navigate = useNavigate();
     const { setUser } = useUser(); // Access the setUser function from the context
@@ -122,10 +122,18 @@ const Login = () => {
         }
     }
 
+    const [isDarkBackground] = React.useState(
+        localStorage.getItem('isDarkBackground') === 'true' ? true : false
+    );
+
+    React.useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkBackground);
+    }, [isDarkBackground]);
+
     return (
         <>
             <div className="app-container">
-                <Navbar />
+                <Navbar toggleBackground={toggleBackground} />
                 <div className='container form-container'>
                     <Card className="form-card">
                         <div className="content row no-gutters from-content">

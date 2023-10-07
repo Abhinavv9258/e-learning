@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import '../assets/css/Navbar.css'
 import { useUser } from '../context/AuthContext';
@@ -14,20 +14,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import logo from '../assets/images/logo.png'
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import '../App.css';
+import MenuIcon from '@mui/icons-material/Menu';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-
-const NavbarComponent = () => {
+const NavbarComponent = ({ toggleBackground }) => {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
-    const [isDarkBackground, setIsDarkBackground] = React.useState(
+    const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
     );
-
-    const toggleBackground = () => {
-        const newMode = !isDarkBackground;
-        setIsDarkBackground(newMode);
-        localStorage.setItem('isDarkBackground', newMode);
-    };
 
     React.useEffect(() => {
         document.body.classList.toggle('dark-mode', isDarkBackground);
@@ -44,8 +41,17 @@ const NavbarComponent = () => {
         <>
             <Navbar expand='lg' className={`main-navbar sticky-lg-top ${isDarkBackground ? 'dark-mode' : 'light-mode'}`} >
                 <Container>
-                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
-                    <Navbar.Collapse id='basic-navbar-nav'>
+                    {isDarkBackground ? (
+                        <Navbar.Toggle className='dark-toggle' aria-controls='responsive-navbar-nav'>
+                            <FontAwesomeIcon icon={faBars} style={{ color: "#ffffff", }} />
+                        </Navbar.Toggle>
+                    ) : (
+                        <Navbar.Toggle className='light-toggle' aria-controls='responsive-navbar-nav'>
+                            <FontAwesomeIcon icon={faBars} />
+                        </Navbar.Toggle>
+                    )}
+
+                    <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav className='me-auto'>
                             <Navbar.Brand><Link className='navbar-brand-link' to='/'>
                                 <img src={logo} className='e-learn-logo' alt='logo' />
@@ -87,8 +93,13 @@ const NavbarComponent = () => {
                         <Button className='navbar-btn navbar-user-dropdown'>
                             <Navbar.Brand className='navbar-user-dropdown'>
                                 <NavDropdown
-                                    className='navbar-user-dropdown-items'
-                                    title={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
+                                    className={`navbar-user-dropdown-items ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}
+                                    title={<>
+                                        {
+                                            user.username.charAt(0).toUpperCase() + user.username.slice(1)
+                                        }
+                                    </>
+                                    }
                                     id='user-dropdown'
                                 >
                                     <NavDropdown.Item className='nav-dropdown-item'>Profile</NavDropdown.Item>
@@ -98,7 +109,7 @@ const NavbarComponent = () => {
                         </Button>
 
                     ) : (
-                        <Navbar.Brand><Link to='/Index'><Button className='navbar-btn'>LogIn/SignUp</Button></Link></Navbar.Brand>
+                        <Navbar.Brand><Link to='/Index'><Button className={`navbar-btn ${isDarkBackground ? ' dark-mode' : 'light-mode'}`}>LogIn/SignUp</Button></Link></Navbar.Brand>
                     )}
                 </Container>
             </Navbar>

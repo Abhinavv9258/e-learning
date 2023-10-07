@@ -18,16 +18,27 @@ export const URL = process.env.REACT_APP_SERVER_URL;
 
 const App = () => {
 
+    const [isDarkBackground, setIsDarkBackground] = React.useState(
+        localStorage.getItem('isDarkBackground') === 'true' ? true : false
+    );
+
+    const toggleBackground = () => {
+        window.location.reload();
+        const newMode = !isDarkBackground;
+        setIsDarkBackground(newMode);
+        localStorage.setItem('isDarkBackground', newMode);
+    };
+
     return (
         <BrowserRouter>
             <ToastContainer />
             <Routes>
-                <Route path='/' element={<Index />} />
-                <Route path='/RegisterPage' element={<RegisterPage />} />
-                <Route path='/Homepage' element={<Homepage />} />
-                <Route path='/Index' element={<Index />} />
-                <Route path='/userLoginPage' element={<UserLoginPage />} />
-                <Route path='/login' element={<Login />} />
+                <Route path='/' element={<Index toggleBackground={toggleBackground} />} />
+                <Route path='/RegisterPage' element={<RegisterPage toggleBackground={toggleBackground} />} />
+                <Route path='/Homepage' element={<Homepage toggleBackground={toggleBackground} />} />
+                <Route path='/Index' element={<Index toggleBackground={toggleBackground} />} />
+                <Route path='/userLoginPage' element={<UserLoginPage toggleBackground={toggleBackground} />} />
+                <Route path='/login' element={<Login toggleBackground={toggleBackground} />} />
             </Routes>
         </BrowserRouter>
     );

@@ -1,12 +1,39 @@
 /* App.css */
 .app-container {
-  display: flex !important;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+    display: flex !important;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Ensure the container takes at least the full viewport height */
 }
 
 .footer-1 {
-  margin-top: auto !important; /* Push the footer to the bottom */
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+    margin-top: auto !important;
+    /* Push the footer to the bottom */
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+/* background toggle */
+.dark-mode {
+    background-color: #333 !important;
+    color: white !important;
+}
+
+.dark-toggle {
+    border: 2px solid white !important;
+    &:focus{
+        box-shadow: 0 0 0 0 !important;
+    }
+}
+
+.light-toggle {
+    border: 2px solid !important;
+    &:focus {
+        box-shadow: 0 0 0 0 !important;
+    }
+}
+
+.light-mode {
+    background-color: white !important;
+    color: black !important;
 }

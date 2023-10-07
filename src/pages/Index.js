@@ -8,9 +8,10 @@ import {
     Card, 
     CardActionArea, 
     CardActions } from '@mui/material';
-import { GrLinkNext } from 'react-icons/gr';
-import { Link } from 'react-router-dom';
 import { useWebsiteTitle } from '../hooks/WebsiteTitle';
+
+// importing icons
+import { FaArrowRightLong } from "react-icons/fa6";
 
 // importing images
 import adminLogin from '../assets/images/561-removebg.png'
@@ -27,12 +28,21 @@ import '../assets/css/Index.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-const Index = () => { 
+const Index = ({ toggleBackground }) => { 
+
     useWebsiteTitle('E-Learn');
+
+    const [isDarkBackground] = React.useState(
+        localStorage.getItem('isDarkBackground') === 'true' ? true : false
+    );
+
+    React.useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkBackground);
+    }, [isDarkBackground]);
 
     return (
         <div className ='app-container'>
-        <Navbar />
+            <Navbar toggleBackground={toggleBackground}/>
             <div className='index-body'>
                 <div className='index-text'>
                     <strong>
@@ -58,18 +68,19 @@ const Index = () => {
                                 image={guestLogin}
                             alt='Admin Login'
                             />
-                            <CardContent>
-                                <Typography gutterBottom variant='h6' component='div'>
-                                    Guest User
-                                </Typography>
-                            </CardContent>
                         </CardActionArea>
+                        <CardContent>
+                            <Typography className={`${isDarkBackground ? 'dark-mode' : 'light-mode'}`} gutterBottom variant='h6' component='div'>
+                                Guest User
+                            </Typography>
+                        </CardContent>
                         <CardActions className='d-flex justify-content-center'>
-                            <Link to='/Homepage'>
-                                <Button className='index-btn' >
-                                    Guest&nbsp;&nbsp;<GrLinkNext className='index-btn-icon'/>
+                                <Button href='/Homepage' className={`index-btn ${isDarkBackground ? 'dark-mode' : 'light-mode'}`} >
+                                    <Typography>
+                                    Guest &nbsp;
+                                    </Typography>
+                                    <FaArrowRightLong />
                                 </Button>
-                            </Link>
                         </CardActions>
                     </Card>
 
@@ -83,18 +94,19 @@ const Index = () => {
                                 image={adminLogin}
                                 alt='Admin Login'
                             />
-                            <CardContent>
-                                <Typography gutterBottom variant='h6' component='div'>
-                                    Admin Login
-                                </Typography>
-                            </CardContent>
                         </CardActionArea>
+                        <CardContent>
+                            <Typography className={`${isDarkBackground ? 'dark-mode' : 'light-mode'}`} gutterBottom variant='h6' component='div'>
+                                Admin Login
+                            </Typography>
+                        </CardContent>
                         <CardActions className='d-flex justify-content-center'>
-                            <Link to='/Index'>
-                                <Button className='index-btn' >
-                                    Admin Login&nbsp;&nbsp;<GrLinkNext className='index-btn-icon' />
+                                <Button href='/Index' className={`index-btn ${isDarkBackground ? 'dark-mode' : 'light-mode'}`} >
+                                    <Typography>
+                                        Admin Login &nbsp;
+                                    </Typography>
+                                    <FaArrowRightLong />
                                 </Button>
-                            </Link>
                         </CardActions>
                     </Card>
 
@@ -108,19 +120,19 @@ const Index = () => {
                             image={userLogin}
                             alt='User Login'
                             />
-                            <CardContent>
-                                <Typography gutterBottom variant='h6' component='div'>
-                                    User Login
-                                </Typography>
-                            </CardContent>
                         </CardActionArea>
-
+                        <CardContent>
+                            <Typography className={`${isDarkBackground ? 'dark-mode' : 'light-mode'}`} gutterBottom variant='h6' component='div'>
+                                User Login
+                            </Typography>
+                        </CardContent>
                         <CardActions className='d-flex justify-content-center'>
-                            <Link to='/RegisterPage'>
-                                <Button className='index-btn' >
-                                    User Login&nbsp;&nbsp;<GrLinkNext/>
+                                <Button href='/RegisterPage' className={`index-btn ${isDarkBackground ? 'dark-mode' : 'light-mode'}`} >
+                                <Typography>
+                                    User Login &nbsp;
+                                </Typography>
+                                <FaArrowRightLong />
                                 </Button>
-                            </Link>
                         </CardActions>
                     </Card>
 

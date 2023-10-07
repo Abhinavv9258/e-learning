@@ -137,17 +137,6 @@
     margin-top: 10px !important;
 }
 
-/* background toggle */
-.dark-mode {
-    background-color: #333 !important;
-    color: white !important;
-}
-
-.light-mode {
-    background-color: white !important;
-    color: black !important;
-}
-
 .button-box {
     width: 200px;
     justify-content: center;
@@ -168,7 +157,6 @@
     display: flex;
     text-align: center;
     color: white;
-
 }
 
 .toggle-btn.selected {

@@ -11,10 +11,19 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 
-const Homepage = () => {
+const Homepage = ({ toggleBackground }) => {
+
+    const [isDarkBackground] = React.useState(
+        localStorage.getItem('isDarkBackground') === 'true' ? true : false
+    );
+
+    React.useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkBackground);
+    }, [isDarkBackground]);
+
     return (
         <div className='app-container'>
-            <Navbar />
+            <Navbar toggleBackground={toggleBackground} />
             <Section1 />
 
             <Section2 />
