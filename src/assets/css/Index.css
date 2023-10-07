@@ -4,7 +4,6 @@
     align-items: center;
     flex-direction: column;
     margin: 20px;
-    /* background-color: rgba(14,14,14,0.76); */
 }
 
 .index-text {
@@ -41,8 +40,8 @@
 }
 
 .index-cards{
-    border: 2px solid #dddddd !important;
-    background: transparent;
+    border: 2px solid #dddddd !important;    
+    background: transparent !important;
     margin:10px;
 }
 
@@ -86,7 +85,7 @@
     .index-card-deck {
         flex-wrap: wrap;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-evenly;
     }
 }
 

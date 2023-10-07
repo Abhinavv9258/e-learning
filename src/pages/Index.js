@@ -46,8 +46,8 @@ const Index = () => {
                     </p>
                 </div>
 
-                <div className='d-flex index-card-deck' style={{width:'75%',justifyContent:'space-evenly'}}>
-
+                <div className='d-flex index-card-deck'>
+                    
                     {/* Login As Guest */}
                     <Card className='index-cards' sx={{ maxWidth: 345 }}>
                         <CardActionArea style={{cursor:'default'}}>

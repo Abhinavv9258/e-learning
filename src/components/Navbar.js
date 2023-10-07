@@ -5,9 +5,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Button } from '@mui/material'
-import {Link}  from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../assets/css/Navbar.css'
-import { useUser } from '../context/AuthContext'; // Import the AuthContext
+import { useUser } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,7 +26,7 @@ const NavbarComponent = () => {
     const toggleBackground = () => {
         const newMode = !isDarkBackground;
         setIsDarkBackground(newMode);
-        localStorage.setItem('isDarkBackground', newMode);    
+        localStorage.setItem('isDarkBackground', newMode);
     };
 
     React.useEffect(() => {
@@ -42,12 +42,12 @@ const NavbarComponent = () => {
 
     return (
         <>
-            <Navbar expand='lg' className={`main-navbar bg-body-tertiary sticky-lg-top ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}>
+            <Navbar expand='lg' className={`main-navbar sticky-lg-top ${isDarkBackground ? 'dark-mode' : 'light-mode'}`} >
                 <Container>
-                    <Navbar.Toggle aria-controls='basic-navbar-nav'/>
+                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='me-auto'>
-                            <Navbar.Brand><Link className='navbar-brand-link' to='/'>                        
+                            <Navbar.Brand><Link className='navbar-brand-link' to='/'>
                                 <img src={logo} className='e-learn-logo' alt='logo' />
                                 E-Learn</Link>
                             </Navbar.Brand>
@@ -61,14 +61,14 @@ const NavbarComponent = () => {
                                     <NavDropdown.Item href='#action/3.2' className='nav-dropdown-item'>Something</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href='#action/3.3' className='nav-dropdown-item'>
-                                      Separated link
+                                        Separated link
                                     </NavDropdown.Item>
                                 </div>
-                                </NavDropdown>
-                          </Nav>
+                            </NavDropdown>
+                        </Nav>
                     </Navbar.Collapse>
 
-                    <Navbar.Brand>    
+                    <Navbar.Brand>
                         <div>
                             <FormControlLabel
                                 control={<Switch checked={isDarkBackground} onChange={toggleBackground} />}
@@ -84,15 +84,15 @@ const NavbarComponent = () => {
                     </Navbar.Brand>
 
                     {user ? (
-                        <Button className='navbar-btn navbar-user-dropdown'>                        
+                        <Button className='navbar-btn navbar-user-dropdown'>
                             <Navbar.Brand className='navbar-user-dropdown'>
                                 <NavDropdown
                                     className='navbar-user-dropdown-items'
                                     title={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
                                     id='user-dropdown'
                                 >
-                                        <NavDropdown.Item className='nav-dropdown-item'>Profile</NavDropdown.Item>
-                                        <NavDropdown.Item className='nav-dropdown-item' onClick={handleLogout}>Logout</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-dropdown-item'>Profile</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-dropdown-item' onClick={handleLogout}>Logout</NavDropdown.Item>
                                 </NavDropdown>
                             </Navbar.Brand>
                         </Button>
