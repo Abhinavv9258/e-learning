@@ -41,15 +41,15 @@ const Section1 = () => {
                         {/* <Link to='/RegisterPage'> */}
                             <Button
                                 className="section1-btn"
-                                onClick={() => navigate("/")}
+                                onClick={() => navigate("/Index")}
                             >
                                 Get Started
                             </Button>
                             <Button
                                 className="section1-btn"
-                                onClick={() => navigate("/Index")}
+                                onClick={() => navigate("/AdminLoginPage")}
                             >
-                                LogIn/SignUp
+                                Admin LogIn
                             </Button>
                         {/* </Link> */}
                     </CardActions>
