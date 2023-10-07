@@ -1,11 +1,13 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import Typed from "react-typed";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+// import Card from '@mui/material/Card';
+// import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
+// import Typography from '@mui/material/Typography';
+import { 
+    // CardActionArea, 
+    CardActions } from '@mui/material';
 import {
     Button,
 } from '@material-ui/core';
@@ -38,7 +40,6 @@ const Section1 = () => {
                         ONLINE LEARNING PORTAL FOR STUDENTS AND TEACHERS
                     </p>
                     <CardActions className="section1-btn-grp">
-                        {/* <Link to='/RegisterPage'> */}
                             <Button
                                 className="section1-btn"
                                 onClick={() => navigate("/Index")}

@@ -8,7 +8,7 @@ import { Button } from '@mui/material'
 import {Link}  from 'react-router-dom'
 import '../assets/css/Navbar.css'
 import { useUser } from '../context/AuthContext'; // Import the AuthContext
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import logo from '../assets/images/logo.png'
@@ -35,32 +35,32 @@ const NavbarComponent = () => {
 
     const handleLogout = () => {
         setUser(null);
-        localStorage.removeItem("access_token");
-        toast.success("Successfully Logged Out");
-        navigate("/");
+        localStorage.removeItem('access_token');
+        toast.success('Successfully Logged Out');
+        navigate('/');
     };
 
     return (
         <>
-            <Navbar expand="lg" className={`main-navbar bg-body-tertiary sticky-lg-top ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}>
+            <Navbar expand='lg' className={`main-navbar bg-body-tertiary sticky-lg-top ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}>
                 <Container>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
+                    <Navbar.Toggle aria-controls='basic-navbar-nav'/>
+                    <Navbar.Collapse id='basic-navbar-nav'>
+                        <Nav className='me-auto'>
                             <Navbar.Brand><Link className='navbar-brand-link' to='/'>                        
-                                <img src={logo} className='e-learn-logo' alt="logo" />
+                                <img src={logo} className='e-learn-logo' alt='logo' />
                                 E-Learn</Link>
                             </Navbar.Brand>
                             <Nav.Link className='navbar-link'><Link className='nav-link' to='/'>Home</Link></Nav.Link>
                             <Nav.Link className='navbar-link'><Link className='nav-link' to='/'>About Us</Link></Nav.Link>
-                            <NavDropdown className='navbar-link-dropdown' title="Courses" id="basic-nav-dropdown" >
+                            <NavDropdown className='navbar-link-dropdown' title='Courses' id='basic-nav-dropdown' >
                                 <div >
-                                    <NavDropdown.Item href="#action/3.1" className='nav-dropdown-item'>
+                                    <NavDropdown.Item href='#action/3.1' className='nav-dropdown-item'>
                                         <Link className='navbar-action-link' to='/'>All Courses</Link>
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2" className='nav-dropdown-item'>Something</NavDropdown.Item>
+                                    <NavDropdown.Item href='#action/3.2' className='nav-dropdown-item'>Something</NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action/3.3" className='nav-dropdown-item'>
+                                    <NavDropdown.Item href='#action/3.3' className='nav-dropdown-item'>
                                       Separated link
                                     </NavDropdown.Item>
                                 </div>
@@ -89,7 +89,7 @@ const NavbarComponent = () => {
                                 <NavDropdown
                                     className='navbar-user-dropdown-items'
                                     title={user.username.charAt(0).toUpperCase() + user.username.slice(1)}
-                                    id="user-dropdown"
+                                    id='user-dropdown'
                                 >
                                         <NavDropdown.Item className='nav-dropdown-item'>Profile</NavDropdown.Item>
                                         <NavDropdown.Item className='nav-dropdown-item' onClick={handleLogout}>Logout</NavDropdown.Item>

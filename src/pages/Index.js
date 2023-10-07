@@ -1,100 +1,40 @@
-import React from "react";
-import Typed from "react-typed"; // You need to install 'react-typed' via npm or yarn
-import '../assets/css/Index.css'
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
-import {
-    Button,
-} from '@material-ui/core';
-import 'bootstrap/dist/css/bootstrap.css';
-import { GrLinkNext } from "react-icons/gr";
+import React from 'react';
+import Typed from 'react-typed';
+import { 
+    Typography, 
+    Button, 
+    CardMedia, 
+    CardContent, 
+    Card, 
+    CardActionArea, 
+    CardActions } from '@mui/material';
+import { GrLinkNext } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
+import { useWebsiteTitle } from '../hooks/WebsiteTitle';
+
+// importing images
 import adminLogin from '../assets/images/561-removebg.png'
 import guestLogin from '../assets/images/565-removebg.png'
 import userLogin from '../assets/images/558-removebg.png'
-import { Link } from "react-router-dom";
-import { useWebsiteTitle } from '../hooks/WebsiteTitle';
+
+// importing components
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import '../App.css'; // Import your CSS
+
+// importing styles
+import '../App.css';
+import '../assets/css/Index.css'
+import 'bootstrap/dist/css/bootstrap.css';
 
 
-const Index = () => {
-    
-    // const adminSubmit = (e) => {
-    //     e.preventDefault();
-    //     dispatch(addActionList.addData(inputData));
-    //     alert('Data added successfully');
-    //     navigate('/');
-    // }
-//
-    // return (
-    //     <React.Fragment>
-    //         <Navbar />
-    //         <div className='body' style={body}>
-    //             <div className='container'>
-    //                 <div className='d-flex w-100 vh-100 justify-content-center align-items-center'>
-    //                     <div className='w-50 border bg-light p-5 shadow mb-5 bg-white rounded'>
-    //                         <form onSubmit={handleSubmit}>
-    //                             <div className='form-group'>
-    //                                 <label htmlFor='name'>Name: </label>
-    //                                 <input type='text' className='form-control' name='name' onChange={(e) => setUserData({...userData, name: e.target.value})}/>
-    //                             </div>
-    //                             <div className='form-group'>
-    //                                 <label>Email: </label>
-    //                                 <input type='email' className='form-control' onChange={(e) => setUserData({...userData, email: e.target.value})}/>
-    //                             </div>
-    //                             <br />                             
-    //                             <button type='submit' className='btn btn-info'>Submit</button>
-    //                         </form>
-    //                     </div>            
-    //                 </div>
-    //             </div>
-    //         </div>
+const Index = () => { 
+    useWebsiteTitle('E-Learn');
 
-    //         {/* <div className='body' style={body}>
-    //             <div className='container'>
-    //                 <div className='d-flex w-100 vh-100 justify-content-center align-items-center'>
-    //                     <div className='w-50 border bg-light p-5 shadow mb-5 bg-white rounded'>
-    //                         <form onSubmit={adminSubmit}>
-    //                             <div className='form-group'>
-    //                                 <label htmlFor='name'>Name: </label>
-    //                                 <input type='text' className='form-control' name='name' onChange={(e) => setAdminData({...adminData, name: e.target.value})}/>
-    //                             </div>
-    //                             <div className='form-group'>
-    //                                 <label>Email: </label>
-    //                                 <input type='email' className='form-control' onChange={(e) => setAdminData({...adminData, email: e.target.value})}/>
-    //                             </div>
-    //                             <br />
-    //                             <div className='form-group'>
-    //                                 <label>Username: </label>
-    //                                 <input type='text' className='form-control' onChange={(e) => setUserData({...adminData, username: e.target.value})}/>
-    //                             </div>
-    //                             <br />
-    //                             <div className='form-group'>
-    //                                 <label>Password: </label>
-    //                                 <input type='password' className='form-control' onChange={(e) => setUserData({...adminData, password: e.target.value})}/>
-    //                             </div>
-    //                             <br />   
-    //                             <button type='submit' className='btn btn-info'>Submit</button>
-    //                         </form>
-    //                     </div>            
-    //                 </div>
-    //             </div>
-    //         </div> */}
-    //         <Footer />
-    //     </React.Fragment>
-    // );
-    
-
-    useWebsiteTitle("E-Learn");
     return (
-        <div className ="app-container">
+        <div className ='app-container'>
         <Navbar />
-            <div className="index-body">
-                <div className="index-text">
+            <div className='index-body'>
+                <div className='index-text'>
                     <strong>
                         E-Learn&nbsp;
                         <Typed strings={['E-Learning', 'Online Courses', 'Website.']} typeSpeed={200} backSpeed={70} loop />
@@ -106,78 +46,78 @@ const Index = () => {
                     </p>
                 </div>
 
-                <div className="d-flex index-card-deck" style={{width:"75%","justify-content":"space-evenly"}}>
+                <div className='d-flex index-card-deck' style={{width:'75%',justifyContent:'space-evenly'}}>
 
                     {/* Login As Guest */}
-                    <Card className="index-cards" sx={{ maxWidth: 345 }}  style={{background:"transparent","margin":"10px"}}>
-                        <CardActionArea style={{cursor:"default"}}>
+                    <Card className='index-cards' sx={{ maxWidth: 345 }}  style={{background:'transparent','margin':'10px'}}>
+                        <CardActionArea style={{cursor:'default'}}>
                             <CardMedia
-                            className="index-card-media"
-                            component="img"
-                            height="auto"
+                            className='index-card-media'
+                            component='img'
+                            height='auto'
                                 image={guestLogin}
-                            alt="Admin Login"
+                            alt='Admin Login'
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h6" component="div">
+                                <Typography gutterBottom variant='h6' component='div'>
                                     Guest User
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
-                        <CardActions className="d-flex justify-content-center">
+                        <CardActions className='d-flex justify-content-center'>
                             <Link to='/Homepage'>
-                                <Button className="index-btn" >
-                                    Guest&nbsp;&nbsp;<GrLinkNext className="index-btn-icon"/>
+                                <Button className='index-btn' >
+                                    Guest&nbsp;&nbsp;<GrLinkNext className='index-btn-icon'/>
                                 </Button>
                             </Link>
                         </CardActions>
                     </Card>
 
                     {/* Login As Admin */}
-                    <Card className="index-cards" sx={{ maxWidth: 345 }} style={{ background: "transparent", "margin": "10px" }}>
-                        <CardActionArea style={{ cursor: "default" }}>
+                    <Card className='index-cards' sx={{ maxWidth: 345 }} style={{ background: 'transparent', 'margin': '10px' }}>
+                        <CardActionArea style={{ cursor: 'default' }}>
                             <CardMedia
-                                className="index-card-media"
-                                component="img"
-                                height="auto"
+                                className='index-card-media'
+                                component='img'
+                                height='auto'
                                 image={adminLogin}
-                                alt="Admin Login"
+                                alt='Admin Login'
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h6" component="div">
+                                <Typography gutterBottom variant='h6' component='div'>
                                     Admin Login
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
-                        <CardActions className="d-flex justify-content-center">
+                        <CardActions className='d-flex justify-content-center'>
                             <Link to='/Index'>
-                                <Button className="index-btn" >
-                                    Admin Login&nbsp;&nbsp;<GrLinkNext className="index-btn-icon" />
+                                <Button className='index-btn' >
+                                    Admin Login&nbsp;&nbsp;<GrLinkNext className='index-btn-icon' />
                                 </Button>
                             </Link>
                         </CardActions>
                     </Card>
 
                     {/* Login As User */}
-                    <Card className="index-cards" sx={{ maxWidth: 345 }} style={{background:"transparent","margin":"10px"}}>
-                        <CardActionArea style={{cursor:"default"}}>
+                    <Card className='index-cards' sx={{ maxWidth: 345 }} style={{background:'transparent','margin':'10px'}}>
+                        <CardActionArea style={{cursor:'default'}}>
                             <CardMedia
-                            className="index-card-media"
-                            component="img"
-                            height="auto"
+                            className='index-card-media'
+                            component='img'
+                            height='auto'
                             image={userLogin}
-                            alt="User Login"
+                            alt='User Login'
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h6" component="div">
+                                <Typography gutterBottom variant='h6' component='div'>
                                     User Login
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
 
-                        <CardActions className="d-flex justify-content-center">
+                        <CardActions className='d-flex justify-content-center'>
                             <Link to='/RegisterPage'>
-                                <Button className="index-btn" >
+                                <Button className='index-btn' >
                                     User Login&nbsp;&nbsp;<GrLinkNext/>
                                 </Button>
                             </Link>

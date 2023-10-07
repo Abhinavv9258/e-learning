@@ -1,4 +1,6 @@
 import React from 'react';
+
+// importing components
 import Section1 from '../components/landingPages/section1';
 import Section2 from '../components/landingPages/section2';
 // import Section3 from '../components/landingPages/section3';

@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 
 import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // importing styles 

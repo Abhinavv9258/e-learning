@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import {
     FormControl,
@@ -21,7 +21,7 @@ import { URL } from '../App';
 import login from '../assets/images/566-removebg.png'
 
 // importing components
-import { useUser } from "../context/AuthContext";
+import { useUser } from '../context/AuthContext';
 
 
 const UserLoginForm = () => {
@@ -40,16 +40,16 @@ const UserLoginForm = () => {
         e.preventDefault();
         const { username, password } = credentials;
         if (username === undefined || password === undefined) {
-            toast.warning("Both username and password are required!", {
+            toast.warning('Both username and password are required!', {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000,
             });
         } else {
             try {
                 const data = await fetch(`${URL}/api/auth/login`, {
-                    method: "POST",
+                    method: 'POST',
                     headers: {
-                        "Content-Type": "application/json"
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         username,
@@ -72,19 +72,19 @@ const UserLoginForm = () => {
                                 autoClose: 3000,
                             });
 
-                            localStorage.setItem("access_token", res.token);
-                            navigate("/");
+                            localStorage.setItem('access_token', res.token);
+                            navigate('/');
                         } else {
-                            console.error("Unexpected response structure:", res);
-                            toast.error("An error occurred during login. Please try again later.", {
+                            console.error('Unexpected response structure:', res);
+                            toast.error('An error occurred during login. Please try again later.', {
                                 position: toast.POSITION.TOP_RIGHT,
                                 autoClose: 3000,
                             });
                         }
                     } catch (jsonError) {
                         // Handle JSON parsing error
-                        console.error("Error parsing JSON response:", jsonError);
-                        toast.error("An error occurred during login. Please try again later.", {
+                        console.error('Error parsing JSON response:', jsonError);
+                        toast.error('An error occurred during login. Please try again later.', {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
                         });
@@ -98,15 +98,15 @@ const UserLoginForm = () => {
                             autoClose: 3000,
                         });
                     } else {
-                        toast.error("Login failed. Please check your credentials and try again.", {
+                        toast.error('Login failed. Please check your credentials and try again.', {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
                         });
                     }
                 }
             } catch (error) {
-                console.error("Error:", error);
-                toast.error("An error occurred during login. Please try again later.", {
+                console.error('Error:', error);
+                toast.error('An error occurred during login. Please try again later.', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 3000,
                 });
@@ -117,38 +117,38 @@ const UserLoginForm = () => {
     return (
         <>
             <div className='container form-container'>
-                <Card className="form-card">
-                    <div className="content row no-gutters from-content">
-                        <CardMedia className="form-image col">
-                            <img src={login} className="card-img img-fluid" alt="..." />
+                <Card className='form-card'>
+                    <div className='content row no-gutters from-content'>
+                        <CardMedia className='form-image col'>
+                            <img src={login} className='card-img img-fluid' alt='...' />
                         </CardMedia>
                         <div style={{ width: '100%' }} className='form-col col d-flex'>
-                            <Card className="card-body d-flex " style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <Card className='card-body d-flex ' style={{ alignItems: 'center', justifyContent: 'center' }}>
                                 <CardContent className='card-content'>
                                     <FormGroup>
                                         <FormControl>
-                                            <Typography variant="h5">
+                                            <Typography variant='h5'>
                                                 Login In to your account and start learning
-                                                <span className="upper-line"></span>
-                                                <span className="lower-line"></span>
+                                                <span className='upper-line'></span>
+                                                <span className='lower-line'></span>
                                             </Typography>
                                         </FormControl>
                                         <FormControl className='form-input-label'>
                                             <InputLabel>User-Name/Email</InputLabel>
-                                            <Input type="text" id="username"
+                                            <Input type='text' id='username'
                                                 onChange={handleChange}
                                                 value={credentials.username}
                                             />
                                         </FormControl>
                                         <FormControl className='form-input-label' >
                                             <InputLabel>Password</InputLabel>
-                                            <Input type="password" id="password"
+                                            <Input type='password' id='password'
                                                 onChange={handleChange}
                                                 value={credentials.password}
                                             />
                                         </FormControl>
-                                        <FormControl style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center", flexDirection: "row" }}>
-                                            <Button className='navbar-btn' type="submit" onClick={handleSubmit}> LogIn </Button>
+                                        <FormControl style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row' }}>
+                                            <Button className='navbar-btn' type='submit' onClick={handleSubmit}> LogIn </Button>
                                         </FormControl>
                                         <Typography> New to E-Learn?
                                             <Link to='/registerPage'>SignUp</Link>
