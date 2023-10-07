@@ -15,7 +15,6 @@ import logo from '../assets/images/logo.png'
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import '../App.css';
-import MenuIcon from '@mui/icons-material/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -90,10 +89,10 @@ const NavbarComponent = ({ toggleBackground }) => {
                     </Navbar.Brand>
 
                     {user ? (
-                        <Button className='navbar-btn navbar-user-dropdown'>
+                        <Button className={`navbar-btn navbar-user-dropdown  ${isDarkBackground ? 'dark-mode' : 'light-mode'} `}>
                             <Navbar.Brand className='navbar-user-dropdown'>
                                 <NavDropdown
-                                    className={`navbar-user-dropdown-items ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}
+                                    className={`navbar-user-dropdown-items `}
                                     title={<>
                                         {
                                             user.username.charAt(0).toUpperCase() + user.username.slice(1)
