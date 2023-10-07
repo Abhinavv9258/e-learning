@@ -49,7 +49,7 @@ const Index = () => {
                 <div className='d-flex index-card-deck' style={{width:'75%',justifyContent:'space-evenly'}}>
 
                     {/* Login As Guest */}
-                    <Card className='index-cards' sx={{ maxWidth: 345 }}  style={{background:'transparent','margin':'10px'}}>
+                    <Card className='index-cards' sx={{ maxWidth: 345 }}>
                         <CardActionArea style={{cursor:'default'}}>
                             <CardMedia
                             className='index-card-media'
@@ -74,7 +74,7 @@ const Index = () => {
                     </Card>
 
                     {/* Login As Admin */}
-                    <Card className='index-cards' sx={{ maxWidth: 345 }} style={{ background: 'transparent', 'margin': '10px' }}>
+                    <Card className='index-cards' sx={{ maxWidth: 345 }}>
                         <CardActionArea style={{ cursor: 'default' }}>
                             <CardMedia
                                 className='index-card-media'
@@ -99,7 +99,7 @@ const Index = () => {
                     </Card>
 
                     {/* Login As User */}
-                    <Card className='index-cards' sx={{ maxWidth: 345 }} style={{background:'transparent','margin':'10px'}}>
+                    <Card className='index-cards' sx={{ maxWidth: 345 }}>
                         <CardActionArea style={{cursor:'default'}}>
                             <CardMedia
                             className='index-card-media'

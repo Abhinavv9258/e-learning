@@ -36,10 +36,14 @@
 .index-card-deck{
     display: flex;
     padding: 30px;
+    width: 90%;
+    justify-content:space-evenly;
 }
 
 .index-cards{
     border: 2px solid #dddddd !important;
+    background: transparent;
+    margin:10px;
 }
 
 .index-card-media{
@@ -54,6 +58,7 @@
     justify-content: center;
     align-items: center;
     margin: 10px !important;
+    color: black !important;
     border: 2px solid #dddddd !important;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
 }
@@ -75,24 +80,37 @@
     color: red !important;
 }
 
-/*----------Resposive--------*/
+/*----------Responsive--------*/
+
+@media (min-width: 780px) and (max-width:1200px){
+    .index-card-deck {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+
 @media(max-width:780px){
     .index-text strong{
         font-size: 2rem;
         line-height: 40px;
         padding: 0px 10px;
     }
+
     .index-text p {
         font-size: 1rem;
     }
+
     .index-btn {
-        width: 180px;
+        width: 200px;
         height: 44px;
         margin: 30px;
     }
+
     .index-card{
         margin: 20px !important;
     }
+
     .index-card-deck{
         display: flex;
         justify-content: center;
