@@ -20,12 +20,12 @@ import { URL } from '../App';
 import login from '../assets/images/566-removebg.png'
 
 // importing components
-// import { useUser } from '../context/AuthContext';
+import { useUser } from '../context/AuthContext';
 
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-    // const { setUser } = useUser(); // Access the setUser function from the UserContext
+    const { setUser } = useUser(); // Access the setUser function from the UserContext
     const [error, setError] = useState(null); // State to store registration error
 
     const [credentials, setCredentials] = useState({
@@ -75,10 +75,35 @@ const RegisterForm = () => {
 
                 if (data.status === 201) {
                     // Registration successful
-                    navigate('/');
-                    toast.success('Registration Successfully 😃!', {
-                        position: 'top-center'
-                    });
+                    try {
+                        const res = await data.json();
+                        console.log('res: ', res, '  res.user :  ', res.user, '  res.token :  ', res.user.tokens[0])
+                        if (res && res.user && res.user.tokens[0]) {
+                            setUser({
+                                username: res.user.username,
+                                token: res.user.tokens[0],
+                            }); 
+                            toast.success(`Registration Successfully 😃! Welcome, ${res.user.username}`, {
+                                position: toast.POSITION.TOP_RIGHT,
+                                autoClose: 3000,
+                            });
+                            localStorage.setItem('access_token', res.user.tokens[0]);
+                            navigate('/');
+                        } else {
+                            console.error('Unexpected response structure:', res);
+                            toast.error('An error occurred during registration. Please try again later.', {
+                                position: toast.POSITION.TOP_RIGHT,
+                                autoClose: 3000,
+                            });
+                        }
+                    } catch (jsonError) {
+                        // Handle JSON parsing error
+                        console.error('Error parsing JSON response:', jsonError);
+                        toast.error('An error occurred during registration. Please try again later.', {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: 3000,
+                        });
+                    }
                 } else {
                     // Registration failed, handle the error message from the server
                     const response = await data.json();

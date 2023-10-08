@@ -25,6 +25,12 @@ const NavbarComponent = ({ toggleBackground }) => {
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
     );
 
+    const [access_token] = React.useState(
+        localStorage.getItem('access_token')
+    );
+
+    console.log(access_token);
+
     React.useEffect(() => {
         document.body.classList.toggle('dark-mode', isDarkBackground);
     }, [isDarkBackground]);

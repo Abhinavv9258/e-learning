@@ -3,12 +3,22 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import AdminLoginForm from '../components/AdminLoginForm'
 
-const AdminLoginPage = () => {
+const AdminLoginPage = ({ toggleBackground }) => {
+    const [isDarkBackground] = React.useState(
+        localStorage.getItem('isDarkBackground') === 'true' ? true : false
+    );
+
+    React.useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkBackground);
+    }, [isDarkBackground]);
+
     return (
         <>
-            <Navbar />
-            <AdminLoginForm />
-            <Footer />            
+            <div className='app-container'>
+                <Navbar toggleBackground={toggleBackground} />
+                <AdminLoginForm />
+                <Footer />
+            </div>
         </>
     );
 };

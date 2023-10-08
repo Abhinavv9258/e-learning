@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Index from './pages/Index'
 import RegisterPage from './pages/RegisterPage'
 import UserLoginPage from './pages/UserLoginPage'
+import AdminLoginPage from './pages/AdminLoginPage'
 import Homepage from './pages/Homepage';
 import Login from './pages/Login';
 
@@ -39,6 +40,7 @@ const App = () => {
                 <Route path='/Index' element={<Index toggleBackground={toggleBackground} />} />
                 <Route path='/userLoginPage' element={<UserLoginPage toggleBackground={toggleBackground} />} />
                 <Route path='/login' element={<Login toggleBackground={toggleBackground} />} />
+                <Route path='/adminLoginPage' element={<AdminLoginPage toggleBackground={toggleBackground} />} />
             </Routes>
         </BrowserRouter>
     );

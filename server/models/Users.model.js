@@ -2,41 +2,39 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema(
     {
         name: {
-            type: 'string',
+            type: String,
             // required: true
         },
         email: {
-            type: 'string',
+            type: String,
             required: true,
             unique: true
         },
         username: {
-            type: 'string',
+            type: String,
             required: true,
             unique: true
         },
         password: {
-            type: 'string',
+            type: String,
             required: true
         },
         phone: {
-            type: 'Number',
+            type: Number,
             // required: true
         },
         address: {
-            type: 'string',
+            type: String,
             // required: true
         },
         stream: {
-            type: 'string',
+            type: String,
             // required: true
         },
         tokens: [
             {
-                token: {
-                    type: 'string',
-                    required: true
-                }
+                type: String,
+                // required: true
             }
         ],
         courseEnrolled: [{
@@ -48,7 +46,7 @@ const schema = mongoose.Schema(
             default: Date.now
         },
         isAdmin: {
-            type: 'boolean',
+            type: Boolean,
             default: false
         }
     }

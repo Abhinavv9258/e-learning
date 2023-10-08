@@ -101,7 +101,7 @@ const Index = ({ toggleBackground }) => {
                             </Typography>
                         </CardContent>
                         <CardActions className='d-flex justify-content-center'>
-                                <Button href='/Index' className={`index-btn ${isDarkBackground ? 'dark-mode' : 'light-mode'}`} >
+                                <Button href='/AdminLoginPage' className={`index-btn ${isDarkBackground ? 'dark-mode' : 'light-mode'}`} >
                                     <Typography>
                                         Admin Login &nbsp;
                                     </Typography>

@@ -17,9 +17,30 @@ const register = async (req, res, next) => {
             address: req.body.address,
             stream: req.body.stream,
         });
-        const savedUser = await newUser.save();
+
+        await newUser.save();
+        const user = await userModel.findOne({ username: req.body.username });
+
+        const token = jwt.sign(
+            { id: user._id, isAdmin: user.isAdmin },
+            process.env.JWT,
+            { expiresIn: '1h' }
+        );
+
+        res.cookie("access_token", token, {
+            httpOnly: true,
+            // secure: process.env.NODE_ENV === "production",
+            sameSite: 'strict'
+        });
+
+        const updatedUser = await userModel.findByIdAndUpdate(
+            user._id,
+            { $set: { tokens: [token] } },
+            { new: true }
+        );
+
         // Return the user object without the password field
-        const userWithoutPassword = { ...savedUser._doc };
+        const userWithoutPassword = { ...updatedUser._doc };
         delete userWithoutPassword.password;
         res.status(201).send({ user: userWithoutPassword });
     } catch (err) {

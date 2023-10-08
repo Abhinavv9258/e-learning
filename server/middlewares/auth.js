@@ -5,6 +5,8 @@ const {
   login
 } = require('../controllers/auth.controllers.js')
 
+const { verifyToken, verifyUser, verifyAdmin } = require('../utils/verifyToken.js')
+
 
 // user authentication
 auth.post('/register', register);

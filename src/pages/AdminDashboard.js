@@ -19,20 +19,27 @@ const AdminDashboard = () => {
         let response = await findAllUser();
     }
 
+    // return (
+    //     <>
+    //         <AdminNavbar />
+    //         <div>            
+    //             <AdminCarousels />
+    //         </div>
+    //         <div style={{background:"#f5f5f5"}}>
+    //             <Typography variant="h5" gutterBottom> Top Courses</Typography>
+    //         </div>
+    //         <Typography variant="h5" gutterBottom> Top Universities Course</Typography>
+    //         <div style={{background:"#f5f5f5"}}>
+    //             <Typography variant="h5" gutterBottom> About Us</Typography>
+    //         </div>
+    //         <Footer />
+    //     </>
+    // );
     return (
         <>
-            <AdminNavbar />
-            <div>            
-                <AdminCarousels />
+            <div>
+                
             </div>
-            <div style={{background:"#f5f5f5"}}>
-                <Typography variant="h5" gutterBottom> Top Courses</Typography>
-            </div>
-            <Typography variant="h5" gutterBottom> Top Universities Course</Typography>
-            <div style={{background:"#f5f5f5"}}>
-                <Typography variant="h5" gutterBottom> About Us</Typography>
-            </div>
-            <Footer />
         </>
     );
 };
