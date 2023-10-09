@@ -34,15 +34,7 @@
 }
 
 .section1-text strong span {
-    color:#f76363;
-}
-
-.section1-text p{
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin: 2px;
-    margin-bottom: 15px;
+    color:#d81010;
 }
 
 .section1-btn-grp{
@@ -51,9 +43,9 @@
 }
 
 .section1-btn {
-    width: 200px;
+    width: 200px !important;
     height: 45px;
-    color: black !important;
+    color: black;
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -76,7 +68,7 @@
     color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
 }
 
-/*----------Resposive--------*/
+/*----------Responsive--------*/
 @media(max-width:1100px){
     .section1-text{
         margin-left: 0px !important;
@@ -143,8 +135,14 @@
     flex-direction: column;
     padding: 2.5rem;
     gap: 1.5rem;
-    background: rgb(245, 245, 245);    
+    background: rgba(245, 245, 245, 0.9);    
 }
+
+
+.section2-content.dark{
+    background: rgba(245, 245, 245, 0.5);
+}
+
 .section2-companies-head{
     font-size: 1.5rem;;
 }
@@ -157,7 +155,9 @@
     font-size: 1.5rem !important;
     outline: transparent solid 2px;
     outline-offset: 2px;
-    color: #f76363;
+    /* color: #f76363; */
+        color:#d81010;
+
     font-weight: 700;
 }
 

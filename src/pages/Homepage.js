@@ -24,9 +24,9 @@ const Homepage = ({ toggleBackground }) => {
     return (
         <div className='app-container'>
             <Navbar toggleBackground={toggleBackground} />
-            <Section1 />
+            <Section1 toggleBackground={toggleBackground} />
 
-            <Section2 />
+            <Section2 toggleBackground={toggleBackground} />
             {/* <Section3 />
             <Section4 />
             <Section5 /> */}

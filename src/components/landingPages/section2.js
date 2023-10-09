@@ -20,10 +20,19 @@ import penn from './css/penn.png'
 import stanford from './css/stanford.png'
 import './css/section1.css'
 
-const Section2 = () => {
+const Section2 = ({ toggleBackground }) => {
+  const [isDarkBackground] = React.useState(
+    localStorage.getItem('isDarkBackground') === 'true' ? true : false
+  );
+
+  React.useEffect(() => {
+    document.body.classList.toggle('dark-mode', isDarkBackground);
+  }, [isDarkBackground]);
 
   return (
-    <div className="section2-content"
+    <div 
+      className={`section2-content ${isDarkBackground ? 'dark-mode' : ''}`}
+
     //   bg="#f5f5f5"
     >
       <Typography

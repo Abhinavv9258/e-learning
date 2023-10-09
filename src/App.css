@@ -15,7 +15,7 @@
 
 /* background toggle */
 .dark-mode {
-    background-color: #333 !important;
+    background-color: rgb(17, 20, 25) !important;
     color: white !important;
 }
 
