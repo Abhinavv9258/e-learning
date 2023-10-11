@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import {
     FormControl,
     InputLabel,
@@ -8,7 +9,9 @@ import {
 } from '@material-ui/core';
 
 // importing icons
-import { FaYoutube, FaTwitter, FaFacebookSquare } from 'react-icons/fa';
+import { FaYoutube, 
+    FaTwitter, 
+    FaFacebookSquare } from 'react-icons/fa';
 
 // importing styles
 import '../assets/css/Footer.css';
@@ -18,9 +21,20 @@ import '../assets/css/Footer.css'
 
 const Footer = () => {
     const navigate = useNavigate();
+
+    const [isDarkBackground] = React.useState(
+        localStorage.getItem('isDarkBackground') === 'true' ? true : false
+    );
+
+    React.useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkBackground);
+    }, [isDarkBackground]);
+
     return (
         <>
-            <footer id='footer' className='footer-1'>
+            <footer id='footer' 
+            className={`footer-1 ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}
+            >
                 <div className='main-footer widgets-dark typo-light'>
                     <div className='container'>
                         <div className='row'>

@@ -1,5 +1,7 @@
 import * as React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// importing toast
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

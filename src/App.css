@@ -15,7 +15,7 @@
 
 /* background toggle */
 .dark-mode {
-    background-color: rgb(17, 20, 25) !important;
+    background-color: #102842 !important;
     color: white !important;
 }
 
@@ -34,6 +34,6 @@
 }
 
 .light-mode {
-    background-color: white !important;
+    background-color: #EFF5FB !important;
     color: black !important;
 }
