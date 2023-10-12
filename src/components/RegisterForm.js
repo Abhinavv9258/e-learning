@@ -7,6 +7,8 @@ import {
     Input
 } from '@material-ui/core';
 import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material'
+
+// importing toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
