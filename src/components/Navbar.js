@@ -1,22 +1,37 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate, Link } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Button, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
-import '../assets/css/Navbar.css'
-import { useUser } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import logo from '../assets/images/logo.png'
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import '../App.css';
+
+import { Button, 
+    Switch, 
+    FormControlLabel } from '@mui/material'
+
+// importing icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+
+// importing images
+import logo from '../assets/images/logo.png'
+
+// importing components
+import { useUser } from '../context/AuthContext';
+
+// importing toast
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// importing styles
+import '../App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../assets/css/Navbar.css'
+
+// importing server side url
+// import { URL } from '../App';
+
 
 const NavbarComponent = ({ toggleBackground }) => {
     const { user, setUser } = useUser();
@@ -25,21 +40,52 @@ const NavbarComponent = ({ toggleBackground }) => {
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
     );
 
-    const [access_token] = React.useState(
-        localStorage.getItem('access_token')
-    );
-
-    console.log(access_token);
-
     React.useEffect(() => {
         document.body.classList.toggle('dark-mode', isDarkBackground);
     }, [isDarkBackground]);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         setUser(null);
         localStorage.removeItem('access_token');
         toast.success('Successfully Logged Out');
         navigate('/');
+        
+        // try {
+        //     const token = localStorage.getItem("access_token");
+        //     const res = await fetch(`${URL}/api/auth/logout`, {
+        //         method: 'GET',
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             "Authorization": `Bearer ${token}`,
+        //             Accept: "application/json",
+        //         },
+        //         credentials: "include"
+        //     });
+        //
+        //     const data = await res.json();
+        //
+        //     if (data.status === 201) {
+        //         toast.success('User successfully logged out.', {
+        //             position: toast.POSITION.TOP_RIGHT,
+        //             autoClose: 3000,
+        //         });
+        //         localStorage.removeItem('access_token');
+        //         setUser(null); // Set user to null to log out
+        //         navigate('/');
+        //     } else {
+        //         console.log("error");
+        //         toast.warning('Error', {
+        //             position: toast.POSITION.TOP_RIGHT,
+        //             autoClose: 3000,
+        //         });
+        //     }
+        // } catch (error) {
+        //     console.error('Error during logout:', error);
+        //     toast.warning('Error', {
+        //         position: toast.POSITION.TOP_RIGHT,
+        //         autoClose: 3000,
+        //     });
+        // }
     };
 
     return (

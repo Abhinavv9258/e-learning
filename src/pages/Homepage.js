@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 // importing components
 import Section1 from '../components/landingPages/section1';
@@ -10,8 +12,17 @@ import Section2 from '../components/landingPages/section2';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
+// importing hooks
+import { useUser } from '../context/AuthContext';
+
+// importing server side url
+import { URL } from '../App';
+
 
 const Homepage = ({ toggleBackground }) => {
+    const navigate = useNavigate();
+    const { user } = useUser();
+    const [userId, setUserId] = useState();
 
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
@@ -20,6 +31,32 @@ const Homepage = ({ toggleBackground }) => {
     React.useEffect(() => {
         document.body.classList.toggle('dark-mode', isDarkBackground);
     }, [isDarkBackground]);
+
+    const dashboard = async() => {
+        let token = localStorage.getItem("access_token");
+        const res = await fetch(`${URL}/api/users/checkuser/${user.userId}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` // Set the authorization header correctly
+            },
+            credentials: 'include' // Include cookies
+        });
+        const data = await res.json();
+        console.log(data);
+        if (data.status === 500 || !data) {
+            console.log("error");
+        } else {
+            navigate('/home');
+        }
+    }
+
+    useEffect(() => {
+        // Check if the user is logged in before running the dashboard function
+        if (user) {
+            dashboard();
+        }
+    }, [user]);
 
     return (
         <div className='app-container'>

@@ -34,7 +34,7 @@
 }
 
 .section1-text strong span {
-    color:#d81010;
+    color:#970C10;
 }
 
 .section1-btn-grp{
@@ -135,12 +135,12 @@
     flex-direction: column;
     padding: 2.5rem;
     gap: 1.5rem;
-    background: rgba(245, 245, 245, 0.9);    
+    background: #D9E4EC;
 }
 
 
 .section2-content.dark{
-    background: rgba(245, 245, 245, 0.5);
+    background: #D9E4EC;
 }
 
 .section2-companies-head{
@@ -156,7 +156,7 @@
     outline: transparent solid 2px;
     outline-offset: 2px;
     /* color: #f76363; */
-        color:#d81010;
+        color:#970C10;
 
     font-weight: 700;
 }

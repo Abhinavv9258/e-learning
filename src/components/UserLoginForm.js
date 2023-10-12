@@ -17,11 +17,13 @@ import '../App.css';
 import '../assets/css/Form.css'
 
 // importing images
-import { URL } from '../App';
 import login from '../assets/images/566-removebg.png'
 
-// importing components
+// importing hooks
 import { useUser } from '../context/AuthContext';
+
+// importing server side url
+import { URL } from '../App';
 
 
 const UserLoginForm = () => {
@@ -62,10 +64,10 @@ const UserLoginForm = () => {
                     try {
                         const res = await data.json();
                         if (res && res.user && res.token) {
-
                             setUser({
                                 username: res.user.username,
                                 token: res.token,
+                                userId: res.user._id,
                             });
                             toast.success(`User Logged In! Welcome, ${res.user.username}`, {
                                 position: toast.POSITION.TOP_RIGHT,
@@ -73,7 +75,7 @@ const UserLoginForm = () => {
                             });
 
                             localStorage.setItem('access_token', res.token);
-                            navigate('/');
+                            navigate('/homepage');
                         } else {
                             console.error('Unexpected response structure:', res);
                             toast.error('An error occurred during login. Please try again later.', {

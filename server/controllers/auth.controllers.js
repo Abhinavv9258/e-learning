@@ -30,7 +30,7 @@ const register = async (req, res, next) => {
         res.cookie("access_token", token, {
             httpOnly: true,
             // secure: process.env.NODE_ENV === "production",
-            sameSite: 'strict'
+            // sameSite: 'strict'
         });
 
         const updatedUser = await userModel.findByIdAndUpdate(
@@ -66,24 +66,58 @@ const login = async (req, res, next) => {
             { expiresIn: '1h' }
         );
 
-        res.cookie("access_token", token, {
-            httpOnly: true,
-            // secure: process.env.NODE_ENV === "production",
-            sameSite: 'strict'
-        });
+        // res.cookie("access_token", token, {
+        //     httpOnly: true,
+        //     // secure: process.env.NODE_ENV === "production",
+        //     // sameSite: 'strict'
+        // });
         
         const { password, isAdmin, ...otherDetails } = user._doc;
-        // res
-        //     .cookie("access_token", token, {
-        //         httpOnly: true,
-        //     })
-        //     .status(200)
-        //     .send({ ...otherDetails });
-        res.status(200).send({ user: otherDetails, token });
+        res.cookie("access_token", token, {
+                httpOnly: true,
+            })
+            .status(200)
+            .send({ user: otherDetails, token });
+        // res.status(200).send({ user: otherDetails, token });
     } catch (err) {
         next(err);
     }
 };
 
+const logout = async (req, res, next) => {
+    // res.send("logout");
+    // console.log(req.headers);
+    // const cookieString = req.headers.cookie;
+    // const cookies = cookieString.split('; '); // Split the cookie string into an array of individual cookies
 
-module.exports = { register, login };
+    // // Find the cookie that starts with "access_token="
+    // const accessTokenCookie = cookies.find(cookie => cookie.startsWith('access_token='));
+
+    // if (!accessTokenCookie) {
+    //     return null; // Access token cookie not found
+    // }
+
+    // // Split the access token cookie into key and value
+    // const [key, value] = accessTokenCookie.split('=');
+
+    // // Return the access token value (remove any leading or trailing spaces)
+    // const accessToken = value.trim();
+    // console.log(accessToken);
+    try {
+        req.userModel.tokens = [];
+        // Save the user with the updated tokens array
+        await req.userModel.save();
+        // Clearing cookies
+        res.clearCookie('access_token', { path: '/' });
+        
+        console.log('log cleared')
+        res.status(201).json({ status: 201, message: 'Logout successful' });
+        console.log('Logout successful');
+    } catch (error) {
+        console.error('Error during logout:', error);
+        res.status(500).json({ status: 500, error: 'Internal server error' });
+        // next();
+    }
+}
+
+module.exports = { register, login, logout };
