@@ -47,11 +47,10 @@ const Homepage = ({ toggleBackground }) => {
             credentials: 'include' // Include cookies
         });
         const data = await res.json();
-        console.log(data);
         if (data.status === 500 || !data) {
             console.log("error");
         } else {
-            navigate('/home');
+            navigate('/homepage');
         }
     }
 

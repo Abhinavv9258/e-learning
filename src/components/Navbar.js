@@ -6,9 +6,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import { Button, 
-    Switch, 
-    FormControlLabel } from '@mui/material'
+import {
+    Button,
+    Switch,
+    FormControlLabel
+} from '@mui/material'
 
 // importing icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -49,7 +51,7 @@ const NavbarComponent = ({ toggleBackground }) => {
         localStorage.removeItem('access_token');
         toast.success('Successfully Logged Out');
         navigate('/');
-        
+
         // try {
         //     const token = localStorage.getItem("access_token");
         //     const res = await fetch(`${URL}/api/auth/logout`, {
@@ -104,12 +106,14 @@ const NavbarComponent = ({ toggleBackground }) => {
 
                     <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav className='me-auto'>
-                            <Navbar.Brand><Link className='navbar-brand-link' to='/'>
-                                <img src={logo} className='e-learn-logo' alt='logo' />
-                                E-Learn</Link>
+                            <Navbar.Brand>
+                                <Link className='navbar-brand-link' to='/'>
+                                    <img src={logo} className='e-learn-logo' alt='logo' />
+                                    E-Learn
+                                </Link>
                             </Navbar.Brand>
-                            <Nav.Link className='navbar-link'><Link className='nav-link' to='/'>Home</Link></Nav.Link>
-                            <Nav.Link className='navbar-link'><Link className='nav-link' to='/'>About Us</Link></Nav.Link>
+                            <Nav.Link className='navbar-link' as={Link} to='/homepage'>Home</Nav.Link>
+                            <Nav.Link className='navbar-link' as={Link} to='/'>About Us</Nav.Link>
                             <NavDropdown className='navbar-link-dropdown' title='Courses' id='basic-nav-dropdown' >
                                 <div >
                                     <NavDropdown.Item href='#action/3.1' className='nav-dropdown-item'>
