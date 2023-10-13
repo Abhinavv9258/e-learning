@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -59,6 +59,7 @@ const Homepage = ({ toggleBackground }) => {
         if (user) {
             dashboard();
         }
+        // eslint-disable-next-line
     }, [user]);
 
     return (

@@ -1,8 +1,8 @@
 import Carousel from 'react-bootstrap/Carousel';
-import i561 from '../assets/images/561.jpg';
-import i559 from '../assets/images/559.jpg';
-import i560 from '../assets/images/560.jpg';
-import i1 from '../assets/images/1.jpg';
+// import i561 from '../assets/images/561.jpg';
+// import i559 from '../assets/images/559.jpg';
+// import i560 from '../assets/images/560.jpg';
+// import i1 from '../assets/images/1.jpg';
 import i2 from '../assets/images/12.png';
 import i3 from '../assets/images/13.png';
 import i4 from '../assets/images/14.png';

@@ -1,19 +1,16 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
 
 // importing ui components
 import {
-    Card,
-    CardActionArea,
-    CardActions,
-    CardContent,
+    // Card,
+    // CardActionArea,
+    // CardActions,
+    // CardContent,
     CardMedia,
-    Typed,
-    Typography
+    // Typed,
+    Typography,
+    // Button
 } from '@mui/material';
-import {
-    Button,
-} from '@material-ui/core';
 
 // importing icons or logo
 import duke from './css/duke.png'
@@ -47,7 +44,7 @@ const Section2 = ({ toggleBackground }) => {
         >
             <Typography className='section2-companies-head'>We collaborate with
                 {" "}
-                <a href="#" className='section2-companies' >
+                <a href='/homepage' className='section2-companies' >
                     300+ leading universities and companies
                 </a>
             </Typography>
