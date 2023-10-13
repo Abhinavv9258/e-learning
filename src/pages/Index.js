@@ -8,6 +8,8 @@ import {
     Card, 
     CardActionArea, 
     CardActions } from '@mui/material';
+
+// importing title
 import { useWebsiteTitle } from '../hooks/WebsiteTitle';
 
 // importing icons

@@ -58,6 +58,8 @@ module.exports = { userRoute };
 const express = require('express');
 const userRoutes = express.Router();
 const {
+    register,
+    login,
     updateUser,
     deleteUser,
     getUser,
@@ -105,6 +107,10 @@ userRoutes.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {
 
 //CREATE
 // userRoutes.post("/", createUser);
+
+// user authentication
+userRoutes.post('/register', register);
+userRoutes.post('/login', login);
 
 //UPDATE
 userRoutes.put("/:id", verifyUser, updateUser);

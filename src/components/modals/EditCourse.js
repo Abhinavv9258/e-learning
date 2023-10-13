@@ -4,11 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const EditCourse = ({modal, toggle, updateBoard, boardObj}) => {
     const [cardList, setCardList] = useState('');
-    const [cardHolderColour, cardColour] = useState('');
+    const [cardHolderColor, cardColor] = useState('');
 
     useEffect(() => {
         setCardList(boardObj.Title);
-        cardColour(boardObj.Colour);
+        cardColor(boardObj.Color);
     },[])
     
     const handleChange = (e) => {
@@ -16,7 +16,7 @@ const EditCourse = ({modal, toggle, updateBoard, boardObj}) => {
         if(name === "cardList"){
             setCardList(value);
         }else{
-            cardColour(value);
+            cardColor(value);
         }
     }
 
@@ -24,22 +24,22 @@ const EditCourse = ({modal, toggle, updateBoard, boardObj}) => {
         e.preventDefault();
         let tempObj = {}
         tempObj['Title'] = cardList;
-        tempObj['Colour'] = cardHolderColour;
+        tempObj['Color'] = cardHolderColor;
         updateBoard(tempObj);
     }
 
     const blueColor = () => {
-        cardColour("#A7F0F9");
+        cardColor("#A7F0F9");
 
     }
     const violetColor = () => {
-        cardColour("#C5C5FC");
+        cardColor("#C5C5FC");
     }
     const pinkColor = () => {
-        cardColour("#FFAEC0");
+        cardColor("#FFAEC0");
     }
     const yellowColor = () => {
-        cardColour("#FFCC66");
+        cardColor("#FFCC66");
     }
 
     return (
@@ -47,14 +47,14 @@ const EditCourse = ({modal, toggle, updateBoard, boardObj}) => {
             <Modal isOpen={modal} toggle={toggle} aria-labelledby="contained-modal-title-vcenter" centered >
                 <form className="form-control">
                     <div className="header">
-                        <h4 classsName="headTitle">Add a name for your board</h4>
+                        <h4 className="headTitle">Add a name for your board</h4>
                         <button type="button" className="btn-close" aria-label="Close" onClick={toggle}></button>
                     </div>
                     <div className="title">
                         <input className="form-control" type="text" name="cardList" onChange={handleChange} placeholder="Board Name" value={cardList}/>
                     </div>
                     <div className="templete-color">
-                        <h4 classsName="headTitle">Select post colour</h4>
+                        <h4 className="headTitle">Select post color</h4>
                     </div>
                     <h5 className="colorSet">Here are some templates to help you get started</h5>
                     <div className="colorPick">

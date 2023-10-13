@@ -59,7 +59,7 @@ const RegisterForm = () => {
             });
         } else {
             try {
-                const data = await fetch(`${URL}/api/auth/register`, {
+                const data = await fetch(`${URL}/api/users/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -84,6 +84,7 @@ const RegisterForm = () => {
                             setUser({
                                 username: res.user.username,
                                 token: res.user.tokens[0],
+                                userId: res.user._id,
                             }); 
                             toast.success(`Registration Successfully 😃! Welcome, ${res.user.username}`, {
                                 position: toast.POSITION.TOP_RIGHT,

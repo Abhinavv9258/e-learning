@@ -5,7 +5,12 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import RegisterForm from '../components/RegisterForm'
 
+// importing title
+import { useWebsiteTitle } from '../hooks/WebsiteTitle';
+
 const RegisterPage = ({ toggleBackground }) => {
+
+    useWebsiteTitle('E-Learn || Register');
 
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false

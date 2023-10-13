@@ -14,7 +14,6 @@ const port = process.env.PORT || 3030;
 const { auth } = require("./middlewares/auth");
 const { userRoutes } = require("./routes/users.route");
 const { courseRoutes } = require("./routes/courses.route");
-const { adminRoute } = require("./routes/admin.route");
 
 
 app.use(cors({

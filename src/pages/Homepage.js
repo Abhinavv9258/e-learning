@@ -15,14 +15,18 @@ import Navbar from '../components/Navbar';
 // importing hooks
 import { useUser } from '../context/AuthContext';
 
+// importing title
+import { useWebsiteTitle } from '../hooks/WebsiteTitle';
+
 // importing server side url
 import { URL } from '../App';
 
 
 const Homepage = ({ toggleBackground }) => {
+
+    useWebsiteTitle('E-Learn || Homepage');
     const navigate = useNavigate();
     const { user } = useUser();
-    const [userId, setUserId] = useState();
 
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false

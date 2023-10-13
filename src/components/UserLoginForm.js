@@ -50,7 +50,7 @@ const UserLoginForm = () => {
             });
         } else {
             try {
-                const data = await fetch(`${URL}/api/auth/login`, {
+                const data = await fetch(`${URL}/api/users/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
