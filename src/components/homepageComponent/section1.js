@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 
 import Typed from "react-typed";
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import {
+    //Card
     // CardActionArea, 
+    // CardContent,
+    CardMedia,
+    Typography,
     CardActions,
     Button
 } from '@mui/material';
@@ -23,7 +23,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { FaArrowRightLong } from "react-icons/fa6";
 
 
-const Section1 = ({ toggleBackground }) => {
+const Section1 = () => {
     const navigate = useNavigate();
 
     const [isDarkBackground] = React.useState(
@@ -52,8 +52,9 @@ const Section1 = ({ toggleBackground }) => {
                         <Typed strings={['E-Learning', 'Online Course', 'Website.']} typeSpeed={200} backSpeed={70} loop />
                     </strong>
                     <Typography style={{ textAlign: 'center' }}>
-                        WELCOME TO, E-Learn
-                        <br />
+                        WELCOME TO E-Learn,
+                    </Typography>
+                    <Typography style={{ textAlign: 'center' }}>
                         ONLINE LEARNING PORTAL FOR STUDENTS AND TEACHERS
                     </Typography>
                     <CardActions className="section1-btn-grp d-flex justify-content-center">
@@ -67,7 +68,7 @@ const Section1 = ({ toggleBackground }) => {
                             <FaArrowRightLong />
                         </Button>
 
-                        <Button
+                        {/* <Button
                             className={`section1-btn ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}
                             onClick={() => navigate("/AdminLoginPage")}
                         >
@@ -75,7 +76,7 @@ const Section1 = ({ toggleBackground }) => {
                                 Admin LogIn &nbsp;
                             </Typography>
                             <FaArrowRightLong />
-                        </Button>
+                        </Button> */}
                     </CardActions>
                 </div>
             </div>

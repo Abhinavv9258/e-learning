@@ -43,7 +43,7 @@ const LoginCard = ({cardImage, cardName, cardButton, cardUrl }) => {
                     />
                 </CardActionArea>
                 <CardContent>
-                    <Typography className={`${isDarkBackground ? 'dark-mode' : 'light-mode'}`} gutterBottom variant='h6' component='div'>
+                    <Typography className={`${isDarkBackground ? 'dark-mode-card' : 'light-mode-card'}`} gutterBottom variant='h6' component='div'>
                         {cardName}
                     </Typography>
                 </CardContent>

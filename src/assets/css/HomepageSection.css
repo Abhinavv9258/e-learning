@@ -3,9 +3,9 @@
     justify-content: center !important;
     align-items: center !important;
     flex-direction: row;
-    margin-top: 80px;
-    margin-bottom: 80px;
-    /* background-color: rgba(14,14,14,0.76); */
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding:10px;
 }
 
 .section1-image{
@@ -91,7 +91,7 @@
     }
     .section1-content{
         flex-direction: column;
-        margin: 0 !important;
+        margin: 5px !important;
     }
     .section1-image{
         max-width: 456px;
@@ -107,11 +107,6 @@
     .section1-text p {
         font-size: 1rem;
     }
-    /* .section1-btn {
-        width: 180px;
-        height: 44px;
-        margin: 30px;
-    } */
     .section1-card{
         margin: 20px !important;
     }
@@ -122,7 +117,6 @@
         align-items: center;
         flex-direction: column;
     }
-
 }
 
 
@@ -144,7 +138,7 @@
 }
 
 .section2-companies-head{
-    font-size: 1.5rem;;
+    font-size: 1.5rem !important;
 }
 .section2-companies{
     transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;;

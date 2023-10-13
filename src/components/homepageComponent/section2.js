@@ -40,7 +40,8 @@ const Section2 = ({ toggleBackground }) => {
         <div
             className={`section2-content ${isDarkBackground ? 'dark-mode' : ''}`}
         >
-            <Typography className='section2-companies-head'>We collaborate with
+            <Typography className='section2-companies-head'>
+                We collaborate with
                 {" "}
                 <a href='/homepage' className='section2-companies' >
                     300+ leading universities and companies
