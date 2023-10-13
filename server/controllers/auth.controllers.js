@@ -53,11 +53,13 @@ const login = async (req, res, next) => {
     try {
         const user = await userModel.findOne({ username: req.body.username });
         if (!user) { return next(createError(404, "User not found!")); }
+        if (!user.isAdmin) { return next(createError(404, "You are not authorized!")); }
 
         const isPasswordCorrect = await bcrypt.compare(
             req.body.password,
             user.password
         );
+
         if (!isPasswordCorrect) { return next(createError(400, "Wrong username or password!")); }
 
         const token = jwt.sign(
@@ -66,19 +68,19 @@ const login = async (req, res, next) => {
             { expiresIn: '1h' }
         );
 
-        // res.cookie("access_token", token, {
-        //     httpOnly: true,
-        //     // secure: process.env.NODE_ENV === "production",
-        //     // sameSite: 'strict'
-        // });
-        
-        const { password, isAdmin, ...otherDetails } = user._doc;
         res.cookie("access_token", token, {
-                httpOnly: true,
-            })
-            .status(200)
-            .send({ user: otherDetails, token });
-        // res.status(200).send({ user: otherDetails, token });
+            httpOnly: true,
+            // secure: process.env.NODE_ENV === "production",
+            sameSite: 'strict'
+        });
+        
+        const { password, ...otherDetails } = user._doc;
+        // res.cookie("access_token", token, {
+        //         httpOnly: true,
+        //     })
+        //     .status(200)
+        //     .send({ user: otherDetails, token });
+        res.status(200).send({ user: otherDetails, token });
     } catch (err) {
         next(err);
     }

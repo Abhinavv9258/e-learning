@@ -3,7 +3,13 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import AdminLoginForm from '../components/AdminLoginForm'
 
+// importing title
+import { useWebsiteTitle } from '../hooks/WebsiteTitle';
+
 const AdminLoginPage = ({ toggleBackground }) => {
+
+    useWebsiteTitle('E-Learn || Admin Login');
+    
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
     );

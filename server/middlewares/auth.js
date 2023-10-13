@@ -6,10 +6,10 @@ const {
   logout
 } = require('../controllers/auth.controllers.js')
 
-const { verifyToken, verifyUser, verifyAdmin } = require('../utils/verifyToken.js')
+const { verifyUser } = require('../utils/verifyToken.js')
 
 
-// user authentication
+// admin authentication
 auth.post('/register', register);
 auth.post('/login', login);
 auth.get('/logout', verifyUser, logout);
