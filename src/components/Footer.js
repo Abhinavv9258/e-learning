@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
     FormControl,
     InputLabel,
     Input,
     Button,
+    Typography
 } from '@material-ui/core';
 
 // importing icons
@@ -29,7 +30,6 @@ import { URL } from '../App';
 
 
 const Footer = () => {
-    const navigate = useNavigate();
     const [email, setEmail] = useState('');
 
     const [isDarkBackground] = React.useState(
@@ -82,32 +82,46 @@ const Footer = () => {
                         <div className='row'>
                             <div className='col-xs-12 col-sm-6 col-md-3'>
                                 <div className='widget subscribe no-box'>
-                                    <h5 className='widget-title'>E-Learn: Online Learning Portal
+                                    <Typography style={{ marginBottom: 10 }} variant='h6' gutterBottom>
+                                        E-Learn: Online Learning Portal
                                         <span className='upper-line'></span>
                                         <span className='lower-line'></span>
-                                    </h5>
-                                    <p>E-Learn is an innovative online learning portal that utilizes a robust tech stack to deliver a seamless and engaging learning experience.  </p>
+                                    </Typography>
+                                    <Typography paragraph>
+                                        E-Learn is an innovative online learning portal that utilizes a robust tech stack to deliver a seamless and engaging learning experience.
+                                    </Typography>
+
                                 </div>
                             </div>
 
                             <div className='col-xs-12 col-sm-6 col-md-3'>
                                 <div className='widget no-box'>
-                                    <h5 className='widget-title'>Quick Links
+                                    <Typography style={{ marginBottom: 10 }} variant='h6' gutterBottom>
+                                        Company
                                         <span className='upper-line'></span>
                                         <span className='lower-line'></span>
-                                    </h5>
+                                    </Typography>
                                     <ul className='thumbnail-widget'>
                                         <li>
-                                            <div className='thumb-content' onClick={() => navigate('/')}>
-                                                {/* &nbsp; */}
-                                                Get Started
-                                            </div>
+                                            <Typography>
+                                                <Link className='thumb-content' to='/'>
+                                                    About Us
+                                                </Link>
+                                            </Typography>
                                         </li>
                                         <li>
-                                            <div className='thumb-content' onClick={() => navigate('/')}>
-                                                {/* &nbsp; */}
-                                                Top Performers
-                                            </div>
+                                            <Typography>
+                                                <Link className='thumb-content' to='/'>
+                                                    Contact Us
+                                                </Link>
+                                            </Typography>
+                                        </li>
+                                        <li>
+                                            <Typography>
+                                                <Link className='thumb-content' to='/'>
+                                                    Student Review
+                                                </Link>
+                                            </Typography>
                                         </li>
                                     </ul>
                                 </div>
@@ -115,10 +129,11 @@ const Footer = () => {
 
                             <div className='col-xs-12 col-sm-6 col-md-3'>
                                 <div className='widget no-box'>
-                                    <h5 className='widget-title'>Follow up
+                                    <Typography style={{ marginBottom: 10 }} variant='h6' gutterBottom>
+                                        Follow Us
                                         <span className='upper-line'></span>
                                         <span className='lower-line'></span>
-                                    </h5>
+                                    </Typography>
                                     <section className='social-section'>
                                         <Button className='social-btn btn-outline-dark btn-floating m-1' href='#!'><FaYoutube className='social-icon' /></Button>
                                         <Button className='social-btn btn-outline-dark btn-floating m-1' href='#!'><FaFacebookSquare className='social-icon' /></Button>
@@ -131,24 +146,37 @@ const Footer = () => {
 
                             <div className='col-xs-12 col-sm-6 col-md-3'>
                                 <div className='widget no-box'>
-                                    <h5 className='widget-title'>Contact Us
+                                    <Typography style={{ marginBottom: 10 }} variant='h6' gutterBottom>
+                                        Contact Us
                                         <span className='upper-line'></span>
                                         <span className='lower-line'></span>
-                                    </h5>
-                                    <p>Subscribe us for daily updates and news.</p>
+                                    </Typography>
+                                    <Typography paragraph style={{ margin: 0 }}>
+                                        Subscribe us for daily updates and news.
+                                    </Typography>
                                     <div className='emailField'>
                                         <FormControl className='footer-input-label'>
-                                            <InputLabel>Email</InputLabel>
+                                            <InputLabel className={`${isDarkBackground ? 'dark' : 'light'}`}>Email</InputLabel>
                                             <Input
                                                 type='email'
+                                                className={`${isDarkBackground ? 'dark' : 'light'}`}
                                                 name='email'
-                                                style={{ width: '100%' }}
+                                                style={{ width: '100%', marginBottom: 10 }}
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                             />
                                         </FormControl>
-                                        <Button className='navbar-btn' style={{ width: '75%' }} type='submit' value='submit' onClick={handleSubmit}>
-                                            Subscribe
+                                        <Button 
+                                            className={`footer-btn ${isDarkBackground ? 'dark' : 'light'}`}
+                                            style={{ width: '75%' }} 
+                                            type='submit' 
+                                            value='submit' 
+                                            onClick={handleSubmit}
+                                        >
+                                            <Typography className={`${isDarkBackground ? 'dark' : 'light'}`}>
+                                                Subscribe
+                                            </Typography>
+                                            
                                         </Button>
                                     </div>
                                 </div>
@@ -160,7 +188,9 @@ const Footer = () => {
                         <div className='container' >
                             <div className='row'>
                                 <div className='col-md-12 text-center' >
-                                    <p>Copyright Abhinav Verma © 2023. All rights reserved.</p>
+                                    <Typography paragraph>
+                                        Copyright Abhinav Verma © 2023. All rights reserved.
+                                    </Typography>
                                 </div>
                             </div>
                         </div>

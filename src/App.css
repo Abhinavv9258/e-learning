@@ -14,7 +14,29 @@
 }
 
 /* background toggle */
+.dark {
+    color: #D9E4EC !important;
+}
+
+.dark:hover {
+    transition: all ease 0.3s;
+    color: #f76363 !important;
+}
+
+.dark:active {
+    color: #f76363 !important;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+}
+
 .dark-mode {
+    background-color: #102842 !important;
+    color: white !important;
+}
+
+.dark-mode-card{
     background-color: #102842 !important;
     color: white !important;
 }
@@ -35,5 +57,9 @@
 
 .light-mode {
     background-color: #EFF5FB !important;
+    color: black !important;
+}
+
+.light-mode-card {
     color: black !important;
 }

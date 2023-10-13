@@ -9,7 +9,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {
     Button,
     Switch,
-    FormControlLabel
+    FormControlLabel,
+    Typography,
 } from '@mui/material'
 
 // importing icons
@@ -106,7 +107,7 @@ const NavbarComponent = ({ toggleBackground }) => {
 
                     <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav className='me-auto'>
-                            <Navbar.Brand>
+                            <Navbar.Brand style={{ marginBottom: "5px"}}>
                                 <Link className='navbar-brand-link' to='/'>
                                     <img src={logo} className='e-learn-logo' alt='logo' />
                                     E-Learn
@@ -114,17 +115,17 @@ const NavbarComponent = ({ toggleBackground }) => {
                             </Navbar.Brand>
                             <Nav.Link className='navbar-link' as={Link} to='/homepage'>Home</Nav.Link>
                             <Nav.Link className='navbar-link' as={Link} to='/'>About Us</Nav.Link>
-                            <NavDropdown className='navbar-link-dropdown' title='Courses' id='basic-nav-dropdown' >
-                                <div >
-                                    <NavDropdown.Item href='#action/3.1' className='nav-dropdown-item'>
-                                        <Link className='navbar-action-link' to='/'>All Courses</Link>
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item href='#action/3.2' className='nav-dropdown-item'>Something</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item href='#action/3.3' className='nav-dropdown-item'>
-                                        Separated link
-                                    </NavDropdown.Item>
-                                </div>
+                            <NavDropdown style={{ display: 'flex', flexDirection:'column',justifyContent:'center', alignItems:'flex-start' }} className='navbar-link-dropdown' title='Courses' id='basic-nav-dropdown' >
+                                    <div>
+                                        <NavDropdown.Item href='#action/3.1' className='nav-dropdown-item'>
+                                            <Link className='navbar-action-link' to='/'>All Courses</Link>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href='#action/3.2' className='nav-dropdown-item'>Something</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href='#action/3.3' className='nav-dropdown-item'>
+                                            Separated link
+                                        </NavDropdown.Item>
+                                    </div>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
@@ -150,9 +151,11 @@ const NavbarComponent = ({ toggleBackground }) => {
                                 <NavDropdown
                                     className={`navbar-user-dropdown-items `}
                                     title={<>
-                                        {
-                                            user.username.charAt(0).toUpperCase() + user.username.slice(1)
-                                        }
+                                        <Typography className={`${isDarkBackground ? 'dark' : 'light'}`}>
+                                            {
+                                                user.username.charAt(0).toUpperCase() + user.username.slice(1)
+                                            }
+                                        </Typography>
                                     </>
                                     }
                                     id='user-dropdown'
@@ -164,7 +167,11 @@ const NavbarComponent = ({ toggleBackground }) => {
                         </Button>
 
                     ) : (
-                        <Navbar.Brand><Link to='/Index'><Button className={`navbar-btn ${isDarkBackground ? ' dark-mode' : 'light-mode'}`}>LogIn/SignUp</Button></Link></Navbar.Brand>
+                        <Navbar.Brand><Link to='/Index'><Button className={`navbar-btn ${isDarkBackground ? ' dark-mode' : 'light-mode'}`}>
+                            <Typography className={`${isDarkBackground ? 'dark' : 'light'}`}>
+                                LogIn/SignUp
+                            </Typography>
+                        </Button></Link></Navbar.Brand>
                     )}
                 </Container>
             </Navbar>
