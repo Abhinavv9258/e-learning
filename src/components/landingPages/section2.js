@@ -45,14 +45,11 @@ const Section2 = ({ toggleBackground }) => {
 
         //   bg="#f5f5f5"
         >
-            <Typography
-            >
-                <p className='section2-companies-head'>We collaborate with
-                    {" "}
-                    <a href="#" className='section2-companies' >
-                        300+ leading universities and companies
-                    </a>
-                </p>
+            <Typography className='section2-companies-head'>We collaborate with
+                {" "}
+                <a href="#" className='section2-companies' >
+                    300+ leading universities and companies
+                </a>
             </Typography>
             <div className="section2-grid" >
                 <div className="d-flex" >

@@ -41,7 +41,7 @@ const Section1 = ({ toggleBackground }) => {
                     <CardMedia
                         className="section1-card-media"
                         component="img"
-                        maxWidth="456px"
+                        style={{ maxWidth:"456px" }}   
                         image={adminLogin}
                         alt="Admin Login"
                     />
@@ -51,11 +51,11 @@ const Section1 = ({ toggleBackground }) => {
                         E-Learn&nbsp;
                         <Typed strings={['E-Learning', 'Online Course', 'Website.']} typeSpeed={200} backSpeed={70} loop />
                     </strong>
-                    <p>
+                    <Typography style={{ textAlign: 'center' }}>
                         WELCOME TO, E-Learn
                         <br />
                         ONLINE LEARNING PORTAL FOR STUDENTS AND TEACHERS
-                    </p>
+                    </Typography>
                     <CardActions className="section1-btn-grp d-flex justify-content-center">
                         <Button
                             className={`section1-btn ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}

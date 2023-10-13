@@ -84,7 +84,11 @@ userRoutes.get("/checkauthentication", verifyToken, (req, res, next) => {
 userRoutes.get("/checkuser/:id", verifyUser, (req, res, next) => {
     try {
         const user = req.user;
-        res.send(`Hello ${user.name}, you are logged in & you can delete your account.`);
+        const message = `Hello ${user.name}, you are logged in & you can delete your account.`
+        const jsonResponse = {
+            message: message
+        };
+        res.json(jsonResponse);
     } catch (error) {
         // Handle errors
         console.error("Error checking user:", error);
@@ -96,7 +100,11 @@ userRoutes.get("/checkuser/:id", verifyUser, (req, res, next) => {
 userRoutes.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {
     try {
         const user = req.user;
-        res.send(`Hello ${user.name}, you are logged in & you can delete all accounts.`);
+        const message = `Hello ${user.name}, you are logged in & you can delete all accounts.`
+        const jsonResponse = {
+            message: message
+        };
+        res.json(jsonResponse);
     } catch (error) {
         // Handle errors
         console.error("Error checking admin:", error);
