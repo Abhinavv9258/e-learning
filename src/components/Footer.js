@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -9,18 +9,28 @@ import {
 } from '@material-ui/core';
 
 // importing icons
-import { FaYoutube, 
-    FaTwitter, 
-    FaFacebookSquare } from 'react-icons/fa';
+import {
+    FaYoutube,
+    FaTwitter,
+    FaFacebookSquare
+} from 'react-icons/fa';
 
 // importing styles
 import '../assets/css/Footer.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/css/Footer.css'
 
+// importing toast
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// importing server side url
+import { URL } from '../App';
+
 
 const Footer = () => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
 
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
@@ -30,10 +40,42 @@ const Footer = () => {
         document.body.classList.toggle('dark-mode', isDarkBackground);
     }, [isDarkBackground]);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`${URL}/api/send-email`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            if (response.status === 200) {
+                // Email sent successfully
+                toast.success('Email sent successfully.', {
+                    position: 'top-center'
+                });
+            } else {
+                // Handle email sending failure
+                toast.error('Failed to send the email. Please try again later.', {
+                    position: 'top-center'
+                });
+            }
+        } catch (error) {
+            // Handle errors.
+            console.error('Error:', error);
+            console.log(error)
+            toast.error('An error occurred while sending the email.', {
+                position: 'top-center'
+            });
+        }
+    };
+
     return (
         <>
-            <footer id='footer' 
-            className={`footer-1 ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}
+            <footer id='footer'
+                className={`footer-1 ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}
             >
                 <div className='main-footer widgets-dark typo-light'>
                     <div className='container'>
@@ -97,9 +139,17 @@ const Footer = () => {
                                     <div className='emailField'>
                                         <FormControl className='footer-input-label'>
                                             <InputLabel>Email</InputLabel>
-                                            <Input type='email' name='email' style={{ width: '100%' }} />
+                                            <Input
+                                                type='email'
+                                                name='email'
+                                                style={{ width: '100%' }}
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                            />
                                         </FormControl>
-                                        <Button className='navbar-btn' style={{ width: '75%' }} type='submit' value='submit'> Subscribe </Button>
+                                        <Button className='navbar-btn' style={{ width: '75%' }} type='submit' value='submit' onClick={handleSubmit}>
+                                            Subscribe
+                                        </Button>
                                     </div>
                                 </div>
                             </div>

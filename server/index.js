@@ -14,6 +14,8 @@ const port = process.env.PORT || 3030;
 const { auth } = require("./middlewares/auth");
 const { userRoutes } = require("./routes/users.route");
 const { courseRoutes } = require("./routes/courses.route");
+const { sendMail } = require("./routes/sendmail.route");
+
 
 
 app.use(cors({
@@ -40,7 +42,7 @@ app.use("/api/auth", auth);
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
-
+app.use("/api", sendMail);
 
 /*
 // courses routes
