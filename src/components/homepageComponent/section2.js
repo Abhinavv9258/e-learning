@@ -13,17 +13,17 @@ import {
 } from '@mui/material';
 
 // importing icons or logo
-import duke from './css/duke.png'
-import google from './css/google.png'
-import ibm from './css/IBM.png'
-import illinois from './css/illinois.png'
-import imperial from './css/imperial.png'
-import michigan from './css/michigan.jpeg'
-import penn from './css/penn.png'
-import stanford from './css/stanford.png'
+import duke from '../../assets/images/duke.png'
+import google from '../../assets/images/google.png'
+import ibm from '../../assets/images/IBM.png'
+import illinois from '../../assets/images/illinois.png'
+import imperial from '../../assets/images/imperial.png'
+import michigan from '../../assets/images/michigan.jpeg'
+import penn from '../../assets/images/penn.png'
+import stanford from '../../assets/images/stanford.png'
 
 // importing styles
-import './css/section1.css'
+import '../../assets/css/HomepageSection.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
 
@@ -39,8 +39,6 @@ const Section2 = ({ toggleBackground }) => {
     return (
         <div
             className={`section2-content ${isDarkBackground ? 'dark-mode' : ''}`}
-
-        //   bg="#f5f5f5"
         >
             <Typography className='section2-companies-head'>We collaborate with
                 {" "}

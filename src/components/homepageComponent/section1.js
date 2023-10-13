@@ -13,10 +13,10 @@ import {
 } from '@mui/material';
 
 // importing images
-import adminLogin from './css/559-removebg.png'
+import adminLogin from '../../assets/images/559-removebg.png'
 
 // importing styles
-import './css/section1.css'
+import '../../assets/css/HomepageSection.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
 // importing icon

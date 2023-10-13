@@ -3,12 +3,12 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // importing components
-import Section1 from '../components/landingPages/section1';
-import Section2 from '../components/landingPages/section2';
-// import Section3 from '../components/landingPages/section3';
-// import Section4 from '../components/landingPages/section4';
-// import Section5 from '../components/landingPages/section5';
-// import Cards from '../components/landingPages/Cards';
+import Section1 from '../components/homepageComponent/section1';
+import Section2 from '../components/homepageComponent/section2';
+// import Section3 from '../components/homepageComponent/section3';
+// import Section4 from '../components/homepageComponent/section4';
+// import Section5 from '../components/homepageComponent/section5';
+// import Cards from '../components/homepageComponent/Cards';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
