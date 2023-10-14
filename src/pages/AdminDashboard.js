@@ -1,44 +1,70 @@
-import React,{useEffect,useState} from 'react';
-import { useParams } from "react-router";
-import { findAllUser } from '../service/api';
-import AdminNavbar from '../components/AdminNavbar'
+import React, { useEffect } from 'react';
+import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import AdminCarousels from '../components/AdminCarousels'
-import { Typography } from '@mui/material';
 
-const AdminDashboard = () => {
-    const { id } = useParams();
-    const [input, setinput] = useState("");
-    const [userInfo, setUserInfo] = useState({});
+import { useNavigate } from 'react-router-dom';
 
-    useEffect(() => {
-        getAllUser();
-    }, []); 
+// importing title
+import { useWebsiteTitle } from '../hooks/WebsiteTitle';
 
-    const getAllUser = async () => {
-        let response = await findAllUser();
+// importing hooks
+import { useUser } from '../context/AuthContext';
+
+// importing server side url
+import { URL } from '../App';
+
+
+const AdminDashboard = ({ toggleBackground }) => {
+
+    useWebsiteTitle('E-Learn || Admin Dashboard');
+
+    const navigate = useNavigate();
+    const { user } = useUser();
+
+    // for theme
+    const [isDarkBackground] = React.useState(
+        localStorage.getItem('isDarkBackground') === 'true' ? true : false
+    );
+    React.useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkBackground);
+    }, [isDarkBackground]);
+
+    // admin validation
+    const adminDashboard = async () => {
+        let token = localStorage.getItem("access_token");
+        const res = await fetch(`${URL}/api/users/checkadmin/${user._id}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            credentials: 'include' // Include cookies
+        });
+        const data = await res.json();
+
+        if(data.response === 'OK'){
+            navigate('/admin-dashboard');
+        }
     }
 
-    // return (
-    //     <>
-    //         <AdminNavbar />
-    //         <div>            
-    //             <AdminCarousels />
-    //         </div>
-    //         <div style={{background:"#f5f5f5"}}>
-    //             <Typography variant="h5" gutterBottom> Top Courses</Typography>
-    //         </div>
-    //         <Typography variant="h5" gutterBottom> Top Universities Course</Typography>
-    //         <div style={{background:"#f5f5f5"}}>
-    //             <Typography variant="h5" gutterBottom> About Us</Typography>
-    //         </div>
-    //         <Footer />
-    //     </>
-    // );
+    useEffect(() => {
+        // Check if the admin is logged in before running the dashboard function
+        if (user) {
+            adminDashboard();
+        }
+        // eslint-disable-next-line
+    }, [user]);
+
     return (
         <>
-            <div>
-                
+            <div className='app-container'>
+                <Navbar toggleBackground={toggleBackground} />
+                {user.isAdmin ? (<>
+                    Admin Dashboard
+                </>):(
+                    null
+                )}
+                <Footer />
             </div>
         </>
     );
