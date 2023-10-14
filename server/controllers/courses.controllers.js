@@ -2,14 +2,15 @@ const courseModel = require("../models/Courses.model.js");
 const { createError } = require('../utils/error.js');
 
 const createCourse = async (req, res, next) => {
-    // const newCourse = new courseModel(
-    //     req.body
-    // );
     try {
         let data = req.body;
-        // if(data.thumbnail){
-        //     data.thumbnail = JSON.stringify({base64:data.thumbnail});
-        // }
+        const course = await courseModel.find({ title });
+        if(course){
+            return next(createError(403, "Course Already Present!"));
+        }
+        if(data.thumbnail){
+            data.thumbnail = JSON.stringify({base64:data.thumbnail});
+        }
         const newCourse = new courseModel({ ...data, adminUsername: req.body.username });
         const savedCourse = await newCourse.save();
         res.status(200).json(savedCourse);

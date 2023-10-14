@@ -41,14 +41,6 @@ const schema = mongoose.Schema(
         thumbnail: {
             type: String,
             // require:true,
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now
-        },
-        updateAt: {
-            type: Date,
-            default: Date.now
         }
         // videos: [{type: mongoose.Schema.Types.ObjectId, ref: "videos"}],
     }
