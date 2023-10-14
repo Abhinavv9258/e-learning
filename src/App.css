@@ -2,7 +2,7 @@
 .app-container {
     display: flex !important;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 98vh;
     /* Ensure the container takes at least the full viewport height */
 }
 
@@ -10,7 +10,8 @@
     margin-top: auto !important;
     /* Push the footer to the bottom */
     padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    padding-bottom: 0px !important;
+    margin-bottom: 0 !important;
 }
 
 /* background toggle */

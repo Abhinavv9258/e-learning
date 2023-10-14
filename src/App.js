@@ -12,6 +12,7 @@ import UserLoginPage from './pages/UserLoginPage'
 import AdminLoginPage from './pages/AdminLoginPage'
 import AdminDashboard from './pages/AdminDashboard'
 import Homepage from './pages/Homepage';
+import NotFound from "./components/Error/NotFound";
 
 // importing styles
 import './App.css';
@@ -43,6 +44,7 @@ const App = () => {
                 <Route path='/user-login-page' element={<UserLoginPage toggleBackground={toggleBackground} />} />
                 <Route path='/admin-login-page' element={<AdminLoginPage toggleBackground={toggleBackground} />} />
                 <Route path='/admin-dashboard' element={<AdminDashboard toggleBackground={toggleBackground} />} />
+                <Route path='*' element={<NotFound toggleBackground={toggleBackground} />} />
             </Routes>
         </BrowserRouter>
     );
