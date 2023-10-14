@@ -54,10 +54,10 @@ const Index = ({ toggleBackground }) => {
                     <LoginCard cardImage={guestLogin} cardName='Guest User' cardButton='Guest' cardUrl='/homepage' />
 
                     {/* Login As Admin */}
-                    <LoginCard cardImage={adminLogin} cardName='Admin Login' cardButton='Admin Login' cardUrl='/adminLoginPage' />
+                    <LoginCard cardImage={adminLogin} cardName='Admin Login' cardButton='Admin Login' cardUrl='/admin-login-page' />
 
                     {/* Login As User */}
-                    <LoginCard cardImage={userLogin} cardName='User Login' cardButton='User Login' cardUrl='/userLoginPage' />
+                    <LoginCard cardImage={userLogin} cardName='User Login' cardButton='User Login' cardUrl='/user-login-page' />
 
                 </div>
             </div>
