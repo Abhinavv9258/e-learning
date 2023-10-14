@@ -8,11 +8,11 @@ Website Link : [https://e-learn-c3ab.onrender.com/](https://e-learn-c3ab.onrende
 
 E-Learn is an innovative online learning portal that utilizes a robust tech stack to deliver a seamless and engaging learning experience. The portal's tech stack includes the following technologies:<br/>
 <ul type = "square">
-  <li><strong>Front-end:</strong> ReactJS, HTML5, CSS, Bootstrap</li>
-  <li><strong>UI Library:</strong> Material-UI</li>
-  <li><strong>Programming Languages:</strong> JavaScript, Node.js</li>
-  <li><strong>Database:</strong> MongoDB</li>
-  <li><strong>Version Control:</strong> Git</li>
+    <li><strong>Front-end:</strong> ReactJS, HTML5, CSS, Bootstrap</li>
+    <li><strong>UI Library:</strong> Material-UI</li>
+    <li><strong>Programming Languages:</strong> JavaScript, Node.js</li>
+    <li><strong>Database:</strong> MongoDB</li>
+    <li><strong>Version Control:</strong> Git</li>
 </ul>
 
 E-Learn is a comprehensive online learning portal with various functionalities and pages that cater to both users and administrators. Here's a list of its key features and pages: Landing Page, Separate Accounts for User & Admin, Sign-In/Sign-Out Functionality, Course Page (Admin can Add, Remove, Update Courses), CRUD Operation (Create, Read, Update, Delete).<br/><br/>
@@ -22,22 +22,34 @@ In the E-Learn project, an API for LogIn, SignUp, and CRUD operations has been i
 
 ### Admin Login Credentials
 
-Username: deep12 
+Username: admin 
 <br/>
-Password: deep123
+Password: admin
 <br/>
 
 ### User Login Credentials
 
-Username: deep12 
+Username: demo 
 <br/>
-Password: deep123
+Password: demo
 
 <hr/>
 
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+## Add Environment Variables (.env file)
+<ul type = "square">
+    <li>PORT</li>
+    <li>MONGO_USER</li>
+    <li>MONGO_PASSWORD</li>
+    <li>JWT</li>
+    <li>REACT_APP_CLIENT_URL</li>
+    <li>REACT_APP_SERVER_URL</li>
+</ul>
+
 
 ## Available Scripts
 
