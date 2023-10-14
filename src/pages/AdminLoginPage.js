@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import AdminLoginForm from '../components/AdminLoginForm'
+import AdminLoginForm from '../components/Admin/AdminLoginForm'
 
 // importing title
 import { useWebsiteTitle } from '../hooks/WebsiteTitle';

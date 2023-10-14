@@ -91,7 +91,7 @@ const RegisterForm = () => {
                                 autoClose: 3000,
                             });
                             localStorage.setItem('access_token', res.user.tokens[0]);
-                            navigate('/');
+                            navigate('/homepage');
                         } else {
                             console.error('Unexpected response structure:', res);
                             toast.error('An error occurred during registration. Please try again later.', {
@@ -190,7 +190,7 @@ const RegisterForm = () => {
                                             <Button className='navbar-btn' type='submit' onClick={handleSubmit}> SignUp </Button>
                                         </FormControl>
                                         <Typography> Already have an account?
-                                            <Link to='/userLoginPage'>LogIn</Link>
+                                            <Link to='/user-login-page'>LogIn</Link>
                                         </Typography>
                                     </FormGroup>
                                 </CardContent>

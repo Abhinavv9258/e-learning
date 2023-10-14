@@ -167,7 +167,7 @@ const NavbarComponent = ({ toggleBackground }) => {
                         </Button>
 
                     ) : (
-                        <Navbar.Brand><Link to='/Index'><Button className={`navbar-btn ${isDarkBackground ? ' dark-mode' : 'light-mode'}`}>
+                        <Navbar.Brand><Link to='/index'><Button className={`navbar-btn ${isDarkBackground ? ' dark-mode' : 'light-mode'}`}>
                             <Typography className={`${isDarkBackground ? 'dark' : 'light'}`}>
                                 LogIn/SignUp
                             </Typography>

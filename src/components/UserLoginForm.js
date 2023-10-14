@@ -155,7 +155,7 @@ const UserLoginForm = () => {
                                             <Button className='navbar-btn' type='submit' onClick={handleSubmit}> LogIn </Button>
                                         </FormControl>
                                         <Typography> New to E-Learn?
-                                            <Link to='/registerPage'>SignUp</Link>
+                                            <Link to='/register-page'>SignUp</Link>
                                         </Typography>
                                     </FormGroup>
                                 </CardContent>

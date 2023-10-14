@@ -10,6 +10,7 @@ import Index from './pages/Index'
 import RegisterPage from './pages/RegisterPage'
 import UserLoginPage from './pages/UserLoginPage'
 import AdminLoginPage from './pages/AdminLoginPage'
+import AdminDashboard from './pages/AdminDashboard'
 import Homepage from './pages/Homepage';
 
 // importing styles
@@ -36,11 +37,12 @@ const App = () => {
             <ToastContainer />
             <Routes>
                 <Route path='/' element={<Index toggleBackground={toggleBackground} />} />
-                <Route path='/RegisterPage' element={<RegisterPage toggleBackground={toggleBackground} />} />
-                <Route path='/Homepage' element={<Homepage toggleBackground={toggleBackground} />} />
-                <Route path='/Index' element={<Index toggleBackground={toggleBackground} />} />
-                <Route path='/userLoginPage' element={<UserLoginPage toggleBackground={toggleBackground} />} />
-                <Route path='/adminLoginPage' element={<AdminLoginPage toggleBackground={toggleBackground} />} />
+                <Route path='/homepage' element={<Homepage toggleBackground={toggleBackground} />} />
+                <Route path='/index' element={<Index toggleBackground={toggleBackground} />} />
+                <Route path='/register-page' element={<RegisterPage toggleBackground={toggleBackground} />} />
+                <Route path='/user-login-page' element={<UserLoginPage toggleBackground={toggleBackground} />} />
+                <Route path='/admin-login-page' element={<AdminLoginPage toggleBackground={toggleBackground} />} />
+                <Route path='/admin-dashboard' element={<AdminDashboard toggleBackground={toggleBackground} />} />
             </Routes>
         </BrowserRouter>
     );

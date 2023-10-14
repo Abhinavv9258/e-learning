@@ -13,15 +13,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // importing styles 
 import 'bootstrap/dist/css/bootstrap.css';
-import '../App.css';
-import '../assets/css/Form.css'
+import '../../App.css'
+import '../../assets/css/Form.css'
 
 // importing images
-import { URL } from '../App';
-import login from '../assets/images/566-removebg.png'
+import { URL } from '../../App';
+import login from '../../assets/images/566-removebg.png'
 
 // importing components
-import { useUser } from '../context/AuthContext';
+import { useUser } from '../../context/AuthContext';
 
 
 const AdminLoginForm = () => {
@@ -74,7 +74,7 @@ const AdminLoginForm = () => {
                             });
 
                             localStorage.setItem('access_token', res.token);
-                            navigate('/');
+                            navigate('/admin-dashboard');
                         } else {
                             console.error('Unexpected response structure:', res);
                             toast.error('An error occurred during login. Please try again later.', {
@@ -151,9 +151,6 @@ const AdminLoginForm = () => {
                                         <FormControl style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row' }}>
                                             <Button className='navbar-btn' type='submit' onClick={handleSubmit}> LogIn </Button>
                                         </FormControl>
-                                        {/* <Typography> New to E-Learn?
-                                            <Link to='/registerPage'>SignUp</Link>
-                                        </Typography> */}
                                     </FormGroup>
                                 </CardContent>
                             </Card>
