@@ -29,6 +29,7 @@ export const UserProvider = ({ children }) => {
 
             if (response.ok) {
                 const userData = await response.json();
+                console.log("context",userData);
                 setUser(userData); // Set the user data in the context
             } else {
                 setUser(null); // Clear user data if the token is not valid

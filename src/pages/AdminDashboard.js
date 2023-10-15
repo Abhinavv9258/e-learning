@@ -42,7 +42,7 @@ const AdminDashboard = ({ toggleBackground }) => {
         });
         const data = await res.json();
 
-        if(data.response === 'OK'){
+        if(data.ok){
             navigate('/admin-dashboard');
         }
     }
