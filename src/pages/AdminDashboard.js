@@ -34,18 +34,18 @@ const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-    }),
+    // transition: theme.transitions.create('width', {
+    //     easing: theme.transitions.easing.sharp,
+    //     duration: theme.transitions.duration.enteringScreen,
+    // }),
     overflowX: 'hidden',
 });
 
 const closedMixin = (theme) => ({
-    transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
+    // transition: theme.transitions.create('width', {
+    //     easing: theme.transitions.easing.sharp,
+    //     duration: theme.transitions.duration.leavingScreen,
+    // }),
     overflowX: 'hidden',
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
@@ -66,17 +66,17 @@ const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
+    // transition: theme.transitions.create(['width', 'margin'], {
+    //     easing: theme.transitions.easing.sharp,
+    //     duration: theme.transitions.duration.leavingScreen,
+    // }),
     ...(open && {
         marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
+        // width: `calc(100% - ${drawerWidth}px)`,
+        // transition: theme.transitions.create(['width', 'margin'], {
+        //     easing: theme.transitions.easing.sharp,
+        //     duration: theme.transitions.duration.enteringScreen,
+        // }),
     }),
 }));
 
@@ -115,24 +115,31 @@ export default function MiniDrawer() {
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box style={{ display: 'block' }}>
             <CssBaseline />
 
-            <AppBar position="fixed" open={open}>
+            <AppBar position="fixed" style={{display:'block'}} open={open}>
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={handleDrawerOpen}
-                            edge="start"
-                            sx={{
-                                marginRight: 5,
-                                ...(open && { display: 'none' }),
-                            }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
+                        {!open ? (
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={handleDrawerOpen}
+                                edge="start"
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        ):(
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                edge="start"
+                                onClick={handleDrawerClose}        
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        )}
                         <Typography variant="h6" noWrap component="div" sx={{ display: 'flex', alignItems: 'center' }}>
                             Mini variant drawer
                         </Typography>
@@ -214,7 +221,7 @@ export default function MiniDrawer() {
                 </List>
             </Drawer>
 
-            <DashboardContent selectedItem={selectedItem} DrawerHeader={DrawerHeader} />
+            <DashboardContent open={open} selectedItem={selectedItem} DrawerHeader={DrawerHeader} />
 
         </Box>
     );
