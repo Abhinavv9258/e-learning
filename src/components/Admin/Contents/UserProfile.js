@@ -60,8 +60,8 @@ const UserProfile = () => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((row) => row.id);
-            setSelected(newSelecteds);
+            const newSelected = rows.map((row) => row.id);
+            setSelected(newSelected);
             setSelectAll(true);
         } else {
             setSelected([]);
