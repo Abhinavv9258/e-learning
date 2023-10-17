@@ -1,13 +1,13 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom'
-import { Box, Typography, Button, Pagination } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import { Box, Typography, Button } from '@mui/material';
 
-
+// importing icons
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import { AiOutlineFileExcel } from "react-icons/ai";
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import {
     TableContainer,
@@ -16,63 +16,33 @@ import {
     TableBody,
     TableRow,
     TableCell,
-    TablePagination, // Import TablePagination component
+    TablePagination,
     Paper,
     Checkbox,
 } from '@mui/material';
+
+// importing styles
 import { makeStyles } from '@mui/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-// const columns = [
-//     { field: 'id', headerName: 'ID', width: 70 },
-//     { field: 'firstName', headerName: 'First name', width: 130 },
-//     { field: 'lastName', headerName: 'Last name', width: 130 },
-//     {
-//         field: 'age',
-//         headerName: 'Age',
-//         type: 'number',
-//         width: 90,
-//     },
-//     {
-//         field: 'fullName',
-//         headerName: 'Full name',
-//         description: 'This column has a value getter and is not sortable.',
-//         sortable: false,
-//         width: 160,
-//         valueGetter: (params) =>
-//             `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-//     },
-// ];
-
-// const rows = [
-//     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-//     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-//     { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-//     { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-//     { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-//     { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-//     { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-//     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-//     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-// ];
-
 const columns = [
     { field: 'id', headerName: 'ID' },
-    { field: 'firstName', headerName: 'First Name' },
-    { field: 'lastName', headerName: 'Last Name' },
-    { field: 'age', headerName: 'Age' },
+    { field: 'avatar', headerName: 'Avatar' },
+    { field: 'emailId', headerName: 'Email ID', minWidth: '100px' },
+    { field: 'username', headerName: 'Username', minWidth: '100px' },
+    { field: 'role', headerName: 'Role', minWidth: '50px' },
+    { field: 'status', headerName: 'Status', minWidth: '50px' },
+    { field: 'view', headerName: 'View', minWidth: '50px' },
+    { field: 'edit', headerName: 'Edit', minWidth: '50px' },
+    { field: 'delete', headerName: 'Delete', minWidth: '50px' },
 ];
 
 const rows = [
-    { id: 1, lastName: 'Doe', firstName: 'John', age: 25 },
-    { id: 2, lastName: 'Fmith', firstName: 'Jane', age: 32 },
-    { id: 3, lastName: 'Gmcdytujhfxdutyikhgctdith', firstName: 'Jane', age: 32 },
-    { id: 4, lastName: 'Hmith', firstName: 'Jane', age: 32 },
-    { id: 5, lastName: 'Imith', firstName: 'Jane', age: 32 },
-    { id: 6, lastName: 'Jmith', firstName: 'Jane', age: 32 },
-    { id: 7, lastName: 'Kmith', firstName: 'Jane', age: 32 },
-    { id: 8, lastName: 'Lmith', firstName: 'Jane', age: 32 },
+    { id: 1, lastName: 'Doe', username: 'John', age: 25, role: 'Admin', status: 'Active', emailId: 'abhinavv218@gmail.com' },
+    { id: 2, lastName: 'Doe', username: 'John', age: 25, role: 'Admin', status: 'Active', emailId: 'abhinavv218@gmail.com' },
+    { id: 3, lastName: 'Doe', username: 'John', age: 25, role: 'Admin', status: 'Active', emailId: 'abhinavv218@gmail.com' },
+    { id: 4, lastName: 'Doe', username: 'John', age: 25, role: 'Admin', status: 'Active', emailId: 'abhinavv218@gmail.com' },
     // Add more rows as needed
 ];
 
@@ -83,12 +53,10 @@ const useStyles = makeStyles({
 });
 
 
-const UserProfile = ({ open }) => {
-
+const UserProfile = () => {
     const [selectAll, setSelectAll] = React.useState(false);
     const [selected, setSelected] = React.useState([]);
     const classes = useStyles();
-
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
@@ -117,7 +85,6 @@ const UserProfile = ({ open }) => {
 
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
-
     const [page, setPage] = React.useState(0);
     const pageSize = 3; // Define the page size
 
@@ -125,18 +92,21 @@ const UserProfile = ({ open }) => {
         setPage(newPage);
     };
 
-    // Calculate the starting index and ending index for the current page
     const startIndex = (page) * pageSize;
     const endIndex = startIndex + pageSize;
+
+    const handleDashboardClick = () => {
+        window.history.pushState(null, '', '/admin-dashboard');
+        window.location.reload();
+    };
+
     return (
         <>
-            <Box 
-                sx={open ? ({ height: '80vh', paddingLeft: '250px' }) : ({ height: '80vh', paddingLeft: '70px' })}            
-            >
+            <Box>
 
                 <Box>
                     <Typography paragraph sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Link style={{ textDecoration: 'none', color: 'grey' }} >Dashboard</Link>
+                        <Link style={{ textDecoration: 'none', color: 'grey' }} onClick={handleDashboardClick}>Dashboard</Link>
                         <NavigateNextIcon sx={{ color: 'grey' }} />
                         User
                     </Typography>
@@ -172,33 +142,13 @@ const UserProfile = ({ open }) => {
                         </Button>
                     </Box>
 
-                    <Box></Box>
-
-                    {/* <Box>
-                        <div style={{ width: '100%', overflowX: 'auto' }}>
-                            <DataGrid
-                                rows={rows}
-                                columns={columns}
-                                initialState={{
-                                    pagination: {
-                                        paginationModel: { page: 0, pageSize: 5 },
-                                    },
-                                }}
-                                pageSizeOptions={[5, 10]}
-                                checkboxSelection
-                                // autoHeight
-                                // autoPageSize
-                            />
-                        </div>
-                    </Box> */}
-
-                    <Box style={{ width:'100%',display: 'block', overflow: 'auto' }}>
+                    <Box style={{ width: '100%', display: 'block', overflow: 'auto' }}>
                         <Box style={{ width: '100%', overflow: 'auto' }}>
                             <Box>
                                 <TableContainer component={Paper}>
-                                    <Table style={{minWidth:'100%'}}>
+                                    <Table style={{ minWidth: '85vw' }}>
                                         <TableHead className={classes.tableHead}>
-                                            <TableRow>
+                                            <TableRow >
                                                 <TableCell padding="checkbox">
                                                     <Checkbox
                                                         checked={selectAll}
@@ -207,7 +157,9 @@ const UserProfile = ({ open }) => {
                                                     />
                                                 </TableCell>
                                                 {columns.map((column) => (
-                                                    <TableCell key={column.field}>{column.headerName}</TableCell>
+                                                    <TableCell sx={{
+                                                        minWidth: `${column.minWidth}`,
+                                                    }} key={column.field}>{column.headerName}</TableCell>
                                                 ))}
                                             </TableRow>
                                         </TableHead>
@@ -216,10 +168,12 @@ const UserProfile = ({ open }) => {
                                                 <TableRow
                                                     key={row.id}
                                                     selected={isSelected(row.id)}
-                                                    onClick={() => handleSelectClick(row.id)}
                                                 >
                                                     <TableCell padding="checkbox">
-                                                        <Checkbox checked={isSelected(row.id)} />
+                                                        <Checkbox
+                                                            onClick={() => handleSelectClick(row.id)}
+                                                            checked={isSelected(row.id)}
+                                                        />
                                                     </TableCell>
                                                     {columns.map((column) => (
                                                         <TableCell key={column.field}>{row[column.field]}</TableCell>
@@ -231,7 +185,7 @@ const UserProfile = ({ open }) => {
                                 </TableContainer>
                             </Box>
                             <TablePagination
-                                component="div"
+                                component={Box}
                                 count={rows.length}
                                 page={page}
                                 onPageChange={handlePageChange}

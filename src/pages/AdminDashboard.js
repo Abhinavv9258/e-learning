@@ -111,6 +111,8 @@ export default function MiniDrawer() {
     };
 
     const handleListItemClick = (text) => {
+        const url = `/admin-dashboard/${encodeURIComponent(text)}`;
+        window.history.pushState(null, '', url);
         setSelectedItem(text);
     };
 
@@ -118,7 +120,7 @@ export default function MiniDrawer() {
         <Box style={{ display: 'block' }}>
             <CssBaseline />
 
-            <AppBar position="fixed" style={{display:'block'}} open={open}>
+            <AppBar position="fixed" style={{ display: 'block' }} open={open}>
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
                         {!open ? (
@@ -130,18 +132,18 @@ export default function MiniDrawer() {
                             >
                                 <MenuIcon />
                             </IconButton>
-                        ):(
+                        ) : (
                             <IconButton
                                 color="inherit"
                                 aria-label="open drawer"
                                 edge="start"
-                                onClick={handleDrawerClose}        
+                                onClick={handleDrawerClose}
                             >
                                 <MenuIcon />
                             </IconButton>
                         )}
                         <Typography variant="h6" noWrap component="div" sx={{ display: 'flex', alignItems: 'center' }}>
-                            Mini variant drawer
+                            Admin Dashboard
                         </Typography>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -221,7 +223,18 @@ export default function MiniDrawer() {
                 </List>
             </Drawer>
 
-            <DashboardContent open={open} selectedItem={selectedItem} DrawerHeader={DrawerHeader} />
+            <Box
+                sx={{
+                    height: '80vh',
+                    paddingLeft: open ? '250px' : '70px'
+                }}
+            >
+                <DashboardContent
+                    selectedItem={selectedItem}
+                    DrawerHeader={DrawerHeader}
+                />
+
+            </Box>
 
         </Box>
     );

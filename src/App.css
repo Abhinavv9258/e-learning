@@ -64,3 +64,8 @@
 .light-mode-card {
     color: black !important;
 }
+
+
+.MuiTablePagination-displayedRows{
+    margin:0 !important;
+}

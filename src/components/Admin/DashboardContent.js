@@ -12,46 +12,45 @@ import Profile from './Contents/Profile'
 import Settings from './Contents/Settings'
 import Default from './Contents/Default'
 
-const DashboardContent = ({ open, selectedItem, DrawerHeader }) => {
+const DashboardContent = ({ selectedItem, DrawerHeader }) => {
 
     const renderContent = () => {
         switch (selectedItem) {
             case 'Dashboard':
                 return (
-                    // <Dashboard open={open} />
-                    <UserProfile open={open} />
+                    <Dashboard  />
                 )
             case 'Admin':
                 return (
-                    <Admin open={open} />
+                    <Admin />
                 )
             case 'User Profile':
                 return (
-                    <UserProfile open={open} />
+                    <UserProfile />
                 )
             case 'Courses':
                 return (
-                    <Courses open={open} />
+                    <Courses />
                 )
             case 'Orders':
                 return (
-                    <Orders open={open} />
+                    <Orders />
                 )
             case 'Notifications':
                 return (
-                    <Notifications open={open} />
+                    <Notifications />
                 )
             case 'Profile':
                 return (
-                    <Profile open={open} />
+                    <Profile />
                 )
             case 'Settings':
                 return (
-                    <Settings open={open} />
+                    <Settings />
                 );
             default:
                 return (
-                    <Default open={open} />
+                    <Default />
                 );
         }
     };
