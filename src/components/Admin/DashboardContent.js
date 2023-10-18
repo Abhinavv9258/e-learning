@@ -13,7 +13,8 @@ import Profile from './Contents/Profile'
 import Settings from './Contents/Settings'
 import Default from './Contents/Default'
 
-const DashboardContent = ({ selectedItem, DrawerHeader }) => {
+const DashboardContent = ({ userData, selectedItem, DrawerHeader }) => {
+    console.log(userData);
 
     const renderContent = () => {
         switch (selectedItem) {

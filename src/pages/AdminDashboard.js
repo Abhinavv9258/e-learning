@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -29,6 +31,16 @@ import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
 import DashboardContent from '../components/Admin/DashboardContent'
+
+
+// importing hooks
+import { useUser } from '../context/AuthContext';
+
+// importing title
+import { useWebsiteTitle } from '../hooks/WebsiteTitle';
+
+// importing server side url
+import { URL } from '../App';
 
 const drawerWidth = 240;
 
@@ -116,6 +128,64 @@ export default function MiniDrawer() {
         setSelectedItem(text);
     };
 
+
+    // data source
+
+    useWebsiteTitle('E-Learn || Admin Dashboard');
+    const navigate = useNavigate();
+    const { user } = useUser();
+    const [userData, setUserData] = React.useState();
+
+    const dashboard = async () => {
+        let token = localStorage.getItem("access_token");
+        const res = await fetch(`${URL}/api/users/${user._id}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` // Set the authorization header correctly
+            },
+            credentials: 'include' // Include cookies
+        });
+        const data = await res.json();
+        // console.log('data from admin  dashboard : ',data);
+    }
+
+    React.useEffect(() => {
+        // Check if the user is logged in before running the dashboard function
+        if (user) {
+            dashboard();
+        }
+        // eslint-disable-next-line
+    }, [user]);
+
+    const getUserProfile = async() => {
+        let token = localStorage.getItem("access_token");
+        const res = await fetch(`${URL}/api/users/${user._id}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` // Set the authorization header correctly
+            },
+            credentials: 'include' // Include cookies
+        });
+        const data = await res.json();
+        setUserData(data);
+    }
+
+    const getAllUserProfile = async () => {
+        let token = localStorage.getItem("access_token");
+        const res = await fetch(`${URL}/api/users`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` // Set the authorization header correctly
+            },
+            credentials: 'include' // Include cookies
+        });
+        const data = await res.json();
+        setUserData(data);
+    }
+
     return (
         <Box style={{ display: 'block' }}>
             <CssBaseline />
@@ -176,6 +246,11 @@ export default function MiniDrawer() {
                                 }}
                             >
                                 <ListItemIcon
+                                    onClick={
+                                        index === 1 ? (getUserProfile)
+                                        : index === 2 ? (getAllUserProfile)
+                                            :(null)
+                                    }
                                     sx={{
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
@@ -230,6 +305,7 @@ export default function MiniDrawer() {
                 }}
             >
                 <DashboardContent
+                    userData={userData}
                     selectedItem={selectedItem}
                     DrawerHeader={DrawerHeader}
                 />

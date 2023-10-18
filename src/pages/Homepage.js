@@ -38,7 +38,7 @@ const Homepage = ({ toggleBackground }) => {
 
     const dashboard = async() => {
         let token = localStorage.getItem("access_token");
-        const res = await fetch(`${URL}/api/users/checkuser/${user.userId}`, {
+        const res = await fetch(`${URL}/api/users/checkuser/${user._id}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",

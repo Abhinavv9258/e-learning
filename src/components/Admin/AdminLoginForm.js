@@ -75,6 +75,7 @@ const AdminLoginForm = () => {
 
                             localStorage.setItem('access_token', res.token);
                             navigate('/admin-dashboard');
+                            window.location.reload();
                         } else {
                             console.error('Unexpected response structure:', res);
                             toast.error('An error occurred during login. Please try again later.', {

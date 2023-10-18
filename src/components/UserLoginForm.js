@@ -68,8 +68,8 @@ const UserLoginForm = () => {
                         if (res && res.user && res.token) {
                             setUser({
                                 username: res.user.username,
-                                // token: res.token,
-                                // userId: res.user._id,
+                                token: res.token,
+                                userId: res.user._id,
                             });
                             toast.success(`User Logged In! Welcome, ${res.user.username}`, {
                                 position: toast.POSITION.TOP_RIGHT,
