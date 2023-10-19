@@ -111,7 +111,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
     const theme = useTheme();
-    const [selectedItem, setSelectedItem] = React.useState('Dashboard');
+    const [selectedItem, setSelectedItem] = React.useState();
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -123,8 +123,8 @@ export default function MiniDrawer() {
     };
 
     const handleListItemClick = (text) => {
-        const url = `/admin-dashboard/${encodeURIComponent(text)}`;
-        window.history.pushState(null, '', url);
+        // const url = `/admin-dashboard/${encodeURIComponent(text)}`;
+        // window.history.pushState(null, '', url);
         setSelectedItem(text);
     };
 
@@ -170,6 +170,7 @@ export default function MiniDrawer() {
         });
         const data = await res.json();
         setUserData(data);
+        console.log('Single User Data : ', data);
     }
 
     const getAllUserProfile = async () => {
@@ -183,8 +184,16 @@ export default function MiniDrawer() {
             credentials: 'include' // Include cookies
         });
         const data = await res.json();
-        setUserData(data);
+        console.log('All User Data : ', data);
     }
+
+    function handleDefaultClick() {
+        // Handle the default click behavior, or leave it empty
+        // For example:
+        console.log('Default click behavior');
+    }
+    console.log('Dash User Data : ', userData);
+
 
     return (
         <Box style={{ display: 'block' }}>
@@ -239,6 +248,11 @@ export default function MiniDrawer() {
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 onClick={() => handleListItemClick(text)}
+                                // onClick={
+                                //     text === 'User Profile' ? getAllUserProfile(text)
+                                //         : text === 'Admin' ? getUserProfile(text)
+                                //             : handleDefaultClick(text)
+                                // }
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
@@ -246,11 +260,6 @@ export default function MiniDrawer() {
                                 }}
                             >
                                 <ListItemIcon
-                                    onClick={
-                                        index === 1 ? (getUserProfile)
-                                        : index === 2 ? (getAllUserProfile)
-                                            :(null)
-                                    }
                                     sx={{
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
@@ -258,8 +267,8 @@ export default function MiniDrawer() {
                                     }}
                                 >
                                     {index === 0 ? (<DashboardIcon />)
-                                        : index === 1 ? (<AccountBoxIcon />)
-                                            : index === 2 ? (<PeopleIcon />)
+                                        : index === 1 ? (<AccountBoxIcon onClick={getUserProfile} />)
+                                            : index === 2 ? (<PeopleIcon onClick={getAllUserProfile} />)
                                                 : index === 3 ? (<MenuBookIcon />)
                                                     : index === 4 ? (<ListAltIcon />)
                                                         : <CircleNotificationsIcon />}
@@ -274,7 +283,7 @@ export default function MiniDrawer() {
                     {['Profile', 'Settings'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
-                                onClick={() => handleListItemClick(text)}
+                                // onClick={() => handleListItemClick(text)}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
@@ -305,7 +314,6 @@ export default function MiniDrawer() {
                 }}
             >
                 <DashboardContent
-                    userData={userData}
                     selectedItem={selectedItem}
                     DrawerHeader={DrawerHeader}
                 />

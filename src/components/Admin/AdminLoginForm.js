@@ -74,7 +74,7 @@ const AdminLoginForm = () => {
                             });
 
                             localStorage.setItem('access_token', res.token);
-                            navigate('/admin-dashboard');
+                            navigate('/admin-demo');
                             window.location.reload();
                         } else {
                             console.error('Unexpected response structure:', res);

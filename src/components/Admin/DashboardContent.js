@@ -14,8 +14,7 @@ import Settings from './Contents/Settings'
 import Default from './Contents/Default'
 
 const DashboardContent = ({ userData, selectedItem, DrawerHeader }) => {
-    console.log(userData);
-
+    // console.log('Content : ',userData);
     const renderContent = () => {
         switch (selectedItem) {
             case 'Dashboard':
