@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 // importing components
 import Section1 from '../components/homepageComponent/section1';
@@ -13,20 +13,20 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 // importing hooks
-import { useUser } from '../context/AuthContext';
+// import { useUser } from '../context/AuthContext';
 
 // importing title
 import { useWebsiteTitle } from '../hooks/WebsiteTitle';
 
 // importing server side url
-import { URL } from '../App';
+// import { URL } from '../App';
 
 
 const Homepage = ({ toggleBackground }) => {
 
     useWebsiteTitle('E-Learn || Homepage');
-    const navigate = useNavigate();
-    const { user } = useUser();
+    // const navigate = useNavigate();
+    // const { user } = useUser();
 
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
@@ -36,31 +36,31 @@ const Homepage = ({ toggleBackground }) => {
         document.body.classList.toggle('dark-mode', isDarkBackground);
     }, [isDarkBackground]);
 
-    const dashboard = async() => {
-        let token = localStorage.getItem("access_token");
-        const res = await fetch(`${URL}/api/users/checkuser/${user._id}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}` // Set the authorization header correctly
-            },
-            credentials: 'include' // Include cookies
-        });
-        const data = await res.json();
-        if (data.status === 500 || !data) {
-            console.log("error");
-        } else {
-            navigate('/homepage');
-        }
-    }
+    // const dashboard = async() => {
+    //     let token = localStorage.getItem("access_token");
+    //     const res = await fetch(`${URL}/api/users/checkuser/${user._id}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": `Bearer ${token}` // Set the authorization header correctly
+    //         },
+    //         credentials: 'include' // Include cookies
+    //     });
+    //     const data = await res.json();
+    //     if (data.status === 500 || !data) {
+    //         console.log("error");
+    //     } else {
+    //         navigate('/homepage');
+    //     }
+    // }
 
-    useEffect(() => {
-        // Check if the user is logged in before running the dashboard function
-        if (user) {
-            dashboard();
-        }
-        // eslint-disable-next-line
-    }, [user]);
+    // useEffect(() => {
+    //     // Check if the user is logged in before running the dashboard function
+    //     if (user) {
+    //         dashboard();
+    //     }
+    //     // eslint-disable-next-line
+    // }, [user]);
 
     return (
         <div className='app-container'>
