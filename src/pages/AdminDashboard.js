@@ -388,7 +388,8 @@ const AdminDemo = () => {
                                             justifyContent: 'center',
                                         }}
                                     >
-                                        <AccountCircleIcon />                                    </ListItemIcon>
+                                        <AccountCircleIcon />                                    
+                                        </ListItemIcon>
                                     {open && (
                                         <ListItemText
                                             primary='Profile'

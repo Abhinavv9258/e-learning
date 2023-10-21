@@ -24,7 +24,7 @@ const register = async (req, res, next) => {
         const token = jwt.sign(
             { id: user._id, isAdmin: user.isAdmin },
             process.env.JWT,
-            { expiresIn: '1h' }
+            { expiresIn: '3h' }
         );
 
         res.cookie("access_token", token, {
@@ -65,7 +65,7 @@ const login = async (req, res, next) => {
         const token = jwt.sign(
             { id: user._id, isAdmin: user.isAdmin },
             process.env.JWT,
-            { expiresIn: '1h' }
+            { expiresIn: '3h' }
         );
 
         res.cookie("access_token", token, {
