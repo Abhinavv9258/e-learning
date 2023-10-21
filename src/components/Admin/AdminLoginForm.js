@@ -21,12 +21,12 @@ import { URL } from '../../App';
 import login from '../../assets/images/566-removebg.png'
 
 // importing components
-import { useUser } from '../../context/AuthContext';
+import { useApp } from '../../context/AuthContext';
 
 
 const AdminLoginForm = () => {
     const navigate = useNavigate();
-    const { setUser } = useUser(); // Access the setUser function from the context
+    const { setUser } = useApp(); // Access the setUser function from the context
     const [credentials, setCredentials] = useState({
         username: undefined,
         password: undefined,
