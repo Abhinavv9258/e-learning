@@ -21,6 +21,8 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
     const [tableData, setTableData] = React.useState();
     const [adminCount, setAdminCount] = React.useState(0);
     const [userCount, setUserCount] = React.useState(0);
+    const [courseTableData, setCourseTableData] = React.useState();
+
 
     const getAllUserProfile = async () => {
         let token = localStorage.getItem('access_token');
@@ -48,9 +50,29 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
         if (user) {
             getAllUserProfile();
         }
+        // eslint-disable-next-line
     }, [user])
 
-    // getting user and admin count
+
+    // get courses list 
+    const allCourseDetails = async () => {
+        // let token = localStorage.getItem('access_token');
+        const res = await fetch(`${URL}/api/courses/`, {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await res.json();
+        setCourseTableData(data);
+    }
+
+    React.useEffect(() => {
+        if (user) {
+            allCourseDetails();
+        }
+        // eslint-disable-next-line
+    }, [user])
 
     const renderContent = () => {
         switch (selectedItem) {
@@ -68,7 +90,7 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
                 )
             case 'Courses':
                 return (
-                    <Courses user={user} />
+                    <Courses courseTableData={courseTableData} tableData={tableData} user={user} />
                 )
             case 'Orders':
                 return (
