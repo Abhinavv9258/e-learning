@@ -34,6 +34,10 @@ const schema = mongoose.Schema(
             type: String,
             // require:true
         },
+        videoLink: {
+            type: String,
+            // require:true
+        },
         price: {
             type: Number,
             // require:true,
