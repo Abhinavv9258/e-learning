@@ -36,14 +36,6 @@ const columns = [
     { field: 'status', headerName: 'Status', minWidth: '50px' },
 ];
 
-const rows = [
-    { lastName: 'Doe', username: 'John', age: 25, role: 'Admin', status: 'Active', emailId: 'abhinavv218@gmail.com' },
-    { lastName: 'Doe', username: 'John', age: 25, role: 'Admin', status: 'Active', emailId: 'abhinavv218@gmail.com' },
-    { lastName: 'Doe', username: 'John', age: 25, role: 'Admin', status: 'Active', emailId: 'abhinavv218@gmail.com' },
-    { lastName: 'Doe', username: 'John', age: 25, role: 'Admin', status: 'Active', emailId: 'abhinavv218@gmail.com' },
-    // Add more rows as needed
-];
-
 const useStyles = makeStyles({
     tableHead: {
         backgroundColor: 'rgba(17,24,39,0.1)',
@@ -53,7 +45,9 @@ const useStyles = makeStyles({
 
 const UserProfile = ({ user, tableData }) => {
     const [selectAll, setSelectAll] = React.useState(false);
-    const [selected, setSelected] = React.useState(tableData.map((row) => row._id));
+    const [selected, setSelected] = React.useState([]);
+
+    // const [selected, setSelected] = React.useState(tableData.map((row) => row._id));
     const classes = useStyles();
 
     const handleSelectAllClick = (event) => {
@@ -66,18 +60,32 @@ const UserProfile = ({ user, tableData }) => {
         }
     };
 
+    // const handleSelectClick = (id) => {
+    //     const selectedIndex = selected.indexOf(id);
+    //     let newSelected = [];
+    //
+    //     if (selectedIndex === -1) {
+    //         newSelected = [...selected, id];
+    //     } else {
+    //         // selected.splice(selectedIndex, 1);
+    //         // newSelected = [...selected];
+    //         newSelected = selected.filter((itemId) => itemId !== id);
+    //     }
+    //
+    //     setSelected(newSelected);
+    // };
+
     const handleSelectClick = (id) => {
         const selectedIndex = selected.indexOf(id);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = [...selected, id];
+            newSelected = [...selected, id]; // Add the ID to the selection
         } else {
-            // selected.splice(selectedIndex, 1);
-            // newSelected = [...selected];
-            newSelected = selected.filter((itemId) => itemId !== id);
+            newSelected = selected.filter((itemId) => itemId !== id); // Remove the ID from the selection
         }
-
+        // console.log(selectedIndex);
+        // console.log(newSelected);
         setSelected(newSelected);
     };
 
