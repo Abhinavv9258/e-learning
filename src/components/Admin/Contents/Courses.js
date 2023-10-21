@@ -177,12 +177,12 @@ const Courses = ({ save, user, courseTableData }) => {
                 if (data && data.message) {
                     toast.error(`res not ok ${data.message}`, {
                         position: toast.POSITION.TOP_RIGHT,
-                        autoClose: 3000,                    
+                        autoClose: 3000,
                     });
                 } else {
                     toast.error('Course deletion failed. Please try again.', {
                         position: toast.POSITION.TOP_RIGHT,
-                        autoClose: 3000,                    
+                        autoClose: 3000,
                     });
                 }
             }
@@ -190,7 +190,7 @@ const Courses = ({ save, user, courseTableData }) => {
             console.log("Error while hitting Api: ", error);
             toast.error('An error occurred while hitting Api. Please try again later.', {
                 position: toast.POSITION.TOP_RIGHT,
-                autoClose: 3000,            
+                autoClose: 3000,
             });
         }
     };
@@ -203,7 +203,8 @@ const Courses = ({ save, user, courseTableData }) => {
                         ? theme.palette.grey[100]
                         : theme.palette.grey[900],
                 flexGrow: 1,
-                height: '100vh',
+                m: 1,
+                // height: '100vh',
                 overflow: 'auto',
             }}
             >
@@ -293,7 +294,7 @@ const Courses = ({ save, user, courseTableData }) => {
                                                 <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
                                             </TableCell>
                                             <TableCell>
-                                                <DeleteIcon sx={{ color: '#f76363', cursor:'pointer' }} onClick={() => handleDeleteCourse(row._id)} />            
+                                                <DeleteIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleDeleteCourse(row._id)} />
                                             </TableCell>
                                         </TableRow>
                                     ))}

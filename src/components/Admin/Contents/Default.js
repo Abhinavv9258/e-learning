@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 const Default = () => {
     return (
         <>
-            <Typography paragraph>
+            <Typography sx={{ m: 1 }} paragraph>
                 Default Content: This is the content for the Default page.
             </Typography>
         </>

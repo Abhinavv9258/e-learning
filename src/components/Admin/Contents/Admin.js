@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 const Admin = () => {
     return (
         <>
-            <Typography paragraph>
+            <Typography sx={{ m: 1 }} paragraph>
                 Admin Content: This is the content for the Admin page.
             </Typography>
         </>

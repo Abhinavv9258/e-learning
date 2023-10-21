@@ -125,8 +125,9 @@ const UserProfile = ({ user, tableData }) => {
                         ? theme.palette.grey[100]
                         : theme.palette.grey[900],
                 flexGrow: 1,
-                height: '100vh',
+                // height: '100vh',
                 overflow: 'auto',
+                m: 1,
             }}
             >
                 <Box>
@@ -229,7 +230,7 @@ const UserProfile = ({ user, tableData }) => {
                                                         Active
                                                     </Typography>
                                                 ) : (
-                                                        <Typography sx={{ color: '#f76363' }}>Disabled</Typography>
+                                                    <Typography sx={{ color: '#f76363' }}>Disabled</Typography>
                                                 )}
                                             </TableCell>
                                             <TableCell>

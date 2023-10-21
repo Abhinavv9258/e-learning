@@ -13,7 +13,7 @@ import Profile from './Contents/Profile'
 import Settings from './Contents/Settings'
 import Default from './Contents/Default'
 
-import {URL} from '../../App';
+import { URL } from '../../App';
 
 const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
 
@@ -59,7 +59,7 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
         // let token = localStorage.getItem('access_token');
         const res = await fetch(`${URL}/api/courses/`, {
             method: 'GET',
-            headers:{
+            headers: {
                 'Content-Type': 'application/json',
             },
         });
@@ -78,7 +78,7 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
         switch (selectedItem) {
             case 'Dashboard':
                 return (
-                    <Dashboard adminCount={adminCount} userCount={userCount} tableData={tableData} user={user} />
+                    <Dashboard courseTableData={courseTableData} adminCount={adminCount} userCount={userCount} tableData={tableData} user={user} />
                 )
             case 'Admin':
                 return (
