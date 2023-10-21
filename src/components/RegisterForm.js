@@ -22,12 +22,12 @@ import { URL } from '../App';
 import login from '../assets/images/566-removebg.png'
 
 // importing components
-import { useUser } from '../context/AuthContext';
+import { useApp } from '../context/AuthContext';
 
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const { setUser } = useUser(); // Access the setUser function from the UserContext
+    const { setUser } = useApp(); // Access the setUser function from the UserContext
     const [error, setError] = useState(null); // State to store registration error
 
     const [credentials, setCredentials] = useState({
@@ -79,7 +79,7 @@ const RegisterForm = () => {
                     // Registration successful
                     try {
                         const res = await data.json();
-                        console.log('res: ', res, '  res.user :  ', res.user, '  res.token :  ', res.user.tokens[0])
+                        // console.log('res: ', res, '  res.user :  ', res.user, '  res.token :  ', res.user.tokens[0])
                         if (res && res.user && res.user.tokens[0]) {
                             setUser({
                                 username: res.user.username,

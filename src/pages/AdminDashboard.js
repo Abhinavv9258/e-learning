@@ -23,7 +23,7 @@ import MuiAppBar from '@mui/material/AppBar';
 
 import DashboardContent from '../components/Admin/DashboardContent'
 
-import { useUser } from '../context/AuthContext'
+import { useApp } from '../context/AuthContext'
 import { toast } from 'react-toastify';
 
 // importing icons
@@ -111,8 +111,8 @@ const AppBar = styled(MuiAppBar, {
 
 const AdminDemo = () => {
     const navigate = useNavigate();
-    const { user } = useUser();
-    const { setUser } = useUser();
+    const { user } = useApp();
+    const { setUser } = useApp();
     // const isToastVisible = React.useRef(false);
 
     const handleLogout = () => {

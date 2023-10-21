@@ -1,10 +1,11 @@
-// Create a UserContext.js file for managing user state
+// Create a AppContext.js file for managing user state
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-const UserContext = createContext();
+const AppContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [courseData, setCourseData] = useState([]); // You can store course data in an array or object, depending on your requirements.
 
     useEffect(() => {
         // Check if a token exists in local storage when the component mounts
@@ -41,16 +42,16 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <AppContext.Provider value={{ user, setUser, courseData, setCourseData }}>
             {children}
-        </UserContext.Provider>
+        </AppContext.Provider>
     );
 };
 
-export const useUser = () => {
-    const context = useContext(UserContext);
+export const useApp = () => {
+    const context = useContext(AppContext);
     if (!context) {
-        throw new Error("useUser must be used within an AuthProvider");
+        throw new Error("useApp must be used within an AuthProvider");
     }
     return context;
 };

@@ -21,7 +21,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/images/logo.png'
 
 // importing components
-import { useUser } from '../context/AuthContext';
+import { useApp } from '../context/AuthContext';
 
 // importing toast
 import { toast } from 'react-toastify';
@@ -37,7 +37,7 @@ import '../assets/css/Navbar.css'
 
 
 const NavbarComponent = ({ toggleBackground }) => {
-    const { user, setUser } = useUser();
+    const { user, setUser } = useApp();
     const navigate = useNavigate();
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
