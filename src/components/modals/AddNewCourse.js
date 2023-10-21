@@ -1,14 +1,14 @@
 import React from 'react';
-import { 
-    Modal, 
-    ModalBody, 
-    ModalFooter, 
-    ModalHeader, 
-    Form, 
-    Label, 
-    Col, 
-    Input, 
-    FormGroup, 
+import {
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    Form,
+    Label,
+    Col,
+    Input,
+    FormGroup,
     // FormText ,
 } from 'reactstrap';
 import { Button } from '@mui/material';
@@ -22,7 +22,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { URL } from '../../App';
 
-import {useApp} from '../../context/AuthContext'
+import { useApp } from '../../context/AuthContext'
 
 
 const AddNewCourse = ({ modal, toggle, save }) => {
@@ -37,7 +37,7 @@ const AddNewCourse = ({ modal, toggle, save }) => {
         description: '',
         language: '',
         videoDuration: '',
-        videoLink:'',
+        videoLink: '',
         price: '',
         thumbnail: ''
     });
@@ -60,46 +60,46 @@ const AddNewCourse = ({ modal, toggle, save }) => {
         let token = localStorage.getItem('access_token');
         // await addCourse(courseDetails);
         const { adminUsername, title, category, subCategory, topic, description, language, videoDuration, videoLink, price, thumbnail } = courseDetails;
-        try{
+        try {
             const res = await fetch(`${URL}/api/courses`, {
-                method:'POST',
-                headers:{
+                method: 'POST',
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
-                    adminUsername, 
-                    title, 
-                    category, 
-                    subCategory, 
-                    topic, 
-                    description, 
-                    language, 
-                    videoDuration, 
-                    videoLink, 
-                    price, 
+                    adminUsername,
+                    title,
+                    category,
+                    subCategory,
+                    topic,
+                    description,
+                    language,
+                    videoDuration,
+                    videoLink,
+                    price,
                     thumbnail
                 }),
                 credentials: 'include',
             });
-            if (res.status === 200){
-                try{
+            if (res.status === 200) {
+                try {
                     const data = await res.json();
-                    if (data){
+                    if (data) {
+                        window.location.reload();
                         toast.success(`Successfully Added Course 😃!`, {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
                         });
-                        // window.location.reload();
-                    }else{
+                    } else {
                         console.error('Unexpected response structure:', res);
-                        console.log('Unexpected response structure:', res);                        
+                        console.log('Unexpected response structure:', res);
                         toast.error('An error occurred during Course Entry. Please try again later.', {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
                         });
                     }
-                } catch (jsonError){
+                } catch (jsonError) {
                     console.error('Error parsing JSON response:', jsonError);
                     console.log('Error parsing JSON response:', jsonError);
                     toast.error('An error occurred during Course Entry. Please try again later.', {
@@ -107,34 +107,37 @@ const AddNewCourse = ({ modal, toggle, save }) => {
                         autoClose: 3000,
                     });
                 }
-            }else{
+            } else {
                 // Course entry failed, handle the error message from the server
                 const data = await res.json();
                 if (data && data.message) {
                     toast.error(data.message, {
-                        position: 'top-center'
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
                     });
                 } else {
                     toast.error('Course entry failed. Please try again.', {
-                        position: 'top-center'
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
                     });
                 }
             }
-        }catch(error){
-            console.log("error while hitting Api: ", error);
+        } catch (error) {
+            console.log("Error while hitting Api: ", error);
             toast.error('An error occurred while hitting Api. Please try again later.', {
-                position: 'top-center'
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
             });
         }
     }
 
     return (
         <>
-            <Modal isOpen={modal} 
-            toggle={toggle}
+            <Modal isOpen={modal}
+                toggle={toggle}
                 scrollable
-                zIndex={2500} 
-                size='lg' 
+                zIndex={2500}
+                size='lg'
                 onHide={handleClose}>
                 <ModalHeader toggle={toggle}>
                     Add Course
@@ -144,12 +147,12 @@ const AddNewCourse = ({ modal, toggle, save }) => {
                         <FormGroup row>
                             <Label sm={3}>Admin Username</Label>
                             <Col sm={9}>
-                                <Input name="adminUsername" 
-                                // onChange={(e) => setCourseDetails({ ...courseDetails, adminUsername: e.target.value })} 
-                                disabled 
-                                placeholder={user.username} 
-                                value={user.username} 
-                                type="text" />
+                                <Input name="adminUsername"
+                                    // onChange={(e) => setCourseDetails({ ...courseDetails, adminUsername: e.target.value })} 
+                                    disabled
+                                    placeholder={user.username}
+                                    value={user.username}
+                                    type="text" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>

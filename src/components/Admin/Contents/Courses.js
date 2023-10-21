@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 
 import { Box, Typography, Button } from '@mui/material';
 
@@ -29,12 +29,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // importing modals
 import AddNewCourse from '../../modals/AddNewCourse';
+import ConfirmDeletion from '../../modals/ConfirmDeletion';
 
 // importing toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { URL } from '../../App';
+import { URL } from '../../../App';
+
+
 
 const columns = [
     { field: 'adminUsername', headerName: 'Admin', minWidth: '50px' },
@@ -75,22 +78,33 @@ const TableCellComponent = ({ row, col }) => {
 };
 
 
-const Courses = ({ save, user, courseTableData,  tableData }) => {
-    const [modal, setModal] = useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+const Courses = ({ save, user, courseTableData }) => {
+    const [openConfirmation, setOpenConfirmation] = React.useState(false);
 
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleDeleteCourse = (id) => {
+        // Show the confirmation dialog with the course ID
+        setOpenConfirmation({ open: true, courseId: id });
     };
+
+    const handleCloseConfirmation = () => {
+        // Close the confirmation dialog without taking any action
+        setOpenConfirmation(false);
+    };
+    const [modal, setModal] = useState(false);
+    // const [anchorEl, setAnchorEl] = React.useState(null);
+
+    // const open = Boolean(anchorEl);
+    // const handleClick = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
 
     const toggle = () => {
         setModal(!modal);
     }
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // };
 
     const [selectAll, setSelectAll] = React.useState(false);
     const [selected, setSelected] = React.useState([]);
@@ -122,7 +136,7 @@ const Courses = ({ save, user, courseTableData,  tableData }) => {
         setSelected(newSelected);
     };
 
-    const isSelected = (id) => selected.indexOf(id) !== -1;
+    // const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const [page, setPage] = React.useState(0);
     const pageSize = 5;
@@ -138,10 +152,11 @@ const Courses = ({ save, user, courseTableData,  tableData }) => {
         setModal(true)
     }
 
-    const handleDelete = async (id) => {
-        let token = localStorage.getItem('access_token');
-        try{
-            const res = await fetch(`${URL}/api/courses/{courseId}`, {
+    const handleConfirmDelete = async () => {
+        const { courseId } = openConfirmation;
+        const token = localStorage.getItem('access_token');
+        try {
+            const res = await fetch(`${URL}/api/courses/${courseId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -149,10 +164,33 @@ const Courses = ({ save, user, courseTableData,  tableData }) => {
                 },
                 credentials: 'include',
             });
-        }catch(error){
-            console.log("error while hitting Api: ", error);
+            if (res.status === 200) {
+                const data = await res.json();
+                window.location.reload();
+                toast.success(data, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+            } else {
+                // Course entry failed, handle the error message from the server
+                const data = await res.json();
+                if (data && data.message) {
+                    toast.error(`res not ok ${data.message}`, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,                    
+                    });
+                } else {
+                    toast.error('Course deletion failed. Please try again.', {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,                    
+                    });
+                }
+            }
+        } catch (error) {
+            console.log("Error while hitting Api: ", error);
             toast.error('An error occurred while hitting Api. Please try again later.', {
-                position: 'top-center'
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,            
             });
         }
     };
@@ -241,21 +279,21 @@ const Courses = ({ save, user, courseTableData,  tableData }) => {
                                                 <Checkbox
                                                     onClick={() => handleSelectClick(row._id)}
                                                     checked={selected.indexOf(row._id) !== -1}
-                                                    // checked={isSelected(row._id)}
+                                                // checked={isSelected(row._id)}
                                                 />
                                             </TableCell>
-                                            <TableCell>{index + 1}</TableCell>
+                                            <TableCell>{startIndex + index + 1}</TableCell>
                                             {columns.map((col) => (
                                                 <TableCellComponent key={col.field} row={row} col={col} />
                                             ))}
                                             <TableCell>
-                                                <SearchIcon sx={{ color: '#f76363' }} />
+                                                <SearchIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
                                             </TableCell>
                                             <TableCell>
-                                                <EditIcon sx={{ color: '#f76363' }} />
+                                                <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
                                             </TableCell>
                                             <TableCell>
-                                                <DeleteIcon sx={{ color: '#f76363' }} />
+                                                <DeleteIcon sx={{ color: '#f76363', cursor:'pointer' }} onClick={() => handleDeleteCourse(row._id)} />            
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -272,8 +310,24 @@ const Courses = ({ save, user, courseTableData,  tableData }) => {
                         rowsPerPageOptions={[pageSize]}
                     />
                 </Box>
+                <Box>
+                    {/* 
+                    // console.log(courseTableData[0].thumbnail)
+                    // const thumbnailData = JSON.parse(courseTableData[0].thumbnail);
+                    // const base64Thumbnail = thumbnailData.base64;
+                    <img src={base64Thumbnail} alt="Course Thumbnail" /> */}
+                </Box>
             </Box>
-            <AddNewCourse toggle={toggle} modal={modal} />
+            <AddNewCourse
+                toggle={toggle}
+                modal={modal}
+            />
+            <ConfirmDeletion
+                open={openConfirmation}
+                courseId={openConfirmation.courseId}
+                onConfirm={handleConfirmDelete}
+                onClose={handleCloseConfirmation}
+            />
         </>
     );
 };
