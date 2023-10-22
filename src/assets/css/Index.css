@@ -50,7 +50,7 @@
 }
 
 .index-btn {
-    width: 200px;
+    width: 250px;
     height: 45px;
     border-radius: 20px;
     display: flex;
@@ -101,7 +101,6 @@
     }
 
     .index-btn {
-        width: 200px;
         height: 44px;
         margin: 30px;
     }

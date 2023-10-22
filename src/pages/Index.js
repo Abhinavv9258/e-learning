@@ -19,10 +19,14 @@ import '../App.css';
 import '../assets/css/Index.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
+import { useApp } from '../context/AuthContext';
+import { Typography } from '@mui/material';
 
-const Index = ({ toggleBackground }) => { 
+const Index = ({ toggleBackground }) => {
+    const { user } = useApp();
 
     useWebsiteTitle('E-Learn');
+
 
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
@@ -33,8 +37,8 @@ const Index = ({ toggleBackground }) => {
     }, [isDarkBackground]);
 
     return (
-        <div className ='app-container'>
-            <Navbar toggleBackground={toggleBackground}/>
+        <div className='app-container'>
+            <Navbar toggleBackground={toggleBackground} />
             <div className='index-body'>
                 <div className='index-text'>
                     <strong>
@@ -43,22 +47,70 @@ const Index = ({ toggleBackground }) => {
                     </strong>
                     <p>
                         WELCOME TO, E-Learn
-                        <br/> 
+                        <br />
                         ONLINE LEARNING PORTAL FOR STUDENTS AND TEACHERS
                     </p>
                 </div>
 
                 <div className='d-flex index-card-deck'>
-                    
+
                     {/* Login As Guest */}
-                    <LoginCard cardImage={guestLogin} cardName='Guest User' cardButton='Guest' cardUrl='/homepage' />
+                    <LoginCard
+                        cardImage={guestLogin}
+                        cardName='Guest User'
+                        cardButton='Guest'
+                        cardUrl='/homepage'
+                    />
 
                     {/* Login As Admin */}
-                    <LoginCard cardImage={adminLogin} cardName='Admin Login' cardButton='Admin Login' cardUrl='/admin-login-page' />
+                    <LoginCard
+                        cardImage={adminLogin}
+                        cardName={user ?
+                            (
+                                <>
+                                    Admin Logged In :
+                                    <Typography gutterBottom variant='h6' component='div' sx={{ paddingLeft: '5px', color: '#f76363' }}>
+
+                                        {
+                                            user.username.charAt(0).toUpperCase() + user.username.slice(1)
+                                        }
+                                    </Typography>
+
+                                </>
+                            )
+                            : (
+                                <>
+                                    Admin Login
+                                </>
+                            )}
+                        cardButton={user ? 'Admin Dashboard' : ' Admin Login'}
+                        cardUrl={user ? '/admin-dashboard' : '/admin-login-page'}
+                    />
 
                     {/* Login As User */}
-                    <LoginCard cardImage={userLogin} cardName='User Login' cardButton='User Login' cardUrl='/user-login-page' />
+                    <LoginCard
+                        cardImage={userLogin}
+                        cardName={user ?
+                            (
+                                <>
+                                    User Logged In :
+                                    <Typography gutterBottom variant='h6' component='div' sx={{ paddingLeft: '5px', color: '#f76363' }}>
 
+                                        {
+                                            user.username.charAt(0).toUpperCase() + user.username.slice(1)
+                                        }
+                                    </Typography>
+
+                                </>
+                            )
+                            : (
+                                <>
+                                    User Login
+                                </>
+                            )}
+                        cardButton={user ? 'User Dashboard' : ' User Login'}
+                        cardUrl={user ? '/homepage' : '/user-login-page'}
+                    />
                 </div>
             </div>
             <Footer />
