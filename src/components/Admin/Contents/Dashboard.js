@@ -21,7 +21,7 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                     </Typography>
 
                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                        <Card sx={{ m: 1, minWidth: 325, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <Card sx={{ m: 1, width: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                             <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
                                 <Box className='dashboard-logo-1'>
                                     <Groups2Icon sx={{ color: '#36A3EA', fontSize: 48 }} />
@@ -37,7 +37,7 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                                 </Typography>
                             </Box>
                         </Card>
-                        <Card sx={{ m: 1, minWidth: 325, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <Card sx={{ m: 1, width: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                             <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
                                 <Box className='dashboard-logo-2' >
                                     <Groups2Icon sx={{ color: '#FFCE56', fontSize: 48 }} />
@@ -53,7 +53,7 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                                 </Typography>
                             </Box>
                         </Card>
-                        <Card sx={{ m: 1, minWidth: 325, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <Card sx={{ m: 1, width: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                             <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
                                 <Box className='dashboard-logo-3'>
                                     <Groups2Icon sx={{ color: '#BFAEC1', fontSize: 48 }} />
@@ -69,7 +69,7 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                                 </Typography>
                             </Box>
                         </Card>
-                        <Card sx={{ m: 1, minWidth: 325, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <Card sx={{ m: 1, width: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                             <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
                                 <Box className='dashboard-logo-4'>
                                     <Groups2Icon sx={{ color: '#F76363', fontSize: 48 }} />

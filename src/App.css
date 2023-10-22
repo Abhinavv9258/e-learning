@@ -73,11 +73,12 @@
 }
 
 
+/* admin dashboard */
 .dashboard-logo-1 {
     position: relative;
     border-radius: 50px !important;
     padding: 5px !important;
-    margin: 10px !important;
+    margin: 20px !important;
     box-shadow: 3px 3px 5px #36A3EA,
     -3px -3px 5px #36A3EA,
     3px -3px 5px #36A3EA,
@@ -88,7 +89,7 @@
     position: relative;
     border-radius: 50px !important;
     padding: 5px !important;
-    margin: 10px !important;
+    margin: 20px !important;
     box-shadow: 3px 3px 5px #FFCE56,
         -3px -3px 5px #FFCE56,
         3px -3px 5px #FFCE56,
@@ -99,7 +100,7 @@
     position: relative;
     border-radius: 50px !important;
     padding: 5px !important;
-    margin: 10px !important;
+    margin: 20px !important;
     box-shadow: 3px 3px 5px #BFAEC1,
         -3px -3px 5px #BFAEC1,
         3px -3px 5px #BFAEC1,
@@ -110,7 +111,7 @@
     position: relative;
     border-radius: 50px !important;
     padding: 5px !important;
-    margin: 10px !important;
+    margin: 20px !important;
     box-shadow: 3px 3px 5px #F76363,
         -3px -3px 5px #F76363,
         3px -3px 5px #F76363,
