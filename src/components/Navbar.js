@@ -117,12 +117,12 @@ const NavbarComponent = ({ toggleBackground }) => {
                             <Nav.Link className='navbar-link' as={Link} to='/'>About Us</Nav.Link>
                             <NavDropdown style={{ display: 'flex', flexDirection:'column',justifyContent:'center', alignItems:'flex-start' }} className='navbar-link-dropdown' title='Courses' id='basic-nav-dropdown' >
                                     <div>
-                                        <NavDropdown.Item href='#action/3.1' className='nav-dropdown-item'>
-                                            <Link className='navbar-action-link' to='/'>All Courses</Link>
+                                        <NavDropdown.Item className='nav-dropdown-item'>
+                                            <Link className='navbar-action-link' to='/homepage#section4'>All Courses</Link>
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href='#action/3.2' className='nav-dropdown-item'>Something</NavDropdown.Item>
+                                        <NavDropdown.Item className='nav-dropdown-item'>Something</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href='#action/3.3' className='nav-dropdown-item'>
+                                        <NavDropdown.Item className='nav-dropdown-item'>
                                             Separated link
                                         </NavDropdown.Item>
                                     </div>

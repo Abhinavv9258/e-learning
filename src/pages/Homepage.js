@@ -6,14 +6,14 @@ import React from 'react';
 import Section1 from '../components/homepageComponent/section1';
 import Section2 from '../components/homepageComponent/section2';
 import Section3 from '../components/homepageComponent/section3';
-// import Section4 from '../components/homepageComponent/section4';
-// import Section5 from '../components/homepageComponent/section5';
-// import Cards from '../components/homepageComponent/Cards';
+import Section4 from '../components/homepageComponent/section4';
+import Section5 from '../components/homepageComponent/section5';
+// import Section6 from '../components/homepageComponent/section6';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 // importing hooks
-// import { useUser } from '../context/AuthContext';
+// import { useApp } from '../context/AuthContext';
 
 // importing title
 import { useWebsiteTitle } from '../hooks/WebsiteTitle';
@@ -26,7 +26,7 @@ const Homepage = ({ toggleBackground }) => {
 
     useWebsiteTitle('E-Learn || Homepage');
     // const navigate = useNavigate();
-    // const { user } = useUser();
+    // const { user } = useApp();
 
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
@@ -64,15 +64,37 @@ const Homepage = ({ toggleBackground }) => {
 
     return (
         <div className='app-container'>
-            <Navbar toggleBackground={toggleBackground} />
-            <Section1 toggleBackground={toggleBackground} />
 
-            <Section2 toggleBackground={toggleBackground} />
-            <Section3 />
-            {/* <Section3 />
-            <Section4 />
-            <Section5 /> */}
+            {/* Navbar */}
+            <Navbar toggleBackground={toggleBackground} />
+
+            {/* Homepage Section */}
+            <Section1 id="section1" toggleBackground={toggleBackground} />
+
+            {/* Company Section */}
+            <Section2 id="section2" toggleBackground={toggleBackground} />
+
+            {/* All Courses */}
+            <Section3 id="section3" />
+
+            {/* Web Development Category Courses */}
+            <Section4 id="section4" />
+
+            {/* Programming Language Category Courses */}
+            <Section5 id="section5" />  
+
+            {/* User Registered Courses */}
+            {/* {user ? (
+                <>
+                    <Section6 />
+                </>
+            ) : (
+                null
+            )} */}
+
+            {/* Footer */}
             <Footer />
+
         </div>
     );
 };

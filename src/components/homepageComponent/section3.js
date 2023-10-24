@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import Slider from "react-slick";
-import CourseCard from "./Cards";
-import LoadingComponent from "../loadingComponent/LoadingComponent";
+import Slider from 'react-slick';
+import { Typography } from '@mui/material';
+import CourseCard from './Cards';
+import LoadingComponent from '../loadingComponent/LoadingComponent';
 import { URL } from '../../App'
 
-const LandingPageCarousel = () => {
+const Section3 = () => {
 
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState([]);
@@ -21,7 +22,7 @@ const LandingPageCarousel = () => {
         autoplay: true,
         speed: 2000,
         autoplaySpeed: 2000,
-        cssEase: "linear",
+        cssEase: 'linear',
         responsive: [
             {
                 breakpoint: 1200,
@@ -63,7 +64,7 @@ const LandingPageCarousel = () => {
                     if (response.ok) {
                         return response.json();
                     } else {
-                        throw new Error("Error: " + response.status);
+                        throw new Error('Error: ' + response.status);
                     }
                 })
                 .then((data) => {
@@ -71,12 +72,12 @@ const LandingPageCarousel = () => {
                     setLoading(false);
                 })
                 .catch((error) => {
-                    console.error("Error:", error);
-                    console.log("Error:", error);
+                    console.error('Error:', error);
+                    console.log('Error:', error);
                     setLoading(false);
                 });
         } catch (error) {
-            console.error("Error:", error);
+            console.error('Error:', error);
             setLoading(false);
         }
     };
@@ -90,9 +91,12 @@ const LandingPageCarousel = () => {
 
     return (
         <>
-            <div className="section3-content">
-                <div className='section3-card-deck'>
-                    <Slider {...settings} className="section3-slider">
+            <div style={{padding:'5%'}}>
+                <div>
+                    <Typography variant='h5'>
+                        Course Details: 
+                    </Typography>
+                    <Slider {...settings}>
                         {/* {course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)} */}
                         {!loading
                             ? course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)
@@ -105,4 +109,4 @@ const LandingPageCarousel = () => {
     );
 };
 
-export default LandingPageCarousel;
+export default Section3;
