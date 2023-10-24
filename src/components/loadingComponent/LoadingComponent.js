@@ -1,21 +1,32 @@
-import React from "react";
-import "./loading.css";
-import "./loadingSkeleton.css";
+import React from 'react';
+import './loading.css';
+import './loadingSkeleton.css';
+import {Box, Typography} from '@mui/material';
+
 const LoadingComponent = () => {
     return (
-        <div className="d-flex"
-            direction={"column"}
-            boxShadow="xl"
+        <Box
+
+            display='flex'
+            flexDirection='column'
+            justifyContent='center'
+            boxShadow={5}
             p={4}
             m={2}
-            _hover={{ boxShadow: "2xl", cursor: "pointer" }}
+            _hover={{ boxShadow: 10, cursor: 'pointer' }}
         >
-            <span className="loaderSkeleton"></span>
+            
+            <span className='loaderSkeleton'></span>
 
-            <div className="box">
-                <span className="loader">L &nbsp; ading</span>
-            </div>
-        </div>
+            <Box>
+                <Typography variant='h4' display='flex'
+                    flexDirection='row'
+                    alignItems='center'
+                    >
+                    L<Box className='loader'></Box>ading
+                </Typography>
+            </Box>
+        </Box>
     );
 };
 
