@@ -233,10 +233,6 @@
 
 /* section 3 */
 .section3-content {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    justify-content: center;
     margin: 5%;
 }
 

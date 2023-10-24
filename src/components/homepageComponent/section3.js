@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react";
-// import { Box, Flex, Heading } from "@chakra-ui/react";
+
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-// import "./LandingPageComponent.css";
 import CourseCard from "./Cards";
 import LoadingComponent from "../loadingComponent/LoadingComponent";
+import { URL } from '../../App'
 
 const LandingPageCarousel = () => {
+
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState([]);
     const arr = [1, 2, 3, 4];
+
     var settings = {
         swipe: true,
         dots: true,
         infinite: true,
-        speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
+        initialSlide: 0,
+        autoplay: true,
+        speed: 2000,
+        autoplaySpeed: 2000,
+        cssEase: "linear",
         responsive: [
             {
                 breakpoint: 1200,
@@ -34,14 +38,14 @@ const LandingPageCarousel = () => {
                 },
             },
             {
-                breakpoint: 800,
+                breakpoint: 600,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
                 },
             },
             {
-                breakpoint: 500,
+                breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
@@ -50,37 +54,52 @@ const LandingPageCarousel = () => {
         ],
     };
 
+    const fetchData = () => {
+        try {
+            fetch(`${URL}/api/courses/`, {
+                method: 'GET',
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Error: " + response.status);
+                    }
+                })
+                .then((data) => {
+                    setCourse(data);
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    console.log("Error:", error);
+                    setLoading(false);
+                });
+        } catch (error) {
+            console.error("Error:", error);
+            setLoading(false);
+        }
+    };
+
+
     useEffect(() => {
-        const url = `http://localhost:3030/courses/all`;
         setLoading(true);
-        fetch(url)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Error: " + response.status);
-                }
-            })
-            .then((data) => {
-                setCourse(data.course);
-                // console.log(data.course);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                setLoading(false);
-            });
+        fetchData();
     }, []);
 
 
     return (
         <>
-            <div className="section3-content" >
-                <Slider {...settings}>
-                    {!loading
-                        ? course?.map((el) => <CourseCard {...el} key={el._id} />)
-                        : arr.map((el, i) => <LoadingComponent key={i} />)}
-                </Slider>
+            <div className="section3-content">
+                <div className='section3-card-deck'>
+                    <Slider {...settings} className="section3-slider">
+                        {/* {course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)} */}
+                        {!loading
+                            ? course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)
+                            : arr.map((el, i) => <LoadingComponent key={i} />)
+                        }
+                    </Slider>
+                </div>
             </div>
         </>
     );
