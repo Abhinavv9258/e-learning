@@ -1,9 +1,17 @@
-import React from 'react';
+// import React from 'react';
 import { Typography, Box, Card, Divider } from '@mui/material';
 import { PieChart } from '@mui/x-charts/PieChart';
 import Groups2Icon from '@mui/icons-material/Groups2';
 
+import * as React from 'react';
+import { LineChart } from '@mui/x-charts/LineChart';
+import Stack from '@mui/material/Stack';
 
+
+const chartsParams = {
+    margin: { bottom: 20, left: 25, right: 5 },
+    height: 300,
+};
 const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) => {
     const data = [
         { label: 'User', value: userCount, color: '#FFCE56' },
@@ -11,6 +19,7 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
     ];
 
     // 
+
 
     return (
         <>
@@ -102,6 +111,30 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                                 height={200}
                             />
                         </Card>
+                    </Box>
+
+
+                    <Box>
+                        <Stack direction="column" spacing={2} alignItems="center" sx={{ width: '100%' }}>
+                            <LineChart
+                                xAxis={[
+                                    { 
+                                        data: [1, 2, 3, 5, 8] 
+                                    }
+                                ]}
+                                series={[
+                                    {
+                                        data: [15, 23, 18, 19, 13],
+                                        label: 'Example',
+                                        // color: '#59a14f',
+                                        // color: '#af7aa1',
+                                        color: '#edc949',
+                                    },
+                                ]}
+                                width={600}
+                                height={300}
+                            />
+                        </Stack>
                     </Box>
                 </Box>
             }
