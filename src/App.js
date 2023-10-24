@@ -17,6 +17,8 @@ import NotFound from "./components/Error/NotFound";
 
 // importing styles
 import './App.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // exporting server URL
 export const URL = process.env.REACT_APP_SERVER_URL;

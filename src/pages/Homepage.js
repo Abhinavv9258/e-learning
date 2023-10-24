@@ -5,7 +5,7 @@ import React from 'react';
 // importing components
 import Section1 from '../components/homepageComponent/section1';
 import Section2 from '../components/homepageComponent/section2';
-// import Section3 from '../components/homepageComponent/section3';
+import Section3 from '../components/homepageComponent/section3';
 // import Section4 from '../components/homepageComponent/section4';
 // import Section5 from '../components/homepageComponent/section5';
 // import Cards from '../components/homepageComponent/Cards';
@@ -68,6 +68,7 @@ const Homepage = ({ toggleBackground }) => {
             <Section1 toggleBackground={toggleBackground} />
 
             <Section2 toggleBackground={toggleBackground} />
+            <Section3 />
             {/* <Section3 />
             <Section4 />
             <Section5 /> */}
