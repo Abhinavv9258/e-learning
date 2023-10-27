@@ -1,3 +1,15 @@
+/* Cards */
+.course-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* Section 1 */
 .section1-content {
     display: flex;
     justify-content: center !important;
@@ -230,3 +242,15 @@
     }
 }
 
+
+/* Section 3 */
+
+.slick-arrow{
+    height:fit-content;
+    margin: 5px;
+}
+
+.slick-prev-arrow,
+.slick-next-arrow{
+    padding: 3%;
+}

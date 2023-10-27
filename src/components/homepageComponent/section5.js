@@ -69,7 +69,6 @@ const Section5 = () => {
                 })
                 .then((data) => {
                     setCourse(data);
-                    console.log(data);
                     setLoading(false);
                 })
                 .catch((error) => {

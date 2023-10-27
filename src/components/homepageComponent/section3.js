@@ -1,10 +1,32 @@
 import React, { useEffect, useState } from 'react';
 
 import Slider from 'react-slick';
-import { Typography } from '@mui/material';
+import { Typography, IconButton } from '@mui/material';
 import CourseCard from './Cards';
 import LoadingComponent from '../loadingComponent/LoadingComponent';
 import { URL } from '../../App'
+
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+
+const NextArrow = (props) => {
+    const { onClick } = props;
+    return (
+        <IconButton onClick={onClick} className="slick-arrow next" >
+            <KeyboardDoubleArrowRightIcon className="slick-next-arrow" />
+        </IconButton>
+    );
+};
+
+const PrevArrow = (props) => {
+    const { onClick } = props;
+    return (
+        <IconButton onClick={onClick} className="slick-arrow prev">
+            <KeyboardDoubleArrowLeftIcon className="slick-prev-arrow" />
+        </IconButton>
+    );
+};
+
 
 const Section3 = () => {
 
@@ -21,8 +43,10 @@ const Section3 = () => {
         initialSlide: 0,
         autoplay: true,
         speed: 2000,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
         cssEase: 'linear',
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
         responsive: [
             {
                 breakpoint: 1200,
@@ -88,7 +112,6 @@ const Section3 = () => {
         fetchData();
     }, []);
 
-
     return (
         <>
             <div style={{padding:'5%'}}>
@@ -96,10 +119,10 @@ const Section3 = () => {
                     <Typography variant='h5'>
                         Course Details: 
                     </Typography>
-                    <Slider {...settings}>
+                    <Slider {...settings} style={{display:'flex', alignItems:'center'}}>
                         {/* {course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)} */}
                         {!loading
-                            ? course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)
+                            ? course?.map((el,i) => <CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
                             : arr.map((el, i) => <LoadingComponent key={i} />)
                         }
                     </Slider>

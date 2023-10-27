@@ -1,3 +1,4 @@
+import React from "react";
 import { FaGraduationCap } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Typed from "react-typed";
@@ -17,22 +18,29 @@ import {
 import '../loadingComponent/LoadingComponent.css';
 
 import LoadingComponent from '../loadingComponent/LoadingComponent';
+import ViewCourse from '../modals/ViewCourse';
 
-const CourseCard = ({ thumbnail, subCategory, title, category, loading }) => {
-
+const CourseCard = ({ course, thumbnail, subCategory, title, category, loading }) => {
+    const [modal, setModal] = React.useState(false);
     const thumbnailData = JSON.parse(thumbnail);
     const base64Thumbnail = thumbnailData.base64;
+    const[courseDetails, setCourseDetails] = React.useState();
+
+    const toggleCourse = () => {
+        setCourseDetails(course);
+        setModal(!modal);
+    }
 
     return (
         <>
             {loading ?
                 (
                     <>
-                        <LoadingComponent/>
+                        <LoadingComponent />
                     </>
                 ) : (
                     <>
-                        <Card
+                        <Card className="course-card"
                             sx={{ m: 2, p: 2, boxShadow: 3, height: 380 }}
                         >
                             <CardHeader
@@ -47,37 +55,40 @@ const CourseCard = ({ thumbnail, subCategory, title, category, loading }) => {
                                     />
                                 }
                             />
-                            <CardActions>
 
-                                <CardContent
-                                    style={{ padding: 0, width: '250px' }}
+                            <CardContent
+                                style={{ padding: 0, width: '250px' }}
+                            >
+                                <Typography
+                                    fontSize="sm"
+                                    fontWeight="bold"
+                                    color="#a7a7a7"
+                                    textTransform={"capitalize"}
                                 >
-                                    <Typography
-                                        fontSize="sm"
-                                        fontWeight="bold"
-                                        color="#a7a7a7"
-                                        textTransform={"capitalize"}
-                                    >
-                                        {category}
-                                    </Typography>
-                                    <Typography
-                                        fontSize="sm"
-                                    >
-                                        {subCategory}
-                                    </Typography>
-                                    <Typography
-                                        fontSize="lg"
-                                        fontWeight="bold"
-                                        mb={2}
-                                        textTransform={"capitalize"}
-                                    >
-                                        {title}
-                                    </Typography>
-                                </CardContent>
+                                    {category}
+                                </Typography>
+                                <Typography
+                                    fontSize="sm"
+                                >
+                                    {subCategory}
+                                </Typography>
+                                <Typography
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    mb={2}
+                                    textTransform={"capitalize"}
+                                >
+                                    {title}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small" color="primary" onClick={toggleCourse}>
+                                    Share
+                                </Button>
                             </CardActions>
                         </Card>
 
-
+                        <ViewCourse modal={modal} courseDetails={courseDetails} toggleCourse={toggleCourse} />
                     </>
                 )}
 
