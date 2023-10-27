@@ -1,10 +1,32 @@
 import React, { useEffect, useState } from 'react';
 
 import Slider from 'react-slick';
-import { Typography } from '@mui/material';
+import { Typography, IconButton } from '@mui/material';
 import CourseCard from './Cards';
 import LoadingComponent from '../loadingComponent/LoadingComponent';
 import { URL } from '../../App'
+
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+
+const NextArrow = (props) => {
+    const { onClick } = props;
+    return (
+        <IconButton onClick={onClick} className="slick-arrow next" >
+            <KeyboardDoubleArrowRightIcon className="slick-next-arrow" />
+        </IconButton>
+    );
+};
+
+const PrevArrow = (props) => {
+    const { onClick } = props;
+    return (
+        <IconButton onClick={onClick} className="slick-arrow prev">
+            <KeyboardDoubleArrowLeftIcon className="slick-prev-arrow" />
+        </IconButton>
+    );
+};
+
 
 const Section4 = () => {
 
@@ -21,32 +43,34 @@ const Section4 = () => {
         initialSlide: 0,
         autoplay: true,
         speed: 2000,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
         cssEase: 'linear',
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
         responsive: [
             {
                 breakpoint: 1200,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
                 },
             },
             {
-                breakpoint: 600,
+                breakpoint: 1030,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
                 },
             },
             {
-                breakpoint: 480,
+                breakpoint: 900,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 720,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,

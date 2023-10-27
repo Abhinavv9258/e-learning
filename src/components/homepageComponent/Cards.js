@@ -41,7 +41,7 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading }
                 ) : (
                     <>
                         <Card className="course-card"
-                            sx={{ m: 2, p: 2, boxShadow: 3, height: 380 }}
+                            sx={{ m: 2, p: 2, boxShadow: 3, height: 380, maxWidth: 300 }}
                         >
                             <CardHeader
                                 title={
