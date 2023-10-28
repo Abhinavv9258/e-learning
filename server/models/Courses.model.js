@@ -38,14 +38,28 @@ const schema = mongoose.Schema(
             type: String,
             // require:true
         },
+        playlistLink: {
+            type: String,
+            // require:true
+        },
         price: {
             type: Number,
             // require:true,
         },
+        syllabus: [{
+            type: String,
+        }],
+        instructors: [{
+            type: String,
+        }],
         thumbnail: {
             type: String,
             // require:true,
-        }
+        },
+        fileName: {
+            type: String,
+            // require:true
+        },
         // videos: [{type: mongoose.Schema.Types.ObjectId, ref: "videos"}],
     }
     , { timestamps: true }

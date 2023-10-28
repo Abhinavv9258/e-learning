@@ -24,11 +24,32 @@ const createCourse = async (req, res, next) => {
 
 const updateCourse = async (req, res, next) => {
     try {
-        const updatedCourse = await courseModel.findByIdAndUpdate(
-            req.params.id,
-            { $set: req.body },
-            { new: true }
-        );
+        // const updatedCourse = await courseModel.findByIdAndUpdate(
+        //     req.params.id,
+        //     { $set: req.body },
+        //     { new: true }
+        // );
+        // res.status(200).json(updatedCourse);
+        const existingCourse = await courseModel.findById(req.params.id);
+
+        if (!existingCourse) {
+            return next(createError(404, "Course not found"));
+        }
+
+        const updatedData = { ...req.body };
+
+        // Handle the 'thumbnail' field separately
+        if (updatedData.thumbnail) {
+            existingCourse.thumbnail = JSON.stringify({ base64: updatedData.thumbnail });
+            delete updatedData.thumbnail;
+        }
+
+        // Update the rest of the course data
+        Object.assign(existingCourse, updatedData);
+
+        // Save the updated course
+        const updatedCourse = await existingCourse.save();
+
         res.status(200).json(updatedCourse);
     } catch (err) {
         next(err);

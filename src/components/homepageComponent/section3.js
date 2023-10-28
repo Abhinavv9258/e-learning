@@ -35,7 +35,7 @@ const Section3 = () => {
     const arr = [1, 2, 3, 4];
 
     var settings = {
-        swipe: true,
+        swipe: false,
         dots: true,
         infinite: true,
         slidesToShow: 4,

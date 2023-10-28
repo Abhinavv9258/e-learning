@@ -29,6 +29,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // importing modals
 import AddNewCourse from '../../modals/AddNewCourse';
+import EditCourse from '../../modals/EditCourse';
 import ConfirmDeletion from '../../modals/ConfirmDeletion';
 
 // importing toast
@@ -79,37 +80,15 @@ const TableCellComponent = ({ row, col }) => {
 
 
 const Courses = ({ save, user, courseTableData }) => {
-    const [openConfirmation, setOpenConfirmation] = React.useState(false);
 
-    const handleDeleteCourse = (id) => {
-        // Show the confirmation dialog with the course ID
-        setOpenConfirmation({ open: true, courseId: id });
-    };
-
-    const handleCloseConfirmation = () => {
-        // Close the confirmation dialog without taking any action
-        setOpenConfirmation(false);
-    };
     const [modal, setModal] = useState(false);
-    // const [anchorEl, setAnchorEl] = React.useState(null);
-
-    // const open = Boolean(anchorEl);
-    // const handleClick = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    // };
-
     const toggle = () => {
         setModal(!modal);
     }
 
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    // };
-
     const [selectAll, setSelectAll] = React.useState(false);
     const [selected, setSelected] = React.useState([]);
 
-    // const [selected, setSelected] = React.useState(tableData.map((row) => row._id));
     const classes = useStyles();
 
     const handleSelectAllClick = (event) => {
@@ -131,12 +110,9 @@ const Courses = ({ save, user, courseTableData }) => {
         } else {
             newSelected = selected.filter((itemId) => itemId !== id); // Remove the ID from the selection
         }
-        // console.log(selectedIndex);
-        // console.log(newSelected);
         setSelected(newSelected);
     };
 
-    // const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const [page, setPage] = React.useState(0);
     const pageSize = 5;
@@ -149,8 +125,18 @@ const Courses = ({ save, user, courseTableData }) => {
     const endIndex = startIndex + pageSize;
 
     const sendData = (e) => {
-        setModal(true)
+        setModal(true);
     }
+
+    const [openConfirmation, setOpenConfirmation] = React.useState(false);
+
+    const handleDeleteCourse = (id) => {
+        setOpenConfirmation({ open: true, courseId: id });
+    };
+
+    const handleCloseConfirmation = () => {
+        setOpenConfirmation(false);
+    };
 
     const handleConfirmDelete = async () => {
         const { courseId } = openConfirmation;
@@ -192,6 +178,44 @@ const Courses = ({ save, user, courseTableData }) => {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 3000,
             });
+        }
+    };
+
+    const [editCourseConfirm, setEditCourseConfirm] = React.useState(false);
+
+    const editToggle = () => {
+        setEditCourseConfirm(!editCourseConfirm);
+    }
+
+    const handleCourseEdit = async(id) =>{
+        const token = localStorage.getItem('access_token');
+        const res = await fetch(`${URL}/api/courses/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await res.json();
+        const thumbnailData = JSON.parse(data.thumbnail);
+        const base64Thumbnail = thumbnailData.base64;
+        console.log(data);
+        setEditCourseConfirm({ open: true, base64Thumbnail: base64Thumbnail, courseData: data });
+    };
+
+    const handleConfirmEdit = async() =>{
+        const { id } = openConfirmation;
+        const token = localStorage.getItem('access_token');
+        const res = await fetch(`${URL}/api/courses/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            credentials: 'include',
+        });
+        const data = await res.json();
+        if(res.ok){
+            alert('done successful');
         }
     };
 
@@ -291,7 +315,7 @@ const Courses = ({ save, user, courseTableData }) => {
                                                 <SearchIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
                                             </TableCell>
                                             <TableCell>
-                                                <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
+                                                <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleCourseEdit(row._id)} />
                                             </TableCell>
                                             <TableCell>
                                                 <DeleteIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleDeleteCourse(row._id)} />
@@ -329,6 +353,13 @@ const Courses = ({ save, user, courseTableData }) => {
                 onConfirm={handleConfirmDelete}
                 onClose={handleCloseConfirmation}
             />
+            <EditCourse
+                modal={editCourseConfirm}
+                toggle={editToggle}
+                courseData={editCourseConfirm.courseData}
+                base64Thumbnail={editCourseConfirm.base64Thumbnail}
+            />
+
         </>
     );
 };

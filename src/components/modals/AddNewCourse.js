@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Modal,
     ModalBody,
@@ -38,28 +38,79 @@ const AddNewCourse = ({ modal, toggle, save }) => {
         language: '',
         videoDuration: '',
         videoLink: '',
+        playlistLink: '',
         price: '',
-        thumbnail: ''
+        syllabus: [],
+        instructors: [],
+        thumbnail: '',
+        fileName: '',
     });
+
+    // function convertToBase64(e) {
+    //     var reader = new FileReader();
+    //     reader.readAsDataURL(e.target.files[0]);
+    //     reader.onload = () => {
+    //         courseDetails.thumbnail = reader.result;
+    //     };
+    //     reader.onerror = (error) => {
+    //         console.log("error: ", error);
+    //     };
+    // }
 
     function convertToBase64(e) {
         var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
+        const selectedFile = e.target.files[0];
+        const selectedFileName = selectedFile.name;
+
+        reader.readAsDataURL(selectedFile);
         reader.onload = () => {
-            courseDetails.thumbnail = reader.result;
+            setCourseDetails({
+                ...courseDetails,
+                thumbnail: reader.result,
+                fileName: selectedFileName,
+            })
+            // courseDetails.thumbnail = reader.result;
+            // courseDetails.selectedFileName = selectedFileName;
         };
         reader.onerror = (error) => {
             console.log("error: ", error);
         };
     }
 
-    const handleClose = () => modal(false);
+    const clearThumbnail = () => {
+        setCourseDetails({
+            ...courseDetails,
+            thumbnail: null,
+            fileName: null,
+        });
+    };
+
+    const handleClose = () => {
+        clearThumbnail();
+        toggle();
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         let token = localStorage.getItem('access_token');
         // await addCourse(courseDetails);
-        const { adminUsername, title, category, subCategory, topic, description, language, videoDuration, videoLink, price, thumbnail } = courseDetails;
+        const { 
+            adminUsername,
+            title,
+            category,
+            subCategory,
+            topic,
+            description,
+            language,
+            videoDuration,
+            videoLink,
+            playlistLink,
+            price,
+            syllabus,
+            instructors,
+            thumbnail,
+            fileName,
+        } = courseDetails;
         try {
             const res = await fetch(`${URL}/api/courses`, {
                 method: 'POST',
@@ -77,8 +128,12 @@ const AddNewCourse = ({ modal, toggle, save }) => {
                     language,
                     videoDuration,
                     videoLink,
+                    playlistLink,
                     price,
-                    thumbnail
+                    syllabus,
+                    instructors,
+                    thumbnail,
+                    fileName,
                 }),
                 credentials: 'include',
             });
@@ -131,14 +186,50 @@ const AddNewCourse = ({ modal, toggle, save }) => {
         }
     }
 
+    const [syllabus, setSyllabus] = useState([]);
+    const [newSyllabusItem, setNewSyllabusItem] = useState();
+    const [instructors, setInstructors] = useState([]);
+    const [newInstructorName, setNewInstructorName] = useState();
+
+    const addSyllabusItem = () => {
+        if (newSyllabusItem.trim() !== '') {
+            setCourseDetails({
+                ...courseDetails,
+                syllabus: [...courseDetails.syllabus, newSyllabusItem]
+            })
+            setSyllabus([...syllabus, newSyllabusItem]);
+            setNewSyllabusItem('');
+        }
+    };
+
+    const removeSyllabusItem = (index) => {
+        const updatedSyllabus = syllabus.filter((_, i) => i !== index);
+        setSyllabus(updatedSyllabus);
+    };
+
+    const addInstructor = () => {
+        if (newInstructorName.trim() !== '') {
+            setCourseDetails({
+                ...courseDetails,
+                instructors: [...courseDetails.instructors, newInstructorName]
+            })
+            setInstructors([...instructors, newInstructorName]);
+            setNewInstructorName('');
+        }
+    };
+
+    const removeInstructor = (index) => {
+        const updatedInstructors = instructors.filter((_, i) => i !== index);
+        setInstructors(updatedInstructors);
+    };
+
     return (
         <>
             <Modal isOpen={modal}
                 toggle={toggle}
                 scrollable
                 zIndex={2500}
-                size='lg'
-                onHide={handleClose}>
+                size='lg'>
                 <ModalHeader toggle={toggle}>
                     Add Course
                 </ModalHeader>
@@ -204,10 +295,54 @@ const AddNewCourse = ({ modal, toggle, save }) => {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
+                            <Label sm={3}>Playlist Link</Label>
+                            <Col sm={9}>
+                                <Input name="playlistLink" onChange={(e) => setCourseDetails({ ...courseDetails, playlistLink: e.target.value })} placeholder="Playlist Link" type="text" />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
                             <Label sm={3}>Price</Label>
                             <Col sm={9}>
                                 <Input name="price" onChange={(e) => setCourseDetails({ ...courseDetails, price: e.target.value })} placeholder="Price" type="text" />
                             </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label sm={3}>Syllabus</Label>
+                            <Col sm={9}>
+                                {syllabus.map((item, index) => (
+                                    <li key={index}>
+                                        {item}
+                                        <Button onClick={() => removeSyllabusItem(index)}>Remove</Button>
+                                    </li>
+                                ))}
+                                <Input
+                                    name="syllabus"
+                                    type="text"
+                                    value={newSyllabusItem}
+                                    placeholder='Syllabus'
+                                    onChange={(e) => setNewSyllabusItem(e.target.value)}
+                                />
+                                <Button onClick={addSyllabusItem}>Add</Button>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label sm={3}>Instructor</Label>
+                            <Col sm={9}>
+                                {instructors.map((name, index) => (
+                                    <li key={index}>
+                                        {name}
+                                        <Button onClick={() => removeInstructor(index)}>Remove</Button>
+                                    </li>
+                                ))}
+                                <Input
+                                    name="instructor"
+                                    type="text"
+                                    value={newInstructorName}
+                                    placeholder='Instructor'
+                                    onChange={(e) => setNewInstructorName(e.target.value)}
+                                />
+                                <Button onClick={addInstructor}>Add</Button>                            
+                                </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label sm={3}> Thumbnail </Label>
@@ -216,7 +351,15 @@ const AddNewCourse = ({ modal, toggle, save }) => {
                                     // onChange={(e) => setCourseDetails({ ...courseDetails, thumbnail: e.target.value })} 
                                     onChange={convertToBase64}
                                     type="file" />
+
                                 {/* <FormText> This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line. </FormText> */}
+                                {courseDetails.thumbnail && (
+                                    <img
+                                        src={courseDetails.thumbnail}
+                                        alt={courseDetails.fileName}
+                                        style={{ maxWidth: '100%', maxHeight: '200px', marginTop: '10px' }}
+                                    />
+                                )}
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -237,7 +380,7 @@ const AddNewCourse = ({ modal, toggle, save }) => {
                     <Button className='navbar-btn' type="submit" onClick={handleSubmit}>
                         Add Course
                     </Button>{' '}
-                    <Button className='navbar-btn' onClick={toggle}>
+                    <Button className='navbar-btn' onClick={handleClose}>
                         Cancel
                     </Button>
                 </ModalFooter>
