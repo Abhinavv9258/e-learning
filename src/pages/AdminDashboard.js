@@ -109,7 +109,9 @@ const AppBar = styled(MuiAppBar, {
 }),
 );
 
-const AdminDemo = () => {
+
+
+const AdminDashboard = () => {
     const navigate = useNavigate();
     const { user } = useApp();
     const { setUser } = useApp();
@@ -388,8 +390,8 @@ const AdminDemo = () => {
                                             justifyContent: 'center',
                                         }}
                                     >
-                                        <AccountCircleIcon />                                    
-                                        </ListItemIcon>
+                                        <AccountCircleIcon />
+                                    </ListItemIcon>
                                     {open && (
                                         <ListItemText
                                             primary='Profile'
@@ -451,4 +453,4 @@ const AdminDemo = () => {
     );
 };
 
-export default AdminDemo;
+export default AdminDashboard;

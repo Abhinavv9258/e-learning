@@ -8,6 +8,8 @@ import RegisterForm from '../components/RegisterForm'
 // importing title
 import { useWebsiteTitle } from '../hooks/WebsiteTitle';
 
+
+
 const RegisterPage = ({ toggleBackground }) => {
 
     useWebsiteTitle('E-Learn || Register');

@@ -22,6 +22,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useApp } from '../context/AuthContext';
 import { Typography } from '@mui/material';
 
+
+
 const Index = ({ toggleBackground }) => {
     const { user } = useApp();
 
