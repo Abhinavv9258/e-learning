@@ -7,14 +7,12 @@ import {
     Input,
     Button,
     Typography
-} from '@material-ui/core';
+} from '@mui/material';
 
 // importing icons
-import {
-    FaYoutube,
-    FaTwitter,
-    FaFacebookSquare
-} from 'react-icons/fa';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 // importing styles
 import '../assets/css/Footer.css';
@@ -27,6 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // importing server side url
 import { URL } from '../App';
+
 
 
 const Footer = () => {
@@ -135,9 +134,9 @@ const Footer = () => {
                                         <span className='lower-line'></span>
                                     </Typography>
                                     <section className='social-section'>
-                                        <Button className='social-btn btn-outline-dark btn-floating m-1' href='#!'><FaYoutube className='social-icon' /></Button>
-                                        <Button className='social-btn btn-outline-dark btn-floating m-1' href='#!'><FaFacebookSquare className='social-icon' /></Button>
-                                        <Button className='social-btn btn-outline-dark btn-floating m-1' href='#!'><FaTwitter className='social-icon' /></Button>
+                                        <Button className='social-btn btn-outline-dark btn-floating m-1' href='#!'><YouTubeIcon className='social-icon' /></Button>
+                                        <Button className='social-btn btn-outline-dark btn-floating m-1' href='#!'><FacebookIcon className='social-icon' /></Button>
+                                        <Button className='social-btn btn-outline-dark btn-floating m-1' href='#!'><TwitterIcon className='social-icon' /></Button>
                                     </section>
                                 </div>
                             </div>

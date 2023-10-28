@@ -20,6 +20,8 @@ import '../loadingComponent/LoadingComponent.css';
 import LoadingComponent from '../loadingComponent/LoadingComponent';
 import ViewCourse from '../modals/ViewCourse';
 
+
+
 const CourseCard = ({ course, thumbnail, subCategory, title, category, loading }) => {
     const [modal, setModal] = React.useState(false);
     const thumbnailData = JSON.parse(thumbnail);

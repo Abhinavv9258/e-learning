@@ -1,6 +1,15 @@
 import React from 'react';
+
 import './LoadingComponent.css';
-import { Card, CardHeader, Box, Typography, CardContent } from '@mui/material';
+
+import { 
+    Card, 
+    CardHeader, 
+    Box, 
+    Typography, 
+    CardContent 
+} from '@mui/material';
+
 
 
 const LoadingComponent = () => {
