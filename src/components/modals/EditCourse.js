@@ -480,7 +480,8 @@ const EditCourse = ({ modal, toggle, save, courseData, base64Thumbnail }) => {
                             <FormGroup row>
                                 <Label sm={3}>Course Title</Label>
                                 <Col sm={9}>
-                                    <Input name="title"
+                                    <Input 
+                                    name="title"
                                         value={courseData.title}
                                         onChange={
                                             (e) => handleCourseDetailsUpdate('title', e.target.value)
@@ -695,3 +696,5 @@ const EditCourse = ({ modal, toggle, save, courseData, base64Thumbnail }) => {
 };
 
 export default EditCourse;
+
+
