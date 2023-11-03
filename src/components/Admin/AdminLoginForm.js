@@ -7,12 +7,15 @@ import {
     FormGroup,
     InputLabel,
     Input,
-    Button, 
-    Card, 
-    CardContent, 
-    CardMedia, 
-    Typography 
-} from '@mui/material'
+    Button,
+    Card,
+    CardContent,
+    CardMedia,
+    CardActions,
+    CardHeader,
+    Box,
+    Typography
+} from '@mui/material';
 
 // importing toast
 import { toast } from 'react-toastify';
@@ -125,23 +128,25 @@ const AdminLoginForm = () => {
 
     return (
         <>
-            <div className='container form-container'>
+            <Box className='container form-container'>
                 <Card className='form-card'>
-                    <div className='content row no-gutters from-content'>
+                    <Box className='content row no-gutters from-content'>
                         <CardMedia className='form-image col'>
                             <img src={login} className='card-img img-fluid' alt='...' />
                         </CardMedia>
-                        <div style={{ width: '100%' }} className='form-col col d-flex'>
-                            <Card className='card-body d-flex ' style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <Box style={{ width: '100%' }} className='form-col col'>
+                            <Card className='card-body'>
+                                <CardHeader
+                                    title="Login In to your account and start learning"
+                                    subheader={
+                                        <>
+                                            <span className='upper-line'></span>
+                                            <span className='lower-line'></span>
+                                        </>
+                                    }
+                                />
                                 <CardContent className='card-content'>
                                     <FormGroup>
-                                        <FormControl>
-                                            <Typography variant='h5'>
-                                                Login In to your account and start learning
-                                                <span className='upper-line'></span>
-                                                <span className='lower-line'></span>
-                                            </Typography>
-                                        </FormControl>
                                         <FormControl className='form-input-label'>
                                             <InputLabel>User-Name/Email</InputLabel>
                                             <Input type='text' id='username'
@@ -149,23 +154,32 @@ const AdminLoginForm = () => {
                                                 value={credentials.username}
                                             />
                                         </FormControl>
-                                        <FormControl className='form-input-label' >
+                                        <FormControl className='form-input-label'>
                                             <InputLabel>Password</InputLabel>
                                             <Input type='password' id='password'
                                                 onChange={handleChange}
                                                 value={credentials.password}
                                             />
                                         </FormControl>
-                                        <FormControl style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row' }}>
-                                            <Button className='navbar-btn' type='submit' onClick={handleSubmit}> LogIn </Button>
+                                    </FormGroup>
+                                    <FormGroup style={{ alignItems: 'flex-end', color: '#f76363' }}>
+                                        <FormControl>
+                                            <Typography sx={{ cursor: 'pointer' }}>
+                                                Forgot your password?
+                                            </Typography>
                                         </FormControl>
                                     </FormGroup>
                                 </CardContent>
+                                <CardActions sx={{ padding: '0 0 0 16px' }}>
+                                    <FormControl>
+                                        <Button className='navbar-btn' type='submit' onClick={handleSubmit}> LogIn </Button>
+                                    </FormControl>
+                                </CardActions>
                             </Card>
-                        </div>
-                    </div>
+                        </Box>
+                    </Box>
                 </Card>
-            </div>
+            </Box>
         </>
     );
 };
