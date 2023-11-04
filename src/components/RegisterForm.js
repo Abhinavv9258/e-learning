@@ -10,7 +10,10 @@ import {
     Card, 
     CardContent, 
     CardMedia, 
-    Typography 
+    Typography,
+    Box,
+    CardHeader,
+    CardActions
 } from '@mui/material'
 
 // importing toast
@@ -143,27 +146,29 @@ const RegisterForm = () => {
     return (
         <>
             {error && (
-                <div className='alert alert-danger' role='alert'>
+                <Box className='alert alert-danger' role='alert'>
                     {error}
-                </div>
+                </Box>
             )}
-            <div className='container form-container'>
+            <Box className='container form-container'>
                 <Card className='form-card'>
-                    <div className='content row no-gutters from-content'>
+                    <Box className='content row no-gutters from-content'>
                         <CardMedia className='form-image col d-flex align-items-center'>
                             <img src={login} className='card-img img-fluid' alt='...' />
                         </CardMedia>
-                        <div style={{ width: '100%' }} className='form-col col d-flex'>
-                            <Card className='card-body d-flex ' style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <Box style={{ width: '100%' }} className='form-col col'>
+                            <Card className='card-body'>
+                                <CardHeader
+                                    title="Sign Up and start learning"
+                                    subheader={
+                                        <>
+                                            <span className='upper-line'></span>
+                                            <span className='lower-line'></span>
+                                        </>
+                                    }
+                                />
                                 <CardContent className='card-content'>
                                     <FormGroup>
-                                        <FormControl>
-                                            <Typography variant='h5'>
-                                                Sign Up and start learning
-                                                <span className='upper-line'></span>
-                                                <span className='lower-line'></span>
-                                            </Typography>
-                                        </FormControl>
                                         <FormControl className='form-input-label' >
                                             <InputLabel>Name</InputLabel>
                                             <Input type='text' id='name' onChange={handleChange} />
@@ -192,19 +197,28 @@ const RegisterForm = () => {
                                             <InputLabel>Password</InputLabel>
                                             <Input type='password' id='password' onChange={handleChange} />
                                         </FormControl>
-                                        <FormControl style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row' }}>
-                                            <Button className='navbar-btn' type='submit' onClick={handleSubmit}> SignUp </Button>
+                                    </FormGroup>
+                                    <FormGroup style={{ alignItems: 'flex-end', color: '#f76363' }}>
+                                        <FormControl>
+                                            <Typography sx={{ cursor: 'pointer' }}>
+                                                Forgot your password?
+                                            </Typography>
+                                            <Typography> Already have an account? {" "}
+                                                <Link to='/user-login-page'>LogIn</Link>
+                                            </Typography>
                                         </FormControl>
-                                        <Typography> Already have an account?
-                                            <Link to='/user-login-page'>LogIn</Link>
-                                        </Typography>
                                     </FormGroup>
                                 </CardContent>
+                                <CardActions sx={{ padding: '0 0 0 16px' }}>
+                                    <FormControl>
+                                        <Button className='navbar-btn' type='submit' onClick={handleSubmit}> SignUp </Button>
+                                    </FormControl>
+                                </CardActions>
                             </Card>
-                        </div>
-                    </div>
+                        </Box>
+                    </Box>
                 </Card>
-            </div>
+            </Box>
         </>
     );
 };
