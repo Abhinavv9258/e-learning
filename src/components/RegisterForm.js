@@ -203,16 +203,16 @@ const RegisterForm = () => {
                                             <Typography sx={{ cursor: 'pointer' }}>
                                                 Forgot your password?
                                             </Typography>
-                                            <Typography> Already have an account? {" "}
-                                                <Link to='/user-login-page'>LogIn</Link>
-                                            </Typography>
                                         </FormControl>
                                     </FormGroup>
                                 </CardContent>
-                                <CardActions sx={{ padding: '0 0 0 16px' }}>
-                                    <FormControl>
+                                <CardActions sx={{ display: 'flex', justifyContent: 'space-between',padding: '0 0 0 16px' }}>
+                                    <FormControl sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
                                         <Button className='navbar-btn' type='submit' onClick={handleSubmit}> SignUp </Button>
                                     </FormControl>
+                                    <Typography> Already have an account? {" "}
+                                        <Link to='/user-login-page'>LogIn{" "}</Link>
+                                    </Typography>
                                 </CardActions>
                             </Card>
                         </Box>
