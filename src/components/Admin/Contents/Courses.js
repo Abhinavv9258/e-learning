@@ -23,6 +23,8 @@ import {
     Checkbox,
 } from '@mui/material';
 
+import Tooltip from '@mui/material/Tooltip';
+
 // importing styles
 import { makeStyles } from '@mui/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,6 +33,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AddNewCourse from '../../modals/AddNewCourse';
 import EditCourse from '../../modals/EditCourse';
 import ConfirmDeletion from '../../modals/ConfirmDeletion';
+import ViewCourseDetails from '../../modals/ViewCourseDetails';
 
 // importing toast
 import { toast } from 'react-toastify';
@@ -85,7 +88,6 @@ const Courses = ({ save, user }) => {
 
     // get courses list 
     const allCourseDetails = async () => {
-        // let token = localStorage.getItem('access_token');
         const res = await fetch(`${URL}/api/courses/`, {
             method: 'GET',
             headers: {
@@ -151,6 +153,7 @@ const Courses = ({ save, user }) => {
         setModal(true);
     }
 
+    // handle delete
     const [openConfirmation, setOpenConfirmation] = React.useState(false);
 
     const handleDeleteCourse = (id) => {
@@ -206,7 +209,6 @@ const Courses = ({ save, user }) => {
 
 
     // edit course functionality
-
     const [editCourseConfirm, setEditCourseConfirm] = React.useState(false);
 
     const editToggle = () => {
@@ -214,7 +216,6 @@ const Courses = ({ save, user }) => {
     }
 
     const handleCourseEdit = async (id) => {
-        const token = localStorage.getItem('access_token');
         const res = await fetch(`${URL}/api/courses/${id}`, {
             method: 'GET',
             headers: {
@@ -224,26 +225,27 @@ const Courses = ({ save, user }) => {
         const data = await res.json();
         const thumbnailData = JSON.parse(data.thumbnail);
         const base64Thumbnail = thumbnailData.base64;
-        setEditCourseConfirm({ open:true,base64Thumbnail: base64Thumbnail, ...data });
+        setEditCourseConfirm({ open: true, base64Thumbnail: base64Thumbnail, ...data });
         // setModal(true);
     };
 
-    // const handleConfirmEdit = async () => {
-    //     const { id } = openConfirmation;
-    //     const token = localStorage.getItem('access_token');
-    //     const res = await fetch(`${URL}/api/courses/${id}`, {
-    //         method: 'PUT',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${token}`,
-    //         },
-    //         credentials: 'include',
-    //     });
-    //     const data = await res.json();
-    //     if (res.ok) {
-    //         alert('done successful');
-    //     }
-    // };
+    const [viewModal, setViewModal] = React.useState(false);
+    const handleCourseView = async (id) => {
+        const res = await fetch(`${URL}/api/courses/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await res.json();
+        const thumbnailData = JSON.parse(data.thumbnail);
+        const base64Thumbnail = thumbnailData.base64;
+        setViewModal({ open: true, base64Thumbnail: base64Thumbnail, ...data });
+    }
+
+    const editViewToggle = () => {
+        setViewModal(!viewModal);
+    }
 
     const handleChange = (e) => {
         setEditCourseConfirm({
@@ -349,13 +351,19 @@ const Courses = ({ save, user }) => {
                                                         <TableCellComponent key={col.field} row={row} col={col} />
                                                     ))}
                                                     <TableCell>
-                                                        <SearchIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
+                                                        <Tooltip title='View'>
+                                                            <SearchIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleCourseView(row._id)} />
+                                                        </Tooltip>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleCourseEdit(row._id)} />
+                                                        <Tooltip title='Edit'>
+                                                            <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleCourseEdit(row._id)} />
+                                                        </Tooltip>
                                                     </TableCell>
                                                     <TableCell>
-                                                        <DeleteIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleDeleteCourse(row._id)} />
+                                                        <Tooltip title='Delete'>
+                                                            <DeleteIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleDeleteCourse(row._id)} />
+                                                        </Tooltip>
                                                     </TableCell>
                                                 </TableRow>
                                             ))}
@@ -396,6 +404,12 @@ const Courses = ({ save, user }) => {
                         handleChange={handleChange}
                         courseData={editCourseConfirm}
                         base64Thumbnail={editCourseConfirm.base64Thumbnail}
+                    />
+                    <ViewCourseDetails
+                        modal={viewModal}
+                        toggle={editViewToggle}
+                        courseData={viewModal}
+                        base64Thumbnail={viewModal.base64Thumbnail}
                     />
                 </>
             }

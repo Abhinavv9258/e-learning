@@ -8,12 +8,21 @@ import {
     Button,
 } from '@mui/material';
 
-const ConfirmDeletion = ({ open, onClose, courseId, onConfirm }) => {
+const ConfirmDeletion = ({ open, onClose, courseId, userId, onConfirm }) => {
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Confirmation</DialogTitle>
             <DialogContent>
-                <DialogContentText>Are you sure you want to delete this course?</DialogContentText>
+                <DialogContentText>Are you sure you want to delete {' '}
+                    {courseId && !userId ? (
+                        <>this course</>
+                    ) : userId && !courseId ? (
+                        <>this user</>
+                    ) : (
+                        <>it</>
+                    )}
+                    ?
+                </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} color="primary">
