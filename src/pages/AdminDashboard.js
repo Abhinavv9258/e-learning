@@ -120,15 +120,16 @@ const AdminDashboard = () => {
     const handleLogout = () => {
         setUser(null);
         localStorage.removeItem('access_token');
+        localStorage.removeItem('selectedItem');
         toast.success('Successfully Logged Out');
         navigate('/');
     }
 
-    const [selectedItem, setSelectedItem] = React.useState('Dashboard');
     const [open, setOpen] = React.useState(false);
 
     const handleListItemClick = (text) => {
-        setSelectedItem(text);
+        window.location.reload();
+        localStorage.setItem("selectedItem", JSON.stringify(text));
     };
 
     const handleDrawerOpen = () => {
@@ -438,7 +439,7 @@ const AdminDashboard = () => {
                         }}>
                             <DashboardContent
                                 user={user}
-                                selectedItem={selectedItem}
+                                // selectedItem={selectedItem}
                                 DrawerHeader={DrawerHeader}
                             />
                         </Box>

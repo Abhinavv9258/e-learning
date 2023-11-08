@@ -15,7 +15,7 @@ import Default from './Contents/Default'
 
 import { URL } from '../../App';
 
-const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
+const DashboardContent = ({ user, DrawerHeader }) => {
 
     // getting all user data
     const [tableData, setTableData] = React.useState();
@@ -23,6 +23,14 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
     const [userCount, setUserCount] = React.useState(0);
     const [courseTableData, setCourseTableData] = React.useState();
 
+    const selectedItem = localStorage.getItem("selectedItem");
+    let selectedBoard = null;
+
+    if (selectedItem) {
+        selectedBoard = selectedItem.replace(/"/g, '');
+    } else {
+        selectedBoard = selectedItem;
+    }
 
     const getAllUserProfile = async () => {
         let token = localStorage.getItem('access_token');
@@ -75,7 +83,7 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
     }, [user])
 
     const renderContent = () => {
-        switch (selectedItem) {
+        switch (selectedBoard) {
             case 'Dashboard':
                 return (
                     <Dashboard courseTableData={courseTableData} adminCount={adminCount} userCount={userCount} tableData={tableData} user={user} />
@@ -86,11 +94,11 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
                 )
             case 'User Profile':
                 return (
-                    <UserProfile tableData={tableData} user={user} />
+                    <UserProfile user={user} />
                 )
             case 'Courses':
                 return (
-                    <Courses courseTableData={courseTableData} tableData={tableData} user={user} />
+                    <Courses courseTableData={courseTableData} user={user} />
                 )
             case 'Orders':
                 return (
@@ -110,7 +118,9 @@ const DashboardContent = ({ user, selectedItem, DrawerHeader }) => {
                 );
             default:
                 return (
-                    <Default user={user} />
+                    // <Default user={user} />
+                    <Dashboard courseTableData={courseTableData} adminCount={adminCount} userCount={userCount} tableData={tableData} user={user} />
+
                 );
         }
     };
