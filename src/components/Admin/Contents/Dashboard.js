@@ -1,25 +1,28 @@
 // import React from 'react';
 import { Typography, Box, Card, Divider } from '@mui/material';
-import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart, BarChart } from '@mui/x-charts';
 import Groups2Icon from '@mui/icons-material/Groups2';
 
 import * as React from 'react';
-import { LineChart } from '@mui/x-charts/LineChart';
-import Stack from '@mui/material/Stack';
 
 
-const chartsParams = {
-    margin: { bottom: 20, left: 25, right: 5 },
-    height: 300,
-};
-const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) => {
+const Dashboard = ({ courseCountData, userCountData, courseTableData, user }) => {
+
     const data = [
-        { label: 'User', value: userCount, color: '#FFCE56' },
-        { label: 'Admin', value: adminCount, color: '#36A3EA' },
+        { label: 'User', value: userCountData.userCount - userCountData.adminCount, color: '#FFCE56' },
+        { label: 'Admin', value: userCountData.adminCount, color: '#36A3EA' },
     ];
 
-    // 
+    const activeUser = [
+        { label: 'Active', value: userCountData.activeUserCount, color: '#21d64a' },
+        { label: 'Disabled', value: userCountData.userCount - userCountData.activeUserCount, color: '#f76363' }
+    ]
 
+    const courseData = [
+        { label: 'Programming Language', value: courseCountData.progCourseCount, color: '#8ED9B6' },
+        { label: 'Core Subject', value: courseCountData.courseCount, color: '#B6BFC6' },
+        { label: 'Web Development', value: courseCountData.webCourseCount, color: '#C899F4' }
+    ]
 
     return (
         <>
@@ -42,7 +45,7 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                                     Admin
                                 </Typography>
                                 <Typography>
-                                    {adminCount}
+                                    {userCountData.adminCount}
                                 </Typography>
                             </Box>
                         </Card>
@@ -58,7 +61,7 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                                     Students
                                 </Typography>
                                 <Typography>
-                                    {userCount}
+                                    {userCountData.userCount - userCountData.adminCount}
                                 </Typography>
                             </Box>
                         </Card>
@@ -97,7 +100,16 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                     </Box>
                     <Box sx={{ m: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Card sx={{ width: '49%' }}>
-                            lif
+                            <PieChart
+                                series={[
+                                    {
+                                        innerRadius: 40,
+                                        outerRadius: 80,
+                                        data: activeUser,
+                                    },
+                                ]}
+                                height={200}
+                            />
                         </Card>
                         <Card sx={{ width: '49%' }}>
                             <PieChart
@@ -112,29 +124,58 @@ const Dashboard = ({ courseTableData, adminCount, userCount, user, tableData }) 
                             />
                         </Card>
                     </Box>
-
-
-                    <Box>
-                        <Stack direction="column" spacing={2} alignItems="center" sx={{ width: '100%' }}>
-                            <LineChart
+                    <Box sx={{ m: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Card sx={{ width: "49%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <PieChart
+                                series={[
+                                    {
+                                        innerRadius: 40,
+                                        outerRadius: 80,
+                                        data: courseData,
+                                    },
+                                ]}
+                                height={200}
+                            />
+                        </Card>
+                        <Card sx={{ width: '49%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <BarChart
                                 xAxis={[
-                                    { 
-                                        data: [1, 2, 3, 5, 8] 
-                                    }
+                                    {
+                                        id: 'barCategories',
+                                        data: [
+                                            'Course',
+                                        ],
+                                        scaleType: 'band',
+                                    },
                                 ]}
                                 series={[
                                     {
-                                        data: [15, 23, 18, 19, 13],
-                                        label: 'Example',
-                                        // color: '#59a14f',
-                                        // color: '#af7aa1',
-                                        color: '#edc949',
+                                        data: [
+                                            courseCountData.progCourseCount,
+
+                                        ],
+                                        label: 'Programming Language',
+                                        color: '#F1F197',
+                                    },
+                                    {
+                                        data: [
+                                            courseCountData.courseCount,
+                                        ],
+                                        label: 'Core Subject',
+                                        color: '#af7aa1',
+                                    },
+                                    {
+                                        data: [
+                                            courseCountData.webCourseCount
+                                        ],
+                                        label: 'Web Development',
+                                        color: '#9B9BE3',
                                     },
                                 ]}
                                 width={600}
-                                height={300}
+                                height={265}
                             />
-                        </Stack>
+                        </Card>
                     </Box>
                 </Box>
             }

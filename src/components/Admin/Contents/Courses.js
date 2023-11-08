@@ -313,13 +313,13 @@ const Courses = ({ save, user }) => {
                                     <Table style={{ minWidth: '75vw' }}>
                                         <TableHead className={classes.tableHead}>
                                             <TableRow>
-                                                <TableCell padding="checkbox">
+                                                {/* <TableCell padding="checkbox">
                                                     <Checkbox
                                                         checked={selectAll}
                                                         indeterminate={selected.length > 0 && selected.length < courseData.length}
                                                         onChange={handleSelectAllClick}
                                                     />
-                                                </TableCell>
+                                                </TableCell> */}
                                                 <TableCell>ID</TableCell>
                                                 {columns.map((column) => (
                                                     <TableCell
@@ -339,13 +339,13 @@ const Courses = ({ save, user }) => {
                                         <TableBody>
                                             {courseData.slice(startIndex, endIndex).map((row, index) => (
                                                 <TableRow key={row._id} selected={selected.indexOf(row._id) !== -1}>
-                                                    <TableCell padding="checkbox">
+                                                    {/* <TableCell padding="checkbox">
                                                         <Checkbox
                                                             onClick={() => handleSelectClick(row._id)}
                                                             checked={selected.indexOf(row._id) !== -1}
                                                         // checked={isSelected(row._id)}
                                                         />
-                                                    </TableCell>
+                                                    </TableCell> */}
                                                     <TableCell>{startIndex + index + 1}</TableCell>
                                                     {columns.map((col) => (
                                                         <TableCellComponent key={col.field} row={row} col={col} />

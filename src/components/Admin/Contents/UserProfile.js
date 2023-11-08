@@ -35,6 +35,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { URL } from '../../../App';
 
 import ConfirmDeletion from '../../modals/ConfirmDeletion';
+import AddUserProfile from '../../modals/AddUserProfile';
 
 
 const columns = [
@@ -134,7 +135,17 @@ const UserProfile = ({ user }) => {
     const endIndex = startIndex + pageSize;
 
 
+    // add user profile
+    const [modal, setModal] = React.useState(false);
+    const sendData = (e) => {
+        setModal(true);
+    }
+
+
     // edit details
+    const toggle = () => {
+        setModal(!modal);
+    }
 
     // handle delete
     const [openConfirmation, setOpenConfirmation] = React.useState(false);
@@ -219,7 +230,7 @@ const UserProfile = ({ user }) => {
                         </Box>
 
                         <Box sx={{ marginBottom: '1rem' }}>
-                            <Button sx={{ border: 1, marginRight: '0.5rem', marginBottom: '0.5rem' }}>
+                            <Button sx={{ border: 1, marginRight: '0.5rem', marginBottom: '0.5rem' }} onClick={sendData}>
                                 <PersonAddIcon sx={{ transform: "scaleX(-1)", marginRight: '0.5rem' }} />
                                 <Typography sx={{ fontSize: '14px', textTransform: 'capitalize' }}>
                                     New
@@ -245,13 +256,13 @@ const UserProfile = ({ user }) => {
                                 <Table style={{ minWidth: '75vw' }}>
                                     <TableHead className={classes.tableHead}>
                                         <TableRow >
-                                            <TableCell padding="checkbox">
+                                            {/* <TableCell padding="checkbox">
                                                 <Checkbox
                                                     checked={selectAll}
                                                     indeterminate={selected.length > 0 && selected.length < userData.length}
                                                     onChange={handleSelectAllClick}
                                                 />
-                                            </TableCell>
+                                            </TableCell> */}
                                             <TableCell>
                                                 ID
                                             </TableCell>
@@ -270,14 +281,14 @@ const UserProfile = ({ user }) => {
                                             <TableRow
                                                 key={row._id} selected={isSelected(row._id)}
                                             >
-                                                <TableCell padding="checkbox">
+                                                {/* <TableCell padding="checkbox">
                                                     <Checkbox
                                                         onClick={() => handleSelectClick(row._id)}
                                                         checked={isSelected(row._id)}
                                                     />
-                                                </TableCell>
+                                                </TableCell> */}
                                                 <TableCell>
-                                                    {index + 1}
+                                                    {startIndex + index + 1}
                                                 </TableCell>
                                                 <TableCell>
 
@@ -314,11 +325,13 @@ const UserProfile = ({ user }) => {
                                                 <TableCell>
                                                     <Tooltip title='Edit'>
                                                         <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
-                                                    </Tooltip>                                                </TableCell>
+                                                    </Tooltip>                                                
+                                                    </TableCell>
                                                 <TableCell>
                                                     <Tooltip title='Delete'>
                                                         <DeleteIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleUserDelete(row._id)} />
-                                                    </Tooltip>                                                </TableCell>
+                                                    </Tooltip>                                                
+                                                    </TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
@@ -334,6 +347,12 @@ const UserProfile = ({ user }) => {
                             rowsPerPageOptions={[pageSize]}
                         />
                     </Box>
+
+                    <AddUserProfile
+                        modal={modal}
+                        toggle={toggle}
+
+                    />
 
                     <ConfirmDeletion
                         open={openConfirmation}
