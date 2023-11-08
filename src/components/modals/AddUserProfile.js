@@ -9,7 +9,6 @@ import {
     Col,
     Input,
     FormGroup,
-    // FormText ,
 } from 'reactstrap';
 import { Button } from '@mui/material';
 
@@ -22,86 +21,63 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { URL } from '../../App';
 
-import { useApp } from '../../context/AuthContext'
+const initialUserDetails = {
+    name: "",
+    email: "",
+    username: "",
+    password: "",
+    status: "",
+    isAdmin: "",
+    phone: "",
+    address: "",
+    stream: "",
+};
 
 
 const AddUserProfile = ({ modal, toggle }) => {
 
-    const { user } = useApp();
-    const [userDetails, setUserDetails] = React.useState({
-        adminUsername: user.username,
-        title: '',
-        category: '',
-        subCategory: '',
-        topic: '',
-        description: '',
-        language: '',
-        videoDuration: '',
-        videoLink: '',
-        playlistLink: '',
-        price: '',
-        syllabus: [],
-        instructors: [],
-        thumbnail: '',
-        fileName: '',
-    });
-
-
-    const handleClose = () => {
-        toggle();
-    };
+    const [userDetails, setUserDetails] = useState(initialUserDetails);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         let token = localStorage.getItem('access_token');
         const {
-            adminUsername,
-            title,
-            category,
-            subCategory,
-            topic,
-            description,
-            language,
-            videoDuration,
-            videoLink,
-            playlistLink,
-            price,
-            syllabus,
-            instructors,
-            thumbnail,
-            fileName,
+            name,
+            email,
+            username,
+            password,
+            status,
+            isAdmin,
+            phone,
+            address,
+            stream,
         } = userDetails;
+        console.log(userDetails);
         try {
-            const res = await fetch(`${URL}/api/courses`, {
+            const res = await fetch(`${URL}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
-                    adminUsername,
-                    title,
-                    category,
-                    subCategory,
-                    topic,
-                    description,
-                    language,
-                    videoDuration,
-                    videoLink,
-                    playlistLink,
-                    price,
-                    syllabus,
-                    instructors,
-                    thumbnail,
-                    fileName,
+                    name,
+                    email,
+                    username,
+                    password,
+                    status,
+                    isAdmin,
+                    phone,
+                    address,
+                    stream,
                 }),
                 credentials: 'include',
             });
-            if (res.status === 200) {
+            if (res.ok) {
                 try {
                     const data = await res.json();
                     if (data) {
-                        window.location.reload();
+                        // window.location.reload();
                         toast.success(`Successfully Added Course 😃!`, {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
@@ -146,106 +122,160 @@ const AddUserProfile = ({ modal, toggle }) => {
         }
     }
 
+    const handleChange = (e) => {
+        setUserDetails((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    };
+
+    // const handleReset = (e) => {
+    //     setUserDetails(initialUserDetails);
+    // }
+
     return (
         <>
             <Modal isOpen={modal}
                 toggle={toggle}
-                scrollable
                 zIndex={2500}
                 size='lg'>
                 <ModalHeader toggle={toggle}>
-                    Add Course
+                    Add User
                 </ModalHeader>
                 <ModalBody>
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit} style={{ paddingLeft: '10px', paddingRight: '10px', marginTop: '16px' }}>
                         <FormGroup row>
-                            <Label sm={3}>Admin Username</Label>
+                            <Label sm={3}>Name</Label>
                             <Col sm={9}>
-                                <Input name="adminUsername"
-                                    disabled
-                                    placeholder={user.username}
-                                    value={user.username}
+                                <Input
+                                    name="name"
+                                    id="name"
+                                    placeholder='Name'
+                                    onChange={
+                                        (e) => handleChange(e)
+                                    }
                                     type="text" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label sm={3}>Course Title</Label>
+                            <Label sm={3}>Email</Label>
                             <Col sm={9}>
-                                <Input name="title" onChange={(e) => setUserDetails({ ...userDetails, title: e.target.value })} placeholder="Course Title" type="text" />
+                                <Input
+                                    name="email"
+                                    id="email"
+                                    onChange={
+                                        (e) => handleChange(e)
+                                    }
+                                    placeholder="Email"
+                                    type="text" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label sm={3}>Category</Label>
+                            <Label sm={3}>Username</Label>
                             <Col sm={9}>
-                                <Input name="category" onChange={(e) => setUserDetails({ ...userDetails, category: e.target.value })} placeholder="Category" type="text" />
+                                <Input
+                                    name="username"
+                                    id="username"
+                                    onChange={
+                                        (e) => handleChange(e)
+                                    }
+                                    placeholder="Username"
+                                    type="text" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label sm={3}>Sub-Category</Label>
+                            <Label for='isAdmin' sm={3}>Admin</Label>
                             <Col sm={9}>
-                                <Input name="subCategory" onChange={(e) => setUserDetails({ ...userDetails, subCategory: e.target.value })} placeholder="Sub-Category" type="text" />
+                                <Input
+                                    type="select"
+                                    name="isAdmin"
+                                    id="isAdmin"
+                                    onChange={(e) => handleChange(e)}
+                                    value={userDetails.isAdmin}  // Set the value to the state value
+
+                                >
+                                    <option value="">Choose...</option>
+                                    <option value={true}>Yes</option>
+                                    <option value={false}>No</option>
+                                </Input>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label sm={3}>Topic</Label>
+                            <Label for='status' sm={3}>Status</Label>
                             <Col sm={9}>
-                                <Input name="topic" onChange={(e) => setUserDetails({ ...userDetails, topic: e.target.value })} placeholder="Topic" type="text" />
+                                <Input
+                                    type="select"
+                                    name="status"
+                                    id="status"
+                                    onChange={(e) => handleChange(e)}
+                                    value={userDetails.status}  // Set the value to the state value
+
+                                >
+                                    <option value="">Choose...</option>
+                                    <option value={true}>Active</option>
+                                    <option value={false}>Inactive</option>
+                                </Input>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label sm={3}> Description </Label>
+                            <Label sm={3}>Phone</Label>
                             <Col sm={9}>
-                                <Input name="description" onChange={(e) => setUserDetails({ ...userDetails, description: e.target.value })} placeholder="Description" type="textarea" />
+                                <Input
+                                    name="phone"
+                                    id="phone"
+                                    onChange={
+                                        (e) => handleChange(e)
+                                    }
+                                    placeholder="Phone"
+                                    type="number" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label sm={3}>Language</Label>
+                            <Label sm={3}>Address</Label>
                             <Col sm={9}>
-                                <Input name="language" onChange={(e) => setUserDetails({ ...userDetails, language: e.target.value })} placeholder="Language" type="text" />
+                                <Input
+                                    name="address"
+                                    id="address"
+                                    onChange={
+                                        (e) => handleChange(e)
+                                    }
+                                    placeholder="Address"
+                                    type="text" />
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label sm={3}>Video Duration</Label>
+                            <Label sm={3}>Stream</Label>
                             <Col sm={9}>
-                                <Input name="videoDuration" onChange={(e) => setUserDetails({ ...userDetails, videoDuration: e.target.value })} placeholder="Video Duration" type="text" />
+                                <Input
+                                    name="stream"
+                                    id="stream"
+                                    onChange={
+                                        (e) => handleChange(e)
+                                    }
+                                    placeholder="Stream"
+                                    type="text" />
                             </Col>
                         </FormGroup>
+
                         <FormGroup row>
-                            <Label sm={3}>Video Link</Label>
+                            <Label sm={3}>Password</Label>
                             <Col sm={9}>
-                                <Input name="videoLink" onChange={(e) => setUserDetails({ ...userDetails, videoLink: e.target.value })} placeholder="Video Link" type="text" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label sm={3}>Playlist Link</Label>
-                            <Col sm={9}>
-                                <Input name="playlistLink" onChange={(e) => setUserDetails({ ...userDetails, playlistLink: e.target.value })} placeholder="Playlist Link" type="text" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label sm={3}>Price</Label>
-                            <Col sm={9}>
-                                <Input name="price" onChange={(e) => setUserDetails({ ...userDetails, price: e.target.value })} placeholder="Price" type="text" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label sm={3}>  </Label>
-                            <Col sm={{ size: 9 }}>
-                                <FormGroup check>
-                                    <Input id="checkbox3" type="checkbox" /> {' '}
-                                    <Label check> Check me out </Label>
-                                </FormGroup>
+                                <Input
+                                    name="password"
+                                    id="password"
+                                    onChange={
+                                        (e) => handleChange(e)
+                                    }
+                                    placeholder="Password"
+                                    type="password" />
                             </Col>
                         </FormGroup>
                     </Form>
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter style={{ display: 'flex', justifyContent: 'space-evenly', padding: '16px' }}>
                     <Button className='navbar-btn' type="submit" onClick={handleSubmit}>
-                        Add Course
-                    </Button>{' '}
-                    <Button className='navbar-btn' onClick={handleClose}>
-                        Cancel
+                        Add User
                     </Button>
+                    {/* <Button className='navbar-btn' onClick={handleReset}>
+                        Reset
+                    </Button> */}
                 </ModalFooter>
             </Modal>
         </>
