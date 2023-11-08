@@ -18,9 +18,19 @@ import { URL } from '../../App';
 const DashboardContent = ({ user, DrawerHeader }) => {
 
     // getting all user data
-    const [tableData, setTableData] = React.useState();
-    const [adminCount, setAdminCount] = React.useState(0);
-    const [userCount, setUserCount] = React.useState(0);
+    const [userCountData, setUserCountData] = React.useState({
+        adminCount: 0,
+        userCount: 0,
+        activeUserCount: 0,
+    });
+
+    const [courseCountData, setCourseCountData] = React.useState({
+        progCourseCount: 0,
+        webCourseCount: 0,
+        courseCount: 0
+    });
+
+
     const [courseTableData, setCourseTableData] = React.useState();
 
     const selectedItem = localStorage.getItem("selectedItem");
@@ -45,14 +55,21 @@ const DashboardContent = ({ user, DrawerHeader }) => {
         const data = await res.json();
         const tempAdminCount = data.reduce((count, user) => {
             if (user.isAdmin) {
-                return count + 1; // Increment count for admin users
+                return count + 1;
             }
-            return count; // No change for non-admin users
+            return count;
         }, 0);
-        const tempUserCount = data.length - adminCount;
-        setAdminCount(tempAdminCount);
-        setUserCount(tempUserCount);
-        setTableData(data);
+        const tempValidUserCount = data.reduce((count, user) => {
+            if (user.status) {
+                return count + 1;
+            }
+            return count;
+        }, 0);
+        setUserCountData({
+            adminCount: tempAdminCount,
+            userCount: data.length,
+            activeUserCount: tempValidUserCount
+        })
     }
     React.useEffect(() => {
         if (user) {
@@ -72,6 +89,30 @@ const DashboardContent = ({ user, DrawerHeader }) => {
             },
         });
         const data = await res.json();
+        const tempProgCourseCount = data.reduce((count, course) => {
+            if (course.category === "Programming Language") {
+                return count + 1;
+            }
+            return count;
+        }, 0);
+        const tempWebCourseCount = data.reduce((count, course) => {
+            if (course.category === "Web Development") {
+                return count + 1;
+            }
+            return count;
+        }, 0);
+        const tempCourseCount = data.reduce((count, course) => {
+            if (course.category === "Course") {
+                return count + 1;
+            }
+            return count;
+        }, 0);
+
+        setCourseCountData({
+            progCourseCount: tempProgCourseCount,
+            webCourseCount: tempWebCourseCount,
+            courseCount: tempCourseCount
+        })
         setCourseTableData(data);
     }
 
@@ -82,11 +123,12 @@ const DashboardContent = ({ user, DrawerHeader }) => {
         // eslint-disable-next-line
     }, [user])
 
+
     const renderContent = () => {
         switch (selectedBoard) {
             case 'Dashboard':
                 return (
-                    <Dashboard courseTableData={courseTableData} adminCount={adminCount} userCount={userCount} tableData={tableData} user={user} />
+                    <Dashboard courseCountData={courseCountData} userCountData={userCountData} courseTableData={courseTableData} user={user} />
                 )
             case 'Admin':
                 return (
@@ -119,8 +161,7 @@ const DashboardContent = ({ user, DrawerHeader }) => {
             default:
                 return (
                     // <Default user={user} />
-                    <Dashboard courseTableData={courseTableData} adminCount={adminCount} userCount={userCount} tableData={tableData} user={user} />
-
+                    <Dashboard courseCountData={courseCountData} userCountData={userCountData} courseTableData={courseTableData} user={user} />
                 );
         }
     };
