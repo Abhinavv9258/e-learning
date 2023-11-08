@@ -22,12 +22,19 @@ import {
     Paper,
     Checkbox,
 } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
 
 // importing styles
 import { makeStyles } from '@mui/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// importing toast
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { URL } from '../../../App';
+
+import ConfirmDeletion from '../../modals/ConfirmDeletion';
 
 
 const columns = [
@@ -68,10 +75,6 @@ const UserProfile = ({ user }) => {
         }
         // eslint-disable-next-line
     }, []);
-
-    console.log(userData)
-
-
 
     const [selectAll, setSelectAll] = React.useState(false);
     const [selected, setSelected] = React.useState([]);
@@ -129,6 +132,63 @@ const UserProfile = ({ user }) => {
 
     const startIndex = (page) * pageSize;
     const endIndex = startIndex + pageSize;
+
+
+    // edit details
+
+    // handle delete
+    const [openConfirmation, setOpenConfirmation] = React.useState(false);
+
+    const handleUserDelete = (id) => {
+        setOpenConfirmation({ open: true, userId: id });
+    };
+
+    const handleCloseConfirmation = () => {
+        setOpenConfirmation(false);
+    };
+
+    const handleConfirmDelete = async () => {
+        const { userId } = openConfirmation;
+        const token = localStorage.getItem('access_token');
+        try {
+            const res = await fetch(`${URL}/api/users/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                credentials: 'include',
+            });
+            if (res.status === 200) {
+                const data = await res.json();
+                window.location.reload();
+                toast.success(data, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+            } else {
+                // Course entry failed, handle the error message from the server
+                const data = await res.json();
+                if (data && data.message) {
+                    toast.error(`res not ok ${data.message}`, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                } else {
+                    toast.error('Course deletion failed. Please try again.', {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                }
+            }
+        } catch (error) {
+            console.log("Error while hitting Api: ", error);
+            toast.error('An error occurred while hitting Api. Please try again later.', {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            });
+        }
+    };
 
     return (
         <>
@@ -238,7 +298,7 @@ const UserProfile = ({ user }) => {
                                                     )}
                                                 </TableCell>
                                                 <TableCell>
-                                                    {row.isAdmin ? (
+                                                    {row.status ? (
                                                         <Typography sx={{ color: 'green' }}>
                                                             Active
                                                         </Typography>
@@ -247,14 +307,18 @@ const UserProfile = ({ user }) => {
                                                     )}
                                                 </TableCell>
                                                 <TableCell>
-                                                    <SearchIcon sx={{ color: '#f76363' }} />
+                                                    <Tooltip title='View'>
+                                                        <SearchIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
+                                                    </Tooltip>
                                                 </TableCell>
                                                 <TableCell>
-                                                    <EditIcon sx={{ color: '#f76363' }} />
-                                                </TableCell>
+                                                    <Tooltip title='Edit'>
+                                                        <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
+                                                    </Tooltip>                                                </TableCell>
                                                 <TableCell>
-                                                    <DeleteIcon sx={{ color: '#f76363' }} />
-                                                </TableCell>
+                                                    <Tooltip title='Delete'>
+                                                        <DeleteIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleUserDelete(row._id)} />
+                                                    </Tooltip>                                                </TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
@@ -270,6 +334,13 @@ const UserProfile = ({ user }) => {
                             rowsPerPageOptions={[pageSize]}
                         />
                     </Box>
+
+                    <ConfirmDeletion
+                        open={openConfirmation}
+                        userId={openConfirmation.userId}
+                        onConfirm={handleConfirmDelete}
+                        onClose={handleCloseConfirmation}
+                    />
                 </Box>
             }
         </>
