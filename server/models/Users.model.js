@@ -48,7 +48,8 @@ const schema = mongoose.Schema(
         isAdmin: {
             type: Boolean,
             default: false
-        },status:{
+        },
+        status:{
             type: Boolean,
             default: true
         }
