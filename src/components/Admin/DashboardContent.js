@@ -142,27 +142,27 @@ const DashboardContent = ({ user, DrawerHeader, selectedItem, setSelectedItem })
                 )
             case 'User Profile':
                 return (
-                    <UserProfile user={user} />
+                    <UserProfile toDashboard={toDashboard} user={user} />
                 )
             case 'Courses':
                 return (
-                    <Courses user={user} />
+                    <Courses toDashboard={toDashboard} user={user} />
                 )
             case 'Orders':
                 return (
-                    <Orders user={user} />
+                    <Orders toDashboard={toDashboard} user={user} />
                 )
             case 'Notifications':
                 return (
-                    <Notifications user={user} />
+                    <Notifications toDashboard={toDashboard} user={user} />
                 )
             case 'Profile':
                 return (
-                    <Profile user={user} />
+                    <Profile toDashboard={toDashboard} user={user} />
                 )
             case 'Settings':
                 return (
-                    <Settings user={user} />
+                    <Settings toDashboard={toDashboard} user={user} />
                 );
             default:
                 return (

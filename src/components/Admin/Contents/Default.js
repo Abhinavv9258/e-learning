@@ -18,7 +18,7 @@ const Default = () => {
             >
                 <Box>
                     <Typography paragraph sx={{ display: 'flex', alignItems: 'center' }}>
-                        Dashboard
+                        <Box sx={{ cursor: 'pointer' }} onClick={toDashboard} >Dashboard</Box>
                         <NavigateNextIcon sx={{ color: 'grey' }} />
                         Default Content
                     </Typography>
@@ -29,7 +29,7 @@ const Default = () => {
                         <Typography variant='h6' sx={{ marginBottom: '1.5rem' }}>
                             Default Content: This is the content for the Default page.
                         </Typography>
-                    </Box> 
+                    </Box>
                     <Box style={{ width: '100%' }}></Box>
                 </Box>
             </Box>

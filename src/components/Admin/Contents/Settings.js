@@ -3,8 +3,8 @@ import { Typography, Box } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 
-const Settings = () => {
-    
+const Settings = ({ toDashboard }) => {
+
     return (
         <>
             <Box component="main" sx={{
@@ -19,7 +19,7 @@ const Settings = () => {
             >
                 <Box>
                     <Typography paragraph sx={{ display: 'flex', alignItems: 'center' }}>
-                        Dashboard
+                        <Box sx={{ cursor: 'pointer' }} onClick={toDashboard} >Dashboard</Box>
                         <NavigateNextIcon sx={{ color: 'grey' }} />
                         Settings Content
                     </Typography>

@@ -58,7 +58,7 @@ const useStyles = makeStyles({
 });
 
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({ user, toDashboard }) => {
 
     const [refreshData, setRefreshData] = React.useState(true);
     const [userData, setUserData] = React.useState();
@@ -269,7 +269,7 @@ const UserProfile = ({ user }) => {
                 >
                     <Box>
                         <Typography paragraph sx={{ display: 'flex', alignItems: 'center' }}>
-                            Dashboard
+                            <Box sx={{ cursor: 'pointer' }} onClick={toDashboard} >Dashboard</Box>
                             <NavigateNextIcon sx={{ color: 'grey' }} />
                             User
                         </Typography>
@@ -331,8 +331,8 @@ const UserProfile = ({ user }) => {
                                     <TableBody>
                                         {userData.slice(startIndex, endIndex).map((row, index) => (
                                             <TableRow
-                                                key={row._id} 
-                                                // selected={isSelected(row._id)}
+                                                key={row._id}
+                                            // selected={isSelected(row._id)}
                                             >
                                                 {/* <TableCell padding="checkbox">
                                                     <Checkbox

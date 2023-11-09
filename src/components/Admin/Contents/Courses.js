@@ -82,7 +82,7 @@ const TableCellComponent = ({ row, col }) => {
 };
 
 
-const Courses = ({ user }) => {
+const Courses = ({ user, toDashboard }) => {
 
     const [courseData, setCourseData] = React.useState();
 
@@ -282,7 +282,7 @@ const Courses = ({ user }) => {
                     >
                         <Box>
                             <Typography paragraph sx={{ display: 'flex', alignItems: 'center' }}>
-                                Dashboard
+                                <Box sx={{ cursor: 'pointer' }} onClick={toDashboard} >Dashboard</Box>
                                 <NavigateNextIcon sx={{ color: 'grey' }} />
                                 Courses
                             </Typography>
@@ -347,7 +347,7 @@ const Courses = ({ user }) => {
                                         </TableHead>
                                         <TableBody>
                                             {courseData.slice(startIndex, endIndex).map((row, index) => (
-                                                <TableRow key={row._id} 
+                                                <TableRow key={row._id}
                                                 // selected={selected.indexOf(row._id) !== -1}
                                                 >
                                                     {/* <TableCell padding="checkbox">
