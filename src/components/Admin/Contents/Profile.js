@@ -113,6 +113,7 @@ const Profile = ({user}) => {
                                         id="phone"
                                         placeholder="Phone"
                                         type="number"
+                                        value={user.phone}
                                         disabled
                                     />
                                 </Col>
@@ -125,6 +126,7 @@ const Profile = ({user}) => {
                                         id="address"
                                         placeholder="Address"
                                         type="text"
+                                        value={user.address}
                                         disabled
                                     />
                                 </Col>
@@ -137,6 +139,7 @@ const Profile = ({user}) => {
                                         id="stream"
                                         placeholder="Stream"
                                         type="text"
+                                        value={user.stream}
                                         disabled
                                     />
                                 </Col>

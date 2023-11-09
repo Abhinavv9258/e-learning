@@ -21,7 +21,8 @@ const Dashboard = ({ courseCountData, userCountData, courseTableData, user }) =>
     const courseData = [
         { label: 'Programming Language', value: courseCountData.progCourseCount, color: '#8ED9B6' },
         { label: 'Core Subject', value: courseCountData.courseCount, color: '#B6BFC6' },
-        { label: 'Web Development', value: courseCountData.webCourseCount, color: '#C899F4' }
+        { label: 'Web Development', value: courseCountData.webCourseCount, color: '#C899F4' },
+        { label: 'Android Development', value: courseCountData.andCourseCount, color: '#6B8CEF' }
     ]
 
     return (
@@ -166,9 +167,9 @@ const Dashboard = ({ courseCountData, userCountData, courseTableData, user }) =>
                                     },
                                     {
                                         data: [
-                                            courseCountData.webCourseCount
+                                            courseCountData.andCourseCount + courseCountData.webCourseCount
                                         ],
-                                        label: 'Web Development',
+                                        label: 'Development',
                                         color: '#9B9BE3',
                                     },
                                 ]}

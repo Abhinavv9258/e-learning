@@ -27,7 +27,8 @@ const DashboardContent = ({ user, DrawerHeader }) => {
     const [courseCountData, setCourseCountData] = React.useState({
         progCourseCount: 0,
         webCourseCount: 0,
-        courseCount: 0
+        courseCount: 0,
+        andCourseCount: 0
     });
 
 
@@ -107,11 +108,18 @@ const DashboardContent = ({ user, DrawerHeader }) => {
             }
             return count;
         }, 0);
+        const tempAndCourseCount = data.reduce((count, course) => {
+            if (course.category === "Development") {
+                return count + 1;
+            }
+            return count;
+        }, 0);
 
         setCourseCountData({
             progCourseCount: tempProgCourseCount,
             webCourseCount: tempWebCourseCount,
-            courseCount: tempCourseCount
+            courseCount: tempCourseCount,
+            andCourseCount: tempAndCourseCount
         })
         setCourseTableData(data);
     }

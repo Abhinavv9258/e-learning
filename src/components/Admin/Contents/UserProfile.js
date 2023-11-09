@@ -127,7 +127,7 @@ const UserProfile = ({ user }) => {
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const [page, setPage] = React.useState(0);
-    const pageSize = 3;
+    const pageSize = 5;
 
     const handlePageChange = (event, newPage) => {
         setPage(newPage);

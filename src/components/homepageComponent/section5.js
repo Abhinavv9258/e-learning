@@ -34,7 +34,7 @@ const Section5 = () => {
     const arr = [1, 2, 3, 4];
 
     var settings = {
-        swipe: true,
+        swipe: false,
         dots: true,
         infinite: true,
         slidesToShow: 4,
@@ -78,6 +78,7 @@ const Section5 = () => {
         ],
     };
 
+
     const fetchData = () => {
         try {
             fetch(`${URL}/api/courses/`, {
@@ -119,7 +120,7 @@ const Section5 = () => {
                     <Typography variant='h5'>
                         Programming Language Course Details:
                     </Typography>
-                    <Slider {...settings}>
+                    <Slider {...settings} style={{ display: 'flex', alignItems: 'center' }}>
                         {/* {course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)} */}
                         {!loading
                             ? course?.map((el) =>

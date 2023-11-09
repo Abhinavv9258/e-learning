@@ -77,7 +77,7 @@ const AddUserProfile = ({ modal, toggle }) => {
                 try {
                     const data = await res.json();
                     if (data) {
-                        // window.location.reload();
+                        window.location.reload();
                         toast.success(`Successfully Added Course 😃!`, {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
