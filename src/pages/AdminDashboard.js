@@ -129,9 +129,11 @@ const AdminDashboard = () => {
     }
 
     const [open, setOpen] = React.useState(false);
+    const [selectedItem, setSelectedItem] = React.useState();
 
     const handleListItemClick = (text) => {
-        window.location.reload();
+        setSelectedItem(text);
+        // window.location.reload();
         localStorage.setItem("selectedItem", JSON.stringify(text));
     };
 
@@ -168,7 +170,7 @@ const AdminDashboard = () => {
     };
 
     const handleProfile = () => {
-        window.location.reload();
+        setSelectedItem("Profile");
         localStorage.setItem("selectedItem", JSON.stringify("Profile"));
     }
 
@@ -473,8 +475,9 @@ const AdminDashboard = () => {
                         }}>
                             <DashboardContent
                                 user={user}
-                                // selectedItem={selectedItem}
+                                selectedItem={selectedItem}
                                 DrawerHeader={DrawerHeader}
+                                setSelectedItem={setSelectedItem}
                             />
                         </Box>
                     </Box>
