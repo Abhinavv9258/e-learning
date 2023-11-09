@@ -52,7 +52,7 @@ const AddUserProfile = ({ modal, toggle }) => {
             address,
             stream,
         } = userDetails;
-        console.log(userDetails);
+
         try {
             const res = await fetch(`${URL}/api/auth/register`, {
                 method: 'POST',
@@ -77,7 +77,7 @@ const AddUserProfile = ({ modal, toggle }) => {
                 try {
                     const data = await res.json();
                     if (data) {
-                        window.location.reload();
+                        toggle(true);
                         toast.success(`Successfully Added Course 😃!`, {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,

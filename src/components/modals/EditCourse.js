@@ -76,15 +76,15 @@ const EditCourse = ({ modal, toggle, courseData, base64Thumbnail, handleChange }
                 try {
                     const data = await res.json();
                     if (data) {
-                        window.location.reload();
-                        toast.success(`Successfully Added Course 😃!`, {
+                        toggle(true);
+                        toast.success(`Successfully Updated Course 😃!`, {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
                         });
                     } else {
                         console.error('Unexpected response structure:', res);
                         console.log('Unexpected response structure:', res);
-                        toast.error('An error occurred during Course Entry. Please try again later.', {
+                        toast.error('An error occurred during Course update. Please try again later.', {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
                         });
@@ -92,7 +92,7 @@ const EditCourse = ({ modal, toggle, courseData, base64Thumbnail, handleChange }
                 } catch (jsonError) {
                     console.error('Error parsing JSON response:', jsonError);
                     console.log('Error parsing JSON response:', jsonError);
-                    toast.error('An error occurred during Course Entry. Please try again later.', {
+                    toast.error('An error occurred during Course update. Please try again later.', {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: 3000,
                     });
@@ -106,7 +106,7 @@ const EditCourse = ({ modal, toggle, courseData, base64Thumbnail, handleChange }
                         autoClose: 3000,
                     });
                 } else {
-                    toast.error('Course entry failed. Please try again.', {
+                    toast.error('Course update failed. Please try again.', {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: 3000,
                     });

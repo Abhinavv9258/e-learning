@@ -141,7 +141,7 @@ const AddNewCourse = ({ modal, toggle, save }) => {
                 try {
                     const data = await res.json();
                     if (data) {
-                        window.location.reload();
+                        toggle(true);
                         toast.success(`Successfully Added Course 😃!`, {
                             position: toast.POSITION.TOP_RIGHT,
                             autoClose: 3000,
