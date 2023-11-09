@@ -24,6 +24,8 @@ import {
 } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 // importing styles
 import { makeStyles } from '@mui/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -291,7 +293,7 @@ const UserProfile = ({ user }) => {
                                                     {startIndex + index + 1}
                                                 </TableCell>
                                                 <TableCell>
-
+                                                    <AccountCircleIcon />
                                                 </TableCell>
                                                 <TableCell>
                                                     {row.email}
@@ -325,13 +327,13 @@ const UserProfile = ({ user }) => {
                                                 <TableCell>
                                                     <Tooltip title='Edit'>
                                                         <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
-                                                    </Tooltip>                                                
-                                                    </TableCell>
+                                                    </Tooltip>
+                                                </TableCell>
                                                 <TableCell>
                                                     <Tooltip title='Delete'>
                                                         <DeleteIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleUserDelete(row._id)} />
-                                                    </Tooltip>                                                
-                                                    </TableCell>
+                                                    </Tooltip>
+                                                </TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>

@@ -18,6 +18,9 @@ import {
     ListItemText,
 } from '@mui/material';
 
+import Tooltip from '@mui/material/Tooltip';
+
+
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 
@@ -164,6 +167,11 @@ const AdminDashboard = () => {
         setAnchorEl(null);
     };
 
+    const handleProfile = () => {
+        window.location.reload();
+        localStorage.setItem("selectedItem", JSON.stringify("Profile"));
+    }
+
     return (
         <>
             {user ? (
@@ -216,7 +224,7 @@ const AdminDashboard = () => {
                                         open={Boolean(anchorEl)}
                                         onClose={handleClose}
                                     >
-                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                        <MenuItem onClick={handleProfile}>Profile</MenuItem>
                                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                                     </Menu>
                                 </Box>
@@ -228,6 +236,7 @@ const AdminDashboard = () => {
                             <DrawerHeader />
                             <List>
                                 <ListItem disablePadding sx={{ display: 'block' }}>
+
                                     <ListItemButton
                                         sx={{
                                             minHeight: 48,
@@ -236,15 +245,18 @@ const AdminDashboard = () => {
                                         }}
                                         onClick={() => handleListItemClick('Dashboard')}
                                     >
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : 'auto',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            <DashboardIcon />
-                                        </ListItemIcon>
+                                        <Tooltip title='Dashboard'>
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 0,
+                                                    mr: open ? 3 : 'auto',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <DashboardIcon />
+                                            </ListItemIcon>
+                                        </Tooltip>
+   
                                         {open && (
                                             <ListItemText
                                                 primary='Dashboard'
@@ -252,6 +264,7 @@ const AdminDashboard = () => {
                                             />
                                         )}
                                     </ListItemButton>
+
                                     <ListItemButton
                                         onClick={() => handleListItemClick('Admin')}
                                         sx={{
@@ -260,15 +273,18 @@ const AdminDashboard = () => {
                                             px: 2.5,
                                         }}
                                     >
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : 'auto',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            <AccountBoxIcon />
-                                        </ListItemIcon>
+                                        <Tooltip title='Admin'>
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 0,
+                                                    mr: open ? 3 : 'auto',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <AccountBoxIcon />
+                                            </ListItemIcon>
+                                        </Tooltip>
+
                                         {open && (
                                             <ListItemText
                                                 primary='Admin'
@@ -284,15 +300,18 @@ const AdminDashboard = () => {
                                             px: 2.5,
                                         }}
                                     >
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : 'auto',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            <PeopleIcon />
-                                        </ListItemIcon>
+                                        <Tooltip title='User Profile'>
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 0,
+                                                    mr: open ? 3 : 'auto',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <PeopleIcon />
+                                            </ListItemIcon>
+                                        </Tooltip>
+
                                         {open && (
                                             <ListItemText
                                                 primary='User Profile'
@@ -308,15 +327,18 @@ const AdminDashboard = () => {
                                             px: 2.5,
                                         }}
                                     >
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : 'auto',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            <MenuBookIcon />
-                                        </ListItemIcon>
+                                        <Tooltip title='Courses'>
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 0,
+                                                    mr: open ? 3 : 'auto',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <MenuBookIcon />
+                                            </ListItemIcon>
+                                        </Tooltip>
+
                                         {open && (
                                             <ListItemText
                                                 primary='Courses'
@@ -332,15 +354,18 @@ const AdminDashboard = () => {
                                             px: 2.5,
                                         }}
                                     >
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : 'auto',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            <ListAltIcon />
-                                        </ListItemIcon>
+                                        <Tooltip title='Orders'>
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 0,
+                                                    mr: open ? 3 : 'auto',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <ListAltIcon />
+                                            </ListItemIcon>
+                                        </Tooltip>
+
                                         {open && (
                                             <ListItemText
                                                 primary='Orders'
@@ -356,15 +381,18 @@ const AdminDashboard = () => {
                                             px: 2.5,
                                         }}
                                     >
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : 'auto',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            <CircleNotificationsIcon />
-                                        </ListItemIcon>
+                                        <Tooltip title='Notifications'>
+                                            <ListItemIcon
+                                                sx={{
+                                                    minWidth: 0,
+                                                    mr: open ? 3 : 'auto',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                <CircleNotificationsIcon />
+                                            </ListItemIcon>
+                                        </Tooltip>
+
                                         {open && (
                                             <ListItemText
                                                 primary='Notifications'
@@ -384,15 +412,18 @@ const AdminDashboard = () => {
                                         px: 2.5,
                                     }}
                                 >
-                                    <ListItemIcon
-                                        sx={{
-                                            minWidth: 0,
-                                            mr: open ? 3 : 'auto',
-                                            justifyContent: 'center',
-                                        }}
-                                    >
-                                        <AccountCircleIcon />
-                                    </ListItemIcon>
+                                    <Tooltip title='Profile'>
+                                        <ListItemIcon
+                                            sx={{
+                                                minWidth: 0,
+                                                mr: open ? 3 : 'auto',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            <AccountCircleIcon />
+                                        </ListItemIcon>
+                                    </Tooltip>
+
                                     {open && (
                                         <ListItemText
                                             primary='Profile'
@@ -408,15 +439,18 @@ const AdminDashboard = () => {
                                         px: 2.5,
                                     }}
                                 >
-                                    <ListItemIcon
-                                        sx={{
-                                            minWidth: 0,
-                                            mr: open ? 3 : 'auto',
-                                            justifyContent: 'center',
-                                        }}
-                                    >
-                                        <SettingsIcon />
-                                    </ListItemIcon>
+                                    <Tooltip title='Settings'>
+                                        <ListItemIcon
+                                            sx={{
+                                                minWidth: 0,
+                                                mr: open ? 3 : 'auto',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            <SettingsIcon />
+                                        </ListItemIcon>
+                                    </Tooltip>
+
                                     {open && (
                                         <ListItemText
                                             primary='Settings'
