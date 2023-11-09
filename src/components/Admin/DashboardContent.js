@@ -15,7 +15,7 @@ import Settings from './Contents/Settings'
 
 import { URL } from '../../App';
 
-const DashboardContent = ({ user, DrawerHeader }) => {
+const DashboardContent = ({ user, DrawerHeader, selectedItem, setSelectedItem }) => {
 
     // getting all user data
     const [userCountData, setUserCountData] = React.useState({
@@ -34,14 +34,8 @@ const DashboardContent = ({ user, DrawerHeader }) => {
 
     const [courseTableData, setCourseTableData] = React.useState();
 
-    const selectedItem = localStorage.getItem("selectedItem");
-    let selectedBoard = null;
-
-    if (selectedItem) {
-        selectedBoard = selectedItem.replace(/"/g, '');
-    } else {
-        selectedBoard = selectedItem;
-    }
+    // const selectedItem = localStorage.getItem("selectedItem");
+    const selectedContentItem = selectedItem ? selectedItem:JSON.parse(localStorage.getItem("selectedItem"));
 
     const getAllUserProfile = async () => {
         let token = localStorage.getItem('access_token');
@@ -131,16 +125,20 @@ const DashboardContent = ({ user, DrawerHeader }) => {
         // eslint-disable-next-line
     }, [user])
 
+    const toDashboard = () =>{
+        setSelectedItem("Dashboard");
+        localStorage.setItem("selectedItem", JSON.stringify("Dashboard"));
+    }
 
     const renderContent = () => {
-        switch (selectedBoard) {
+        switch (selectedContentItem) {
             case 'Dashboard':
                 return (
                     <Dashboard courseCountData={courseCountData} userCountData={userCountData} courseTableData={courseTableData} user={user} />
                 )
             case 'Admin':
                 return (
-                    <Admin user={user} />
+                    <Admin toDashboard={toDashboard} user={user} />
                 )
             case 'User Profile':
                 return (
@@ -148,7 +146,7 @@ const DashboardContent = ({ user, DrawerHeader }) => {
                 )
             case 'Courses':
                 return (
-                    <Courses courseTableData={courseTableData} user={user} />
+                    <Courses user={user} />
                 )
             case 'Orders':
                 return (

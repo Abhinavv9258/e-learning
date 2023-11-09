@@ -12,7 +12,7 @@ import {
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 
-const Admin = ({ user }) => {
+const Admin = ({ user, toDashboard }) => {
 
     return (
         <>
@@ -28,7 +28,7 @@ const Admin = ({ user }) => {
             }}>
                 <Box>
                     <Typography paragraph sx={{ display: 'flex', alignItems: 'center' }}>
-                        Dashboard
+                        <Box sx={{ cursor: 'pointer' }} onClick={toDashboard} >Dashboard</Box>
                         <NavigateNextIcon sx={{ color: 'grey' }} />
                         Admin Details
                     </Typography>

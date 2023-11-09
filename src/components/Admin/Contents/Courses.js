@@ -97,14 +97,7 @@ const Courses = ({ user }) => {
         const data = await res.json();
         setCourseData(data);
     }
-
-    React.useEffect(() => {
-        if (user) {
-            allCourseDetails();
-        }
-        // eslint-disable-next-line
-    }, [user])
-
+    const [refreshData, setRefreshData] = React.useState(true);
 
     const [modal, setModal] = useState(false);
     const toggle = () => {
@@ -178,7 +171,8 @@ const Courses = ({ user }) => {
             });
             if (res.status === 200) {
                 const data = await res.json();
-                window.location.reload();
+                setOpenConfirmation(false);
+                setRefreshData(true);
                 toast.success(data, {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 3000,
@@ -212,6 +206,7 @@ const Courses = ({ user }) => {
     const [editCourseConfirm, setEditCourseConfirm] = React.useState(false);
 
     const editToggle = () => {
+        setRefreshData(true);
         setEditCourseConfirm(!editCourseConfirm);
     }
 
@@ -225,6 +220,7 @@ const Courses = ({ user }) => {
         const data = await res.json();
         const thumbnailData = JSON.parse(data.thumbnail);
         const base64Thumbnail = thumbnailData.base64;
+        setRefreshData(true);
         setEditCourseConfirm({ open: true, base64Thumbnail: base64Thumbnail, ...data });
         // setModal(true);
     };
@@ -253,6 +249,19 @@ const Courses = ({ user }) => {
             [e.target.name]: e.target.value,
         });
     };
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            if (user && refreshData) {
+                await allCourseDetails();
+                setRefreshData(false);
+            }
+        };
+        fetchData();
+        // eslint-disable-next-line
+    }, [
+        user, courseData, refreshData
+    ])
 
     return (
         <>

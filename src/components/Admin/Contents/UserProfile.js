@@ -39,6 +39,7 @@ import { URL } from '../../../App';
 import ConfirmDeletion from '../../modals/ConfirmDeletion';
 import AddUserProfile from '../../modals/AddUserProfile';
 import ViewUserDetails from '../../modals/ViewUserDetails';
+import EditUser from '../../modals/EditUser';
 
 
 
@@ -59,7 +60,10 @@ const useStyles = makeStyles({
 
 const UserProfile = ({ user }) => {
 
+    const [refreshData, setRefreshData] = React.useState(true);
     const [userData, setUserData] = React.useState();
+
+
     const getAllUserProfile = async () => {
         let token = localStorage.getItem('access_token');
         const res = await fetch(`${URL}/api/users`, {
@@ -73,13 +77,6 @@ const UserProfile = ({ user }) => {
         const data = await res.json();
         setUserData(data);
     }
-
-    React.useEffect(() => {
-        if (user) {
-            getAllUserProfile();
-        }
-        // eslint-disable-next-line
-    }, []);
 
     // const [selectAll, setSelectAll] = React.useState(false);
     // const [selected, setSelected] = React.useState([]);
@@ -148,8 +145,25 @@ const UserProfile = ({ user }) => {
 
     // edit user profile
     const toggle = () => {
+        setRefreshData(true);
         setModal(!modal);
     }
+
+    const handleUserEdit = async (id) => {
+        let token = localStorage.getItem('access_token');
+        const res = await fetch(`${URL}/api/users/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            credentials: 'include',
+        });
+        const data = await res.json();
+        setRefreshData(true);
+        setViewModal({ open: true, data });
+    }
+
 
     // handle view change 
     const [viewModal, setViewModal] = React.useState(false);
@@ -194,9 +208,10 @@ const UserProfile = ({ user }) => {
                 },
                 credentials: 'include',
             });
-            if (res.status === 200) {
+            if (res.ok) {
                 const data = await res.json();
-                window.location.reload();
+                setRefreshData(true);
+                setOpenConfirmation(false);
                 toast.success(data, {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 3000,
@@ -224,6 +239,19 @@ const UserProfile = ({ user }) => {
             });
         }
     };
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            if (user && refreshData) {
+                await getAllUserProfile();
+                setRefreshData(false);
+            }
+        };
+        fetchData();
+        // eslint-disable-next-line
+    }, [
+        user, userData, refreshData
+    ])
 
     return (
         <>
@@ -349,7 +377,7 @@ const UserProfile = ({ user }) => {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Tooltip title='Edit'>
-                                                        <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
+                                                        <EditIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleUserEdit(row._id)} />
                                                     </Tooltip>
                                                 </TableCell>
                                                 <TableCell>
@@ -378,7 +406,14 @@ const UserProfile = ({ user }) => {
                         toggle={toggle}
 
                     />
+
                     <ViewUserDetails
+                        modal={viewModal}
+                        toggle={editViewToggle}
+                        userData={viewModal.data}
+                    />
+
+                    <EditUser
                         modal={viewModal}
                         toggle={editViewToggle}
                         userData={viewModal.data}

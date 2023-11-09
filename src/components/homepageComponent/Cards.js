@@ -45,14 +45,16 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading }
                         <Card className="course-card"
                             sx={{ m: 2, p: 2, boxShadow: 3, height: 380, maxWidth: 300 }}
                         >
-                            <CardHeader
+                            <CardHeader sx={{height:'160px', p:0}}
                                 title={
                                     <CardMedia
                                         component="img"
                                         alt={title}
                                         image={base64Thumbnail}
                                         style={{
-                                            objectFit: 'cover'
+                                            objectFit: 'cover',
+                                            borderRadius: '5px',
+                                            border:'1px solid '
                                         }}
                                     />
                                 }
