@@ -141,12 +141,18 @@ const UserProfile = ({ user, toDashboard }) => {
     const sendData = (e) => {
         setModal(true);
     }
-
-
-    // edit user profile
     const toggle = () => {
         setRefreshData(true);
         setModal(!modal);
+    }
+
+
+    // edit user profile
+    const [editUserConfirm, setEditUserConfirm] = React.useState(false);
+
+    const editToggle = () => {
+        setRefreshData(true);
+        setEditUserConfirm(!editUserConfirm);
     }
 
     const handleUserEdit = async (id) => {
@@ -161,7 +167,7 @@ const UserProfile = ({ user, toDashboard }) => {
         });
         const data = await res.json();
         setRefreshData(true);
-        setViewModal({ open: true, data });
+        setEditUserConfirm({ open: true, data });
     }
 
 
@@ -239,6 +245,14 @@ const UserProfile = ({ user, toDashboard }) => {
             });
         }
     };
+
+    const handleChange = (e) => {
+        setEditUserConfirm({
+            ...editUserConfirm,
+            [e.target.name]: e.target.value,
+        });
+    };
+
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -414,9 +428,10 @@ const UserProfile = ({ user, toDashboard }) => {
                     />
 
                     <EditUser
-                        modal={viewModal}
-                        toggle={editViewToggle}
-                        userData={viewModal.data}
+                        modal={editUserConfirm}
+                        toggle={editToggle}
+                        userData={editUserConfirm.data}
+                        handleChange={handleChange}
                     />
 
                     <ConfirmDeletion

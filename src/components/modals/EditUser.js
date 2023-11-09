@@ -17,7 +17,7 @@ import { Button } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-const EditUser = ({ modal, toggle, userData }) => {
+const EditUser = ({ modal, toggle, userData, handleChange }) => {
 
     return (
         <>
@@ -31,7 +31,7 @@ const EditUser = ({ modal, toggle, userData }) => {
                     centered
                     >
                     <ModalHeader toggle={toggle}>
-                        Add User
+                        Edit User
                     </ModalHeader>
                     <ModalBody>
                         <Form style={{ paddingLeft: '10px', paddingRight: '10px', marginTop: '16px' }}>
@@ -44,7 +44,9 @@ const EditUser = ({ modal, toggle, userData }) => {
                                         placeholder='Name'
                                         type="text"
                                         value={userData.name}
-                                        disabled
+                                        onChange={
+                                            (e) => handleChange(e)
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -57,7 +59,9 @@ const EditUser = ({ modal, toggle, userData }) => {
                                         placeholder="Email"
                                         type="text"
                                         value={userData.email}
-                                        disabled
+                                        onChange={
+                                            (e) => handleChange(e)
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -70,7 +74,9 @@ const EditUser = ({ modal, toggle, userData }) => {
                                         placeholder="Username"
                                         type="text"
                                         value={userData.username}
-                                        disabled
+                                        onChange={
+                                            (e) => handleChange(e)
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -82,7 +88,9 @@ const EditUser = ({ modal, toggle, userData }) => {
                                         name="isAdmin"
                                         id="isAdmin"
                                         value={userData.isAdmin}
-                                        disabled
+                                        onChange={
+                                            (e) => handleChange(e)
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -94,7 +102,9 @@ const EditUser = ({ modal, toggle, userData }) => {
                                         name="status"
                                         id="status"
                                         value={userData.status}
-                                        disabled
+                                        onChange={
+                                            (e) => handleChange(e)
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -107,7 +117,9 @@ const EditUser = ({ modal, toggle, userData }) => {
                                         placeholder="Phone"
                                         value={userData.phone}
                                         type="number"
-                                        disabled
+                                        onChange={
+                                            (e) => handleChange(e)
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -120,7 +132,9 @@ const EditUser = ({ modal, toggle, userData }) => {
                                         placeholder="Address"
                                         value={userData.address}
                                         type="text"
-                                        disabled
+                                        onChange={
+                                            (e) => handleChange(e)
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -133,7 +147,9 @@ const EditUser = ({ modal, toggle, userData }) => {
                                         placeholder="Stream"
                                         value={userData.stream}
                                         type="text"
-                                        disabled
+                                        onChange={
+                                            (e) => handleChange(e)
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
