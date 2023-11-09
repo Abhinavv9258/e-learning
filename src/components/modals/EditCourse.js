@@ -43,8 +43,6 @@ const EditCourse = ({ modal, toggle, courseData, base64Thumbnail, handleChange }
         };
     }
 
-    const handleClose = () => modal(false);
-
     const handleUpdate = async (e) => {
         e.preventDefault();
         let token = localStorage.getItem('access_token');
@@ -160,7 +158,9 @@ const EditCourse = ({ modal, toggle, courseData, base64Thumbnail, handleChange }
                     scrollable
                     zIndex={2500}
                     size='lg'
-                    onHide={handleClose}>
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    >
                     <ModalHeader toggle={toggle}>
                         Edit Course
                     </ModalHeader>

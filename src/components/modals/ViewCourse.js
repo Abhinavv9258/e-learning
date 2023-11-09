@@ -28,7 +28,12 @@ const Example = ({ modal, toggleCourse, courseDetails }) => {
     return (
         <>
             {courseDetails ? (
-                <Modal isOpen={modal} toggle={toggleCourse} centered size='lg'>
+                <Modal isOpen={modal}
+                    toggle={toggleCourse}
+                    size='lg'
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
 
                     <ModalHeader toggle={toggleCourse}>
                         <Typography variant='h6'>
@@ -72,9 +77,9 @@ const Example = ({ modal, toggleCourse, courseDetails }) => {
                     </ModalBody>
                     <ModalBody>
                         {activeSection === 'About' && <>
-                        <Typography>
+                            <Typography>
                                 {courseDetails.description}
-                        </Typography>
+                            </Typography>
                         </>}
                         {activeSection === 'Instructor' && <>Instructor</>}
                         {activeSection === 'Syllabus' && <>Syllabus</>}

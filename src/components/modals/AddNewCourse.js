@@ -229,7 +229,10 @@ const AddNewCourse = ({ modal, toggle, save }) => {
                 toggle={toggle}
                 scrollable
                 zIndex={2500}
-                size='lg'>
+                size='lg'
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                >
                 <ModalHeader toggle={toggle}>
                     Add Course
                 </ModalHeader>

@@ -31,6 +31,8 @@ const ViewCourseDetails = ({ modal, toggle, courseData, base64Thumbnail }) => {
                     scrollable
                     zIndex={2500}
                     size='lg'
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
                 >
                     <ModalHeader toggle={toggle}>
                         Course Details

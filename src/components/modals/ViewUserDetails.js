@@ -26,7 +26,10 @@ const ViewUserDetails = ({ modal, toggle, userData }) => {
                     isOpen={modal}
                     toggle={toggle}
                     zIndex={2500}
-                    size='lg'>
+                    size='lg'
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    >
                     <ModalHeader toggle={toggle}>
                         Add User
                     </ModalHeader>
