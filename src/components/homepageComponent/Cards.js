@@ -1,13 +1,8 @@
 import React from "react";
-import { FaGraduationCap } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import Typed from "react-typed";
 
 import {
-    CardActionArea,
     CardActions,
     CardHeader,
-    Box,
     Button,
     Card,
     CardContent,
