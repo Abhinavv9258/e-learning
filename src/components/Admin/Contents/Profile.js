@@ -1,5 +1,6 @@
 import React from 'react';
-import {Typography, Box} from '@mui/material';
+
+import { Typography, Box } from '@mui/material';
 import {
     Form,
     Label,
@@ -10,7 +11,9 @@ import {
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-const Profile = ({user}) => {
+
+const Profile = ({ user }) => {
+
     return (
         <>
             <Box component="main" sx={{
@@ -147,8 +150,6 @@ const Profile = ({user}) => {
                         </Form>
                     </Box>
                 </Box>
-
-
             </Box>
         </>
     );

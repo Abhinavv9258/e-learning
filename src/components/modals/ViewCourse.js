@@ -13,9 +13,9 @@ import {
 
 
 const Example = ({ modal, toggleCourse, courseDetails }) => {
-    const sections = ['About', 'Instructor', 'Syllabus', 'Enrollment Options'];
+    // const sections = ['About', 'Instructor', 'Syllabus', 'Enrollment Options'];
     const [activeSection, setActiveSection] = useState('About');
-    const [underlineStyle, setUnderlineStyle] = useState({});
+    // const [underlineStyle, setUnderlineStyle] = useState({});
     const [clickedBox, setClickedBox] = useState('About');
 
     const handleSectionClick = (sectionName) => {

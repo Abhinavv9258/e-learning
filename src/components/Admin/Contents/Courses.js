@@ -20,7 +20,7 @@ import {
     TableCell,
     TablePagination,
     Paper,
-    Checkbox,
+    // Checkbox,
 } from '@mui/material';
 
 import Tooltip from '@mui/material/Tooltip';
@@ -82,7 +82,7 @@ const TableCellComponent = ({ row, col }) => {
 };
 
 
-const Courses = ({ save, user }) => {
+const Courses = ({ user }) => {
 
     const [courseData, setCourseData] = React.useState();
 
@@ -111,32 +111,32 @@ const Courses = ({ save, user }) => {
         setModal(!modal);
     }
 
-    const [selectAll, setSelectAll] = React.useState(false);
-    const [selected, setSelected] = React.useState([]);
+    // const [selectAll, setSelectAll] = React.useState(false);
+    // const [selected, setSelected] = React.useState([]);
 
     const classes = useStyles();
 
-    const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
-            setSelected(courseData.map((row) => row._id));
-            setSelectAll(true);
-        } else {
-            setSelected([]);
-            setSelectAll(false);
-        }
-    };
+    // const handleSelectAllClick = (event) => {
+    //     if (event.target.checked) {
+    //         setSelected(courseData.map((row) => row._id));
+    //         setSelectAll(true);
+    //     } else {
+    //         setSelected([]);
+    //         setSelectAll(false);
+    //     }
+    // };
 
-    const handleSelectClick = (id) => {
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
+    // const handleSelectClick = (id) => {
+    //     const selectedIndex = selected.indexOf(id);
+    //     let newSelected = [];
 
-        if (selectedIndex === -1) {
-            newSelected = [...selected, id]; // Add the ID to the selection
-        } else {
-            newSelected = selected.filter((itemId) => itemId !== id); // Remove the ID from the selection
-        }
-        setSelected(newSelected);
-    };
+    //     if (selectedIndex === -1) {
+    //         newSelected = [...selected, id]; // Add the ID to the selection
+    //     } else {
+    //         newSelected = selected.filter((itemId) => itemId !== id); // Remove the ID from the selection
+    //     }
+    //     setSelected(newSelected);
+    // };
 
 
     const [page, setPage] = React.useState(0);
@@ -338,7 +338,9 @@ const Courses = ({ save, user }) => {
                                         </TableHead>
                                         <TableBody>
                                             {courseData.slice(startIndex, endIndex).map((row, index) => (
-                                                <TableRow key={row._id} selected={selected.indexOf(row._id) !== -1}>
+                                                <TableRow key={row._id} 
+                                                // selected={selected.indexOf(row._id) !== -1}
+                                                >
                                                     {/* <TableCell padding="checkbox">
                                                         <Checkbox
                                                             onClick={() => handleSelectClick(row._id)}
@@ -379,13 +381,6 @@ const Courses = ({ save, user }) => {
                                 rowsPerPage={pageSize}
                                 rowsPerPageOptions={[pageSize]}
                             />
-                        </Box>
-                        <Box>
-                            {/* 
-                    // console.log(courseData[0].thumbnail)
-                    // const thumbnailData = JSON.parse(courseData[0].thumbnail);
-                    // const base64Thumbnail = thumbnailData.base64;
-                    <img src={base64Thumbnail} alt="Course Thumbnail" /> */}
                         </Box>
                     </Box>
                     <AddNewCourse

@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import Typed from "react-typed";
 import {
-    //Card
-    // CardActionArea, 
-    // CardContent,
     CardMedia,
     Typography,
     CardActions,
@@ -67,16 +64,6 @@ const Section1 = () => {
                             </Typography>
                             <FaArrowRightLong />
                         </Button>
-
-                        {/* <Button
-                            className={`section1-btn ${isDarkBackground ? 'dark-mode' : 'light-mode'}`}
-                            onClick={() => navigate("/AdminLoginPage")}
-                        >
-                            <Typography>
-                                Admin LogIn &nbsp;
-                            </Typography>
-                            <FaArrowRightLong />
-                        </Button> */}
                     </CardActions>
                 </div>
             </div>

@@ -1,9 +1,10 @@
 import React from 'react';
-import {Typography, Box} from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 
 const Settings = () => {
+    
     return (
         <>
             <Box component="main" sx={{

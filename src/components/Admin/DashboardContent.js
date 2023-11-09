@@ -11,7 +11,7 @@ import Orders from './Contents/Orders'
 import Notifications from './Contents/Notifications'
 import Profile from './Contents/Profile'
 import Settings from './Contents/Settings'
-import Default from './Contents/Default'
+// import Default from './Contents/Default'
 
 import { URL } from '../../App';
 

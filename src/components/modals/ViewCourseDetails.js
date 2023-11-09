@@ -22,17 +22,16 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ViewCourseDetails = ({ modal, toggle, courseData, base64Thumbnail }) => {
 
-    const handleClose = () => modal(false);
-
     return (
         <>
             {courseData &&
-                <Modal isOpen={modal}
+                <Modal
+                    isOpen={modal}
                     toggle={toggle}
                     scrollable
                     zIndex={2500}
                     size='lg'
-                    onHide={handleClose}>
+                >
                     <ModalHeader toggle={toggle}>
                         Course Details
                     </ModalHeader>
@@ -187,7 +186,7 @@ const ViewCourseDetails = ({ modal, toggle, courseData, base64Thumbnail }) => {
                             <FormGroup row>
                                 <Label sm={3}> Thumbnail </Label>
                                 <Col sm={9}>
-                                    <img src={base64Thumbnail} alt={courseData.fileName}  style={{ maxWidth: "100px", margin: "5px" }} />
+                                    <img src={base64Thumbnail} alt={courseData.fileName} style={{ maxWidth: "100px", margin: "5px" }} />
                                     Selected Image: {courseData.fileName}
                                 </Col>
                             </FormGroup>

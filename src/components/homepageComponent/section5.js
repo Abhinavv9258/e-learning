@@ -126,7 +126,6 @@ const Section5 = () => {
                             ? course?.map((el) =>
                                 el.category === 'Programming Language' &&
                                 (<CourseCard {...el} loading={loading} key={el._id} />)
-
                             )
                             : arr.map((el, i) => <LoadingComponent key={i} />)
                         }

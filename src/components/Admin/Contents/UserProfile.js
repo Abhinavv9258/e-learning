@@ -20,7 +20,7 @@ import {
     TableCell,
     TablePagination,
     Paper,
-    Checkbox,
+    // Checkbox,
 } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -38,6 +38,8 @@ import { URL } from '../../../App';
 
 import ConfirmDeletion from '../../modals/ConfirmDeletion';
 import AddUserProfile from '../../modals/AddUserProfile';
+import ViewUserDetails from '../../modals/ViewUserDetails';
+
 
 
 const columns = [
@@ -79,21 +81,21 @@ const UserProfile = ({ user }) => {
         // eslint-disable-next-line
     }, []);
 
-    const [selectAll, setSelectAll] = React.useState(false);
-    const [selected, setSelected] = React.useState([]);
+    // const [selectAll, setSelectAll] = React.useState(false);
+    // const [selected, setSelected] = React.useState([]);
 
     // const [selected, setSelected] = React.useState(userData.map((row) => row._id));
     const classes = useStyles();
 
-    const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
-            setSelected(userData.map((row) => row._id));
-            setSelectAll(true);
-        } else {
-            setSelected([]);
-            setSelectAll(false);
-        }
-    };
+    // const handleSelectAllClick = (event) => {
+    //     if (event.target.checked) {
+    //         setSelected(userData.map((row) => row._id));
+    //         setSelectAll(true);
+    //     } else {
+    //         setSelected([]);
+    //         setSelectAll(false);
+    //     }
+    // };
 
     // const handleSelectClick = (id) => {
     //     const selectedIndex = selected.indexOf(id);
@@ -110,21 +112,21 @@ const UserProfile = ({ user }) => {
     //     setSelected(newSelected);
     // };
 
-    const handleSelectClick = (id) => {
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
+    // const handleSelectClick = (id) => {
+    //     const selectedIndex = selected.indexOf(id);
+    //     let newSelected = [];
 
-        if (selectedIndex === -1) {
-            newSelected = [...selected, id]; // Add the ID to the selection
-        } else {
-            newSelected = selected.filter((itemId) => itemId !== id); // Remove the ID from the selection
-        }
-        // console.log(selectedIndex);
-        // console.log(newSelected);
-        setSelected(newSelected);
-    };
+    //     if (selectedIndex === -1) {
+    //         newSelected = [...selected, id]; // Add the ID to the selection
+    //     } else {
+    //         newSelected = selected.filter((itemId) => itemId !== id); // Remove the ID from the selection
+    //     }
+    //     // console.log(selectedIndex);
+    //     // console.log(newSelected);
+    //     setSelected(newSelected);
+    // };
 
-    const isSelected = (id) => selected.indexOf(id) !== -1;
+    // const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const [page, setPage] = React.useState(0);
     const pageSize = 5;
@@ -144,9 +146,29 @@ const UserProfile = ({ user }) => {
     }
 
 
-    // edit details
+    // edit user profile
     const toggle = () => {
         setModal(!modal);
+    }
+
+    // handle view change 
+    const [viewModal, setViewModal] = React.useState(false);
+    const handleUserView = async (id) => {
+        let token = localStorage.getItem('access_token');
+        const res = await fetch(`${URL}/api/users/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            credentials: 'include',
+        });
+        const data = await res.json();
+        setViewModal({ open: true, data });
+    }
+
+    const editViewToggle = () => {
+        setViewModal(!viewModal);
     }
 
     // handle delete
@@ -281,7 +303,8 @@ const UserProfile = ({ user }) => {
                                     <TableBody>
                                         {userData.slice(startIndex, endIndex).map((row, index) => (
                                             <TableRow
-                                                key={row._id} selected={isSelected(row._id)}
+                                                key={row._id} 
+                                                // selected={isSelected(row._id)}
                                             >
                                                 {/* <TableCell padding="checkbox">
                                                     <Checkbox
@@ -321,7 +344,7 @@ const UserProfile = ({ user }) => {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Tooltip title='View'>
-                                                        <SearchIcon sx={{ color: '#f76363', cursor: 'pointer' }} />
+                                                        <SearchIcon sx={{ color: '#f76363', cursor: 'pointer' }} onClick={() => handleUserView(row._id)} />
                                                     </Tooltip>
                                                 </TableCell>
                                                 <TableCell>
@@ -354,6 +377,11 @@ const UserProfile = ({ user }) => {
                         modal={modal}
                         toggle={toggle}
 
+                    />
+                    <ViewUserDetails
+                        modal={viewModal}
+                        toggle={editViewToggle}
+                        userData={viewModal.data}
                     />
 
                     <ConfirmDeletion
