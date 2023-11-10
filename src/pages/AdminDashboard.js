@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
@@ -12,22 +13,13 @@ import {
     Menu, MenuItem,
     Divider,
     IconButton,
-    ListItem,
     ListItemButton,
     ListItemIcon,
     ListItemText,
 } from '@mui/material';
-
 import Tooltip from '@mui/material/Tooltip';
-
-
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-
-import DashboardContent from '../components/Admin/DashboardContent'
-
-import { useApp } from '../context/AuthContext'
-import { toast } from 'react-toastify';
 
 // importing icons
 import MenuIcon from '@mui/icons-material/Menu';
@@ -39,6 +31,14 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import PeopleIcon from '@mui/icons-material/People';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+
+import LoadingBar from 'react-top-loading-bar'
+
+import DashboardContent from '../components/Admin/DashboardContent'
+
+import { useApp } from '../context/AuthContext'
+
+import { toast } from 'react-toastify';
 
 
 const drawerWidth = 240;
@@ -69,7 +69,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
 }));
 
@@ -100,7 +99,7 @@ const AppBar = styled(MuiAppBar, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: '#f76363',
+    // backgroundColor: '#f76363',
     ...(open && {
         marginLeft: drawerWidth,
         // width: `calc(100% - ${drawerWidth}px)`,
@@ -114,53 +113,27 @@ const AppBar = styled(MuiAppBar, {
 
 
 
-const AdminDashboard = () => {
+const AdminDashboard = () => { 
+
     const navigate = useNavigate();
-    const { user } = useApp();
-    const { setUser } = useApp();
-    // const isToastVisible = React.useRef(false);
+    const { user, setUser } = useApp();
 
-    const handleLogout = () => {
-        setUser(null);
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('selectedItem');
-        toast.success('Successfully Logged Out');
-        navigate('/');
-    }
+    // for top loading bar
+    const ref = React.useRef(null);
 
+    // for side drawer
     const [open, setOpen] = React.useState(false);
     const [selectedItem, setSelectedItem] = React.useState();
 
-    const handleListItemClick = (text) => {
-        setSelectedItem(text);
-        // window.location.reload();
-        localStorage.setItem("selectedItem", JSON.stringify(text));
-    };
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-
-    // // for user-logged-in users || direct them to home page
-    // React.useEffect(() => {
-    //     if (!user && !isToastVisible.current) {
-    //         isToastVisible.current = true
-    //         toast.error('Login required', {
-    //             autoClose: 3000,
-    //             onClose: () => {
-    //                 isToastVisible.current = false;
-    //                 navigate('/');
-    //             },
-    //         });
-    //     }
-    // }, [user, navigate]);
-
+    // for profile modal
     const [anchorEl, setAnchorEl] = React.useState(null);
 
+    // for side drawer
+    const handleDrawer = () => {
+        setOpen(!open);
+    };
+
+    // for profile modal
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -172,7 +145,72 @@ const AdminDashboard = () => {
     const handleProfile = () => {
         setSelectedItem("Profile");
         localStorage.setItem("selectedItem", JSON.stringify("Profile"));
+    };
+
+    const handleLogout = () => {
+        setUser(null);
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('selectedItem');
+        toast.success('Successfully Logged Out');
+        navigate('/');
     }
+
+    // for drawer list option
+    const renderListItemButton = (text, icon, title) => {
+        return (
+            <ListItemButton
+                onClick={() => handleListItemClick(text)}
+                sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                }}
+            >
+                {open && (
+                    <ListItemIcon
+                        sx={{
+                            minWidth: 0,
+                            mr: 3,
+                            justifyContent: 'center',
+                        }}
+                    >
+                        {icon}
+                    </ListItemIcon>
+                )}
+
+                {!open && (
+                    <Tooltip title={title} placement="right">
+                        <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: 'auto',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            {icon}
+                        </ListItemIcon>
+                    </Tooltip>
+
+                )}
+
+                {open && (
+                    <ListItemText
+                        primary={text}
+                        sx={{ opacity: 1 }}
+                    />
+                )}
+            </ListItemButton>
+        );
+    };
+
+    const handleListItemClick = (text) => {
+        setSelectedItem(text);
+        ref.current.complete();
+        localStorage.setItem("selectedItem", JSON.stringify(text));
+    };
+
+    
+
 
     return (
         <>
@@ -184,25 +222,14 @@ const AdminDashboard = () => {
                         <AppBar position='fixed' open={open}>
                             <Toolbar sx={{ justifyContent: 'space-between' }}>
                                 <Box style={{ display: 'flex', flexDirection: 'row' }}>
-                                    {!open ? (
-                                        <IconButton
-                                            color="inherit"
-                                            aria-label="open drawer"
-                                            onClick={handleDrawerOpen}
-                                            edge="start"
-                                        >
-                                            <MenuIcon />
-                                        </IconButton>
-                                    ) : (
-                                        <IconButton
-                                            color="inherit"
-                                            aria-label="open drawer"
-                                            edge="start"
-                                            onClick={handleDrawerClose}
-                                        >
-                                            <MenuIcon />
-                                        </IconButton>
-                                    )}
+                                    <IconButton
+                                        color="inherit"
+                                        aria-label="open drawer"
+                                        onClick={handleDrawer}
+                                        edge="start"
+                                    >
+                                        <MenuIcon />
+                                    </IconButton>
                                     <Typography variant="h6" noWrap component="div" sx={{ display: 'flex', alignItems: 'center' }}>
                                         Admin Dashboard
                                     </Typography>
@@ -236,230 +263,18 @@ const AdminDashboard = () => {
                         {/* Drawer */}
                         <Drawer variant='permanent' open={open}>
                             <DrawerHeader />
-                            <List>
-                                <ListItem disablePadding sx={{ display: 'block' }}>
-
-                                    <ListItemButton
-                                        sx={{
-                                            minHeight: 48,
-                                            justifyContent: open ? 'initial' : 'center',
-                                            px: 2.5,
-                                        }}
-                                        onClick={() => handleListItemClick('Dashboard')}
-                                    >
-                                        <Tooltip title='Dashboard'>
-                                            <ListItemIcon
-                                                sx={{
-                                                    minWidth: 0,
-                                                    mr: open ? 3 : 'auto',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <DashboardIcon />
-                                            </ListItemIcon>
-                                        </Tooltip>
-   
-                                        {open && (
-                                            <ListItemText
-                                                primary='Dashboard'
-                                                sx={{ opacity: 1 }}
-                                            />
-                                        )}
-                                    </ListItemButton>
-
-                                    <ListItemButton
-                                        onClick={() => handleListItemClick('Admin')}
-                                        sx={{
-                                            minHeight: 48,
-                                            justifyContent: open ? 'initial' : 'center',
-                                            px: 2.5,
-                                        }}
-                                    >
-                                        <Tooltip title='Admin'>
-                                            <ListItemIcon
-                                                sx={{
-                                                    minWidth: 0,
-                                                    mr: open ? 3 : 'auto',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <AccountBoxIcon />
-                                            </ListItemIcon>
-                                        </Tooltip>
-
-                                        {open && (
-                                            <ListItemText
-                                                primary='Admin'
-                                                sx={{ opacity: 1 }}
-                                            />
-                                        )}
-                                    </ListItemButton>
-                                    <ListItemButton
-                                        onClick={() => handleListItemClick('User Profile')}
-                                        sx={{
-                                            minHeight: 48,
-                                            justifyContent: open ? 'initial' : 'center',
-                                            px: 2.5,
-                                        }}
-                                    >
-                                        <Tooltip title='User Profile'>
-                                            <ListItemIcon
-                                                sx={{
-                                                    minWidth: 0,
-                                                    mr: open ? 3 : 'auto',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <PeopleIcon />
-                                            </ListItemIcon>
-                                        </Tooltip>
-
-                                        {open && (
-                                            <ListItemText
-                                                primary='User Profile'
-                                                sx={{ opacity: 1 }}
-                                            />
-                                        )}
-                                    </ListItemButton>
-                                    <ListItemButton
-                                        onClick={() => handleListItemClick('Courses')}
-                                        sx={{
-                                            minHeight: 48,
-                                            justifyContent: open ? 'initial' : 'center',
-                                            px: 2.5,
-                                        }}
-                                    >
-                                        <Tooltip title='Courses'>
-                                            <ListItemIcon
-                                                sx={{
-                                                    minWidth: 0,
-                                                    mr: open ? 3 : 'auto',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <MenuBookIcon />
-                                            </ListItemIcon>
-                                        </Tooltip>
-
-                                        {open && (
-                                            <ListItemText
-                                                primary='Courses'
-                                                sx={{ opacity: 1 }}
-                                            />
-                                        )}
-                                    </ListItemButton>
-                                    <ListItemButton
-                                        onClick={() => handleListItemClick('Orders')}
-                                        sx={{
-                                            minHeight: 48,
-                                            justifyContent: open ? 'initial' : 'center',
-                                            px: 2.5,
-                                        }}
-                                    >
-                                        <Tooltip title='Orders'>
-                                            <ListItemIcon
-                                                sx={{
-                                                    minWidth: 0,
-                                                    mr: open ? 3 : 'auto',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <ListAltIcon />
-                                            </ListItemIcon>
-                                        </Tooltip>
-
-                                        {open && (
-                                            <ListItemText
-                                                primary='Orders'
-                                                sx={{ opacity: 1 }}
-                                            />
-                                        )}
-                                    </ListItemButton>
-                                    <ListItemButton
-                                        onClick={() => handleListItemClick('Notifications')}
-                                        sx={{
-                                            minHeight: 48,
-                                            justifyContent: open ? 'initial' : 'center',
-                                            px: 2.5,
-                                        }}
-                                    >
-                                        <Tooltip title='Notifications'>
-                                            <ListItemIcon
-                                                sx={{
-                                                    minWidth: 0,
-                                                    mr: open ? 3 : 'auto',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <CircleNotificationsIcon />
-                                            </ListItemIcon>
-                                        </Tooltip>
-
-                                        {open && (
-                                            <ListItemText
-                                                primary='Notifications'
-                                                sx={{ opacity: 1 }}
-                                            />
-                                        )}
-                                    </ListItemButton>
-                                </ListItem>
+                            <List disablePadding sx={{ display: 'block' }}>
+                                {renderListItemButton('Dashboard', <DashboardIcon />, 'Dashboard')}
+                                {renderListItemButton('Admin', <AccountBoxIcon />, 'Admin')}
+                                {renderListItemButton('User Profile', <PeopleIcon />, 'User Profile')}
+                                {renderListItemButton('Courses', <MenuBookIcon />, 'Courses')}
+                                {renderListItemButton('Orders', <ListAltIcon />, 'Orders')}
+                                {renderListItemButton('Notifications', <CircleNotificationsIcon />, 'Notifications')}
                             </List>
                             <Divider sx={{ border: 1 }} />
                             <List sx={{ marginTop: 'auto', overflow: 'hidden' }}>
-                                <ListItemButton
-                                    onClick={() => handleListItemClick('Profile')}
-                                    sx={{
-                                        minHeight: 48,
-                                        justifyContent: open ? 'initial' : 'center',
-                                        px: 2.5,
-                                    }}
-                                >
-                                    <Tooltip title='Profile'>
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : 'auto',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            <AccountCircleIcon />
-                                        </ListItemIcon>
-                                    </Tooltip>
-
-                                    {open && (
-                                        <ListItemText
-                                            primary='Profile'
-                                            sx={{ opacity: 1 }}
-                                        />
-                                    )}
-                                </ListItemButton>
-                                <ListItemButton
-                                    onClick={() => handleListItemClick('Settings')}
-                                    sx={{
-                                        minHeight: 48,
-                                        justifyContent: open ? 'initial' : 'center',
-                                        px: 2.5,
-                                    }}
-                                >
-                                    <Tooltip title='Settings'>
-                                        <ListItemIcon
-                                            sx={{
-                                                minWidth: 0,
-                                                mr: open ? 3 : 'auto',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            <SettingsIcon />
-                                        </ListItemIcon>
-                                    </Tooltip>
-
-                                    {open && (
-                                        <ListItemText
-                                            primary='Settings'
-                                            sx={{ opacity: 1 }}
-                                        />
-                                    )}
-                                </ListItemButton>
+                                {renderListItemButton('Profile', <AccountCircleIcon />, 'Profile')}
+                                {renderListItemButton('Settings', <SettingsIcon />, 'Settings')}
                             </List>
                         </Drawer>
 
@@ -473,6 +288,7 @@ const AdminDashboard = () => {
                             height: '100vh',
                             overflow: 'auto',
                         }}>
+                            <LoadingBar color="#f11946" ref={ref} shadow={true} />
                             <DashboardContent
                                 user={user}
                                 selectedItem={selectedItem}
