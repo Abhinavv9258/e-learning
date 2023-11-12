@@ -124,9 +124,9 @@ const Section4 = () => {
                     <Slider {...settings} style={{ display: 'flex', alignItems: 'center' }}>
                         {/* {course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)} */}
                         {!loading
-                            ? course?.map((el) =>
+                            ? course?.map((el,i) =>
                                 (el.category === 'Web Development' || el.category === 'Development') &&
-                                (<CourseCard {...el} loading={loading} key={el._id} />)
+                                (<CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
 
                             )
                             : arr.map((el, i) => <LoadingComponent key={i} />)

@@ -41,7 +41,7 @@ const Section3 = () => {
         slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 0,
-        autoplay: true,
+        // autoplay: true,
         speed: 2000,
         autoplaySpeed: 3000,
         cssEase: 'linear',

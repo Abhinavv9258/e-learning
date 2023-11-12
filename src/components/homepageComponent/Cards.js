@@ -7,26 +7,128 @@ import {
     Card,
     CardContent,
     CardMedia,
-    Typography
+    Typography,
+    Box
 } from '@mui/material';
 
 import '../loadingComponent/LoadingComponent.css';
 
 import LoadingComponent from '../loadingComponent/LoadingComponent';
 import ViewCourse from '../modals/ViewCourse';
+import LoginPopUp from "../modals/LoginPopUp";
+
+import { URL } from '../../App';
+
+import { useApp } from '../../context/AuthContext'
+
+// importing toast
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { TbDiscountCheckFilled } from "react-icons/tb";
 
 
 
-const CourseCard = ({ course, thumbnail, subCategory, title, category, loading }) => {
+const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, price }) => {
     const [modal, setModal] = React.useState(false);
     const thumbnailData = JSON.parse(thumbnail);
     const base64Thumbnail = thumbnailData.base64;
-    const[courseDetails, setCourseDetails] = React.useState();
+    const [courseDetails, setCourseDetails] = React.useState();
 
     const toggleCourse = () => {
         setCourseDetails(course);
         setModal(!modal);
     }
+
+    const { user } = useApp();
+
+    const addCourseToUser = async () => {
+        const courseId = course._id;
+        console.log(course);
+        const token = localStorage.getItem('access_token');
+        try {
+            const url = `${URL}/api/users/add-course/${user._id}`;
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                credentials: 'include',
+                body: JSON.stringify({ courseId }),
+            };
+
+            const response = await fetch(url, requestOptions);
+
+            if (response.ok) {
+                const data = await response.json();
+                toast.success(`${data.message}`, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+            } else if (response.status === 400) {
+                const data = await response.json();
+                toast.warning(`${data.message}`, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+            } else {
+                toast.error(`Failed to add course!`, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                console.error('Failed to add course:', response.statusText);
+            }
+        } catch (error) {
+            toast.error(`Error adding course!`, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            });
+            console.error('Error adding course:', error);
+        }
+    };
+
+    const [isCourseAdded, setIsCourseAdded] = React.useState(false);
+
+    const checkCourse = async () => {
+        console.log(course.title);
+        try {
+            const token = localStorage.getItem('access_token');
+            const url = `${URL}/api/users/check-course/${user._id}`;
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                credentials: 'include',
+                body: JSON.stringify({ courseId: course._id }),
+            };
+
+            const response = await fetch(url, requestOptions);
+
+            if (response.ok) {
+                setIsCourseAdded(true);
+            } else {
+                setIsCourseAdded(false);
+            }
+        } catch (error) {
+            console.error('Error checking course:', error);
+        }
+    }
+    React.useEffect(() => {
+        if (user) {
+            checkCourse();
+        }
+        // eslint-disable-next-line
+    }, []);
+
+    const [loginPopUp, setLoginPopUp] = React.useState(false);
+
+    const toggle = () => {
+        setLoginPopUp(!loginPopUp);
+    };
+
 
     return (
         <>
@@ -40,7 +142,7 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading }
                         <Card className="course-card"
                             sx={{ m: 2, p: 2, boxShadow: 3, height: 380, maxWidth: 300 }}
                         >
-                            <CardHeader sx={{height:'160px', p:0}}
+                            <CardHeader sx={{ height: '160px', p: 0 }}
                                 title={
                                     <CardMedia
                                         component="img"
@@ -49,7 +151,7 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading }
                                         style={{
                                             objectFit: 'cover',
                                             borderRadius: '5px',
-                                            border:'1px solid '
+                                            border: '1px solid '
                                         }}
                                     />
                                 }
@@ -81,12 +183,64 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading }
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary" onClick={toggleCourse}>
-                                    Share
-                                </Button>
+                                {/* <Button size="small" color="primary" onClick={toggleCourse}>
+                                    View
+                                </Button> */}
+                                {user && isCourseAdded ? (
+                                    <Button size="small" color="primary" onClick={toggleCourse}>
+                                        View Course
+                                    </Button>
+                                ) : user ? (
+                                    <>
+                                        <Button size="small" color="primary" onClick={addCourseToUser}>
+                                            Add Course
+                                        </Button>
+                                        {price === 0 ? (
+                                            <>
+                                                <Button variant="contained" color="success">
+                                                    <Box><TbDiscountCheckFilled size={20} /> FREE</Box>
+                                                </Button>
+
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Button variant="contained" color="primary">
+                                                    <Box><TbDiscountCheckFilled size={20} />{price}</Box>
+                                                </Button>
+                                            </>
+                                        )}
+                                    </>
+
+                                ) : (
+                                    <>
+                                        <Button size="small" color="primary" onClick={toggle}>
+                                            Add Course
+                                        </Button>
+                                        {price === 0 ? (
+                                            <>
+                                                <Button variant="contained" color="success">
+                                                    <Box><TbDiscountCheckFilled size={20} /> FREE</Box>
+                                                </Button>
+
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Button variant="contained" color="primary">
+                                                    <Box><TbDiscountCheckFilled size={20} />{price}</Box>
+                                                </Button>
+                                            </>
+                                        )}
+                                    </>
+
+                                )}
+
                             </CardActions>
                         </Card>
-
+                        <LoginPopUp
+                            open={loginPopUp}
+                            onClose={toggle}
+                            setLoginPopUp={setLoginPopUp}
+                        />
                         <ViewCourse modal={modal} courseDetails={courseDetails} toggleCourse={toggleCourse} />
                     </>
                 )}
