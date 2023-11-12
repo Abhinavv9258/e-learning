@@ -1,4 +1,5 @@
 const userModel = require("../models/Users.model.js");
+const courseModel = require("../models/Courses.model.js");
 const { createError } = require('../utils/error.js');
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
@@ -156,4 +157,77 @@ const getAllUsers = async (req, res, next) => {
 };
 
 
-module.exports = { register, login, createUser, updateUser, deleteUser, getUser, getAllUsers };
+const addCourse = async (req, res, next) => {
+    const userId = req.params.id;
+    const { courseId } = req.body;
+
+    try {
+        const user = await userModel.findById(userId);
+        const course = await courseModel.findById(courseId);
+
+        if (user && course) {
+            const alreadyEnrolled = user.courseEnrolled.some(enrolledCourse => enrolledCourse.equals(course._id));
+            if (alreadyEnrolled) {
+                return next(createError(400, "Course already added to the user!"));
+            }
+            user.courseEnrolled.push(course);
+            await user.save();
+            res.status(200).json({ message: 'Course added to user successfully!' });
+        } else {
+            res.status(404).json({ error: 'User or course not found!' });
+        }
+    } catch (error) {
+        // res.status(500).json({ error: 'Internal server error' });
+        next(error);
+    }
+}
+
+const checkCourse = async (req, res, next) => {
+    const userId = req.params.id;
+    const { courseId } = req.body;
+
+    try {
+        const user = await userModel.findById(userId);
+
+        if (user) {
+
+            const isCourseAdded = user.courseEnrolled.includes(courseId);
+
+            if (isCourseAdded) {
+                next(createError(200, "Course is already added!"))
+                // res.status(200).json({ message: 'Course is already added' });
+            } else {
+                next(createError(404, "Course is not added!"))
+                // res.status(404).json({ message: 'Course is not added' });
+            }
+        } else {
+            next(createError(404, "User not found!"))
+            // res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        next(error);
+        // res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+const enrolledCourse = async (req, res, next) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await userModel.findById(userId).populate('courseEnrolled');
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const enrolledCourseIds = user.courseEnrolled.map(course => course._id);
+
+        res.status(200).json({ enrolledCourseIds });
+    } catch (error) {
+        console.error('Error fetching user enrolled courses:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+module.exports = { register, login, createUser, updateUser, deleteUser, getUser, getAllUsers, addCourse, checkCourse, enrolledCourse };

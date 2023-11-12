@@ -6,7 +6,10 @@ const {
     updateUser,
     deleteUser,
     getUser,
-    getAllUsers
+    getAllUsers,
+    addCourse,
+    checkCourse,
+    enrolledCourse
 } = require('../controllers/users.controllers.js')
 
 const { verifyToken, verifyUser, verifyAdmin } = require('../utils/verifyToken.js')
@@ -59,7 +62,7 @@ userRoutes.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {
 //CREATE
 // userRoutes.post("/", createUser);
 
-// user authentication
+// User Authentication
 userRoutes.post('/register', register);
 userRoutes.post('/login', login);
 
@@ -75,5 +78,14 @@ userRoutes.get("/:id", verifyUser, getUser);
 //GET ALL
 userRoutes.get("/", verifyAdmin, getAllUsers);
 
+
+//ADD Course Details to User
+userRoutes.post("/add-course/:id", verifyUser, addCourse);
+
+//CHECK Course Details
+userRoutes.post("/check-course/:id", verifyUser, checkCourse);
+
+// FETCH User Course Details
+userRoutes.get('/:id/enrolled-courses', verifyUser, enrolledCourse);
 
 module.exports = { userRoutes };
