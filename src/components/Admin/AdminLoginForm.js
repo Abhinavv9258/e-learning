@@ -72,11 +72,9 @@ const AdminLoginForm = () => {
                     try {
                         const res = await data.json();
                         if (res && res.user && res.token) {
-                            setUser({
-                                username: res.user.username,
-                                token: res.token,
-                                _id: res.user._id,
-                            });
+                            setUser(
+                                res.user
+                            );
                             toast.success(`Admin Logged In! Welcome, ${res.user.username}`, {
                                 position: toast.POSITION.TOP_RIGHT,
                                 autoClose: 3000,
@@ -84,6 +82,7 @@ const AdminLoginForm = () => {
 
                             localStorage.setItem('access_token', res.token);
                             navigate('/admin-dashboard');
+                            // window.location.reload();
                         } else {
                             console.error('Unexpected response structure:', res);
                             toast.error('An error occurred during login. Please try again later.', {

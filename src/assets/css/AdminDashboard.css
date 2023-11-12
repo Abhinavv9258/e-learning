@@ -1,0 +1,14 @@
+/* Dashboard */
+
+@media(max-width:860px) {
+    .count-sub-box {
+    flex-direction: column !important;
+    }
+}
+
+
+@media(max-width:1200px) {
+    .count-sub-box-2 {
+        flex-direction: column !important;
+    }
+}

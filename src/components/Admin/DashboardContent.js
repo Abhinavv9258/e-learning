@@ -13,6 +13,8 @@ import Profile from './Contents/Profile'
 import Settings from './Contents/Settings'
 // import Default from './Contents/Default'
 
+import LoadingBar from 'react-top-loading-bar'
+
 import { URL } from '../../App';
 
 const DashboardContent = ({ user, DrawerHeader, selectedItem, setSelectedItem }) => {
@@ -125,7 +127,11 @@ const DashboardContent = ({ user, DrawerHeader, selectedItem, setSelectedItem })
         // eslint-disable-next-line
     }, [user])
 
+    // for top loading bar
+    const ref = React.useRef(null);
+
     const toDashboard = () =>{
+        ref.current.complete();
         setSelectedItem("Dashboard");
         localStorage.setItem("selectedItem", JSON.stringify("Dashboard"));
     }
@@ -175,6 +181,7 @@ const DashboardContent = ({ user, DrawerHeader, selectedItem, setSelectedItem })
     return (
         <>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <LoadingBar color="#f11946" ref={ref} shadow={true} />
                 <DrawerHeader />
                 {renderContent()}
             </Box>

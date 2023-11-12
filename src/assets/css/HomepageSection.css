@@ -5,7 +5,7 @@
 
 .course-card:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) !important;
     cursor: pointer;
 }
 
@@ -262,12 +262,31 @@
 
 /* Section 3 */
 
-.slick-arrow{
-    height:fit-content;
+.slick-arrow {
+    height: fit-content;
     margin: 5px;
 }
 
 .slick-prev-arrow,
-.slick-next-arrow{
+.slick-next-arrow {
     padding: 3%;
+}
+
+
+/* course-list */
+.course-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; */
+    margin: 20px;
+}
+
+.course-card {
+    margin: 20px;
+    padding: 20px;
+    height: 380px;
+    max-width: 300px;
+    box-shadow: 0 0 5px #939598 !important;
 }

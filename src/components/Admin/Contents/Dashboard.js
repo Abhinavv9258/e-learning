@@ -4,7 +4,7 @@ import { PieChart, BarChart } from '@mui/x-charts';
 import Groups2Icon from '@mui/icons-material/Groups2';
 
 import * as React from 'react';
-
+import '../../../assets/css/AdminDashboard.css'
 
 const Dashboard = ({ courseCountData, userCountData, courseTableData, user }) => {
 
@@ -33,74 +33,81 @@ const Dashboard = ({ courseCountData, userCountData, courseTableData, user }) =>
                         Dashboard Content:
                     </Typography>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                        <Card sx={{ m: 1, width: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                            <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
-                                <Box className='dashboard-logo-1'>
-                                    <Groups2Icon sx={{ color: '#36A3EA', fontSize: 48 }} />
+                    <Box className='count-box' sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                        <Box className='count-sub-box' sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                            <Card sx={{ m: 1, minWidth: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
+                                    <Box className='dashboard-logo-1'>
+                                        <Groups2Icon sx={{ color: '#36A3EA', fontSize: 48 }} />
+                                    </Box>
                                 </Box>
-                            </Box>
-                            <Divider sx={{ border: 1, height: '80%', alignItems: 'center' }} />
-                            <Box sx={{ width: '60%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography>
-                                    Admin
-                                </Typography>
-                                <Typography>
-                                    {userCountData.adminCount}
-                                </Typography>
-                            </Box>
-                        </Card>
-                        <Card sx={{ m: 1, width: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                            <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
-                                <Box className='dashboard-logo-2' >
-                                    <Groups2Icon sx={{ color: '#FFCE56', fontSize: 48 }} />
+                                <Divider sx={{ border: 1, height: '80%', alignItems: 'center' }} />
+                                <Box sx={{ width: '60%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                                    <Typography>
+                                        Admin
+                                    </Typography>
+                                    <Typography>
+                                        {userCountData.adminCount}
+                                    </Typography>
                                 </Box>
-                            </Box>
-                            <Divider sx={{ border: 1, height: '80%', alignItems: 'center' }} />
-                            <Box sx={{ width: '60%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography>
-                                    Students
-                                </Typography>
-                                <Typography>
-                                    {userCountData.userCount - userCountData.adminCount}
-                                </Typography>
-                            </Box>
-                        </Card>
-                        <Card sx={{ m: 1, width: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                            <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
-                                <Box className='dashboard-logo-3'>
-                                    <Groups2Icon sx={{ color: '#BFAEC1', fontSize: 48 }} />
+                            </Card>
+
+                            <Card sx={{ m: 1, minWidth: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
+                                    <Box className='dashboard-logo-2' >
+                                        <Groups2Icon sx={{ color: '#FFCE56', fontSize: 48 }} />
+                                    </Box>
                                 </Box>
-                            </Box>
-                            <Divider sx={{ border: 1, height: '80%', alignItems: 'center' }} />
-                            <Box sx={{ width: '60%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography>
-                                    Courses
-                                </Typography>
-                                <Typography>
-                                    {courseTableData && courseTableData.length}
-                                </Typography>
-                            </Box>
-                        </Card>
-                        <Card sx={{ m: 1, width: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                            <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
-                                <Box className='dashboard-logo-4'>
-                                    <Groups2Icon sx={{ color: '#F76363', fontSize: 48 }} />
+                                <Divider sx={{ border: 1, height: '80%', alignItems: 'center' }} />
+                                <Box sx={{ width: '60%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                                    <Typography>
+                                        Students
+                                    </Typography>
+                                    <Typography>
+                                        {userCountData.userCount - userCountData.adminCount}
+                                    </Typography>
                                 </Box>
-                            </Box>
-                            <Divider sx={{ border: 1, height: '80%', alignItems: 'center' }} />
-                            <Box sx={{ width: '60%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                                <Typography>
-                                    Orders
-                                </Typography>
-                                <Typography>
-                                    0
-                                </Typography>
-                            </Box>
-                        </Card>
+                            </Card>
+                        </Box>
+                        <Box className='count-sub-box' sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                            <Card sx={{ m: 1, minWidth: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
+                                    <Box className='dashboard-logo-3'>
+                                        <Groups2Icon sx={{ color: '#BFAEC1', fontSize: 48 }} />
+                                    </Box>
+                                </Box>
+                                <Divider sx={{ border: 1, height: '80%', alignItems: 'center' }} />
+                                <Box sx={{ width: '60%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                                    <Typography>
+                                        Courses
+                                    </Typography>
+                                    <Typography>
+                                        {courseTableData && courseTableData.length}
+                                    </Typography>
+                                </Box>
+                            </Card>
+
+                            <Card sx={{ m: 1, minWidth: 335, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                <Box sx={{ width: '40%', display: 'flex', justifyContent: 'center' }}>
+                                    <Box className='dashboard-logo-4'>
+                                        <Groups2Icon sx={{ color: '#F76363', fontSize: 48 }} />
+                                    </Box>
+                                </Box>
+                                <Divider sx={{ border: 1, height: '80%', alignItems: 'center' }} />
+                                <Box sx={{ width: '60%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                                    <Typography>
+                                        Orders
+                                    </Typography>
+                                    <Typography>
+                                        0
+                                    </Typography>
+                                </Box>
+                            </Card>
+                        </Box>
                     </Box>
-                    <Box sx={{ m: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Card sx={{ width: '49%' }}>
+
+                    <Box className='count-sub-box' sx={{ m: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Card sx={{ minWidth: '49%' }}>
                             <PieChart
                                 series={[
                                     {
@@ -112,7 +119,7 @@ const Dashboard = ({ courseCountData, userCountData, courseTableData, user }) =>
                                 height={200}
                             />
                         </Card>
-                        <Card sx={{ width: '49%' }}>
+                        <Card sx={{ minWidth: '49%' }}>
                             <PieChart
                                 series={[
                                     {
@@ -125,8 +132,9 @@ const Dashboard = ({ courseCountData, userCountData, courseTableData, user }) =>
                             />
                         </Card>
                     </Box>
-                    <Box sx={{ m: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Card sx={{ width: "49%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
+                    <Box className='count-sub-box-2' sx={{ m: 1, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Card sx={{ minWidth: "49%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <PieChart
                                 series={[
                                     {
@@ -138,7 +146,7 @@ const Dashboard = ({ courseCountData, userCountData, courseTableData, user }) =>
                                 height={200}
                             />
                         </Card>
-                        <Card sx={{ width: '49%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Card sx={{ minWidth: '49%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <BarChart
                                 xAxis={[
                                     {
