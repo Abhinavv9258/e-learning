@@ -111,9 +111,57 @@ const AppBar = styled(MuiAppBar, {
 }),
 );
 
+// for drawer list option
+const renderListItemButton = (text, icon, title, open, handleListItemClick) => {
+    return (
+        <ListItemButton
+            onClick={() => handleListItemClick(text)}
+            sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+            }}
+        >
+            {open && (
+                <ListItemIcon
+                    sx={{
+                        minWidth: 0,
+                        mr: 3,
+                        justifyContent: 'center',
+                    }}
+                >
+                    {icon}
+                </ListItemIcon>
+            )}
+
+            {!open && (
+                <Tooltip title={title} placement="right">
+                    <ListItemIcon
+                        sx={{
+                            minWidth: 0,
+                            mr: 'auto',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        {icon}
+                    </ListItemIcon>
+                </Tooltip>
+
+            )}
+
+            {open && (
+                <ListItemText
+                    primary={text}
+                    sx={{ opacity: 1 }}
+                />
+            )}
+        </ListItemButton>
+    );
+};
 
 
-const AdminDashboard = () => { 
+
+const AdminDashboard = () => {
 
     const navigate = useNavigate();
     const { user, setUser } = useApp();
@@ -129,7 +177,7 @@ const AdminDashboard = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     // for side drawer
-    const handleDrawer = () => {
+    const toggleDrawer = () => {
         setOpen(!open);
     };
 
@@ -143,12 +191,14 @@ const AdminDashboard = () => {
     };
 
     const handleProfile = () => {
+        ref.current.complete();
         setSelectedItem("Profile");
         localStorage.setItem("selectedItem", JSON.stringify("Profile"));
     };
 
     const handleLogout = () => {
         setUser(null);
+        ref.current.complete();
         localStorage.removeItem('access_token');
         localStorage.removeItem('selectedItem');
         toast.success('Successfully Logged Out');
@@ -156,153 +206,113 @@ const AdminDashboard = () => {
     }
 
     // for drawer list option
-    const renderListItemButton = (text, icon, title) => {
-        return (
-            <ListItemButton
-                onClick={() => handleListItemClick(text)}
-                sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                }}
-            >
-                {open && (
-                    <ListItemIcon
-                        sx={{
-                            minWidth: 0,
-                            mr: 3,
-                            justifyContent: 'center',
-                        }}
-                    >
-                        {icon}
-                    </ListItemIcon>
-                )}
-
-                {!open && (
-                    <Tooltip title={title} placement="right">
-                        <ListItemIcon
-                            sx={{
-                                minWidth: 0,
-                                mr: 'auto',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            {icon}
-                        </ListItemIcon>
-                    </Tooltip>
-
-                )}
-
-                {open && (
-                    <ListItemText
-                        primary={text}
-                        sx={{ opacity: 1 }}
-                    />
-                )}
-            </ListItemButton>
-        );
-    };
-
     const handleListItemClick = (text) => {
         setSelectedItem(text);
         ref.current.complete();
         localStorage.setItem("selectedItem", JSON.stringify(text));
     };
 
-    
-
+    React.useEffect(() => {
+        if (user && (!user.isAdmin)) {
+            toast.error('You are not authorized!');
+            navigate('/');
+        }
+    });
 
     return (
         <>
-            {user ? (
-                <>
-                    <Box style={{ display: 'flex' }}>
-                        <CssBaseline />
-                        {/* App bar */}
-                        <AppBar position='fixed' open={open}>
-                            <Toolbar sx={{ justifyContent: 'space-between' }}>
-                                <Box style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <IconButton
-                                        color="inherit"
-                                        aria-label="open drawer"
-                                        onClick={handleDrawer}
-                                        edge="start"
-                                    >
-                                        <MenuIcon />
-                                    </IconButton>
-                                    <Typography variant="h6" noWrap component="div" sx={{ display: 'flex', alignItems: 'center' }}>
-                                        Admin Dashboard
-                                    </Typography>
-                                </Box>
-                                <Box style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <ListItemButton
-                                        onClick={handleClick}
-                                        aria-controls="user-menu"
-                                        aria-haspopup="true"
-                                    >
-                                        <AccountCircleIcon style={{ marginRight: 10 }} />
-                                        <Typography>
-                                            {
-                                                user.username.charAt(0).toUpperCase() + user.username.slice(1)
-                                            }
+            {user && (
+                user.isAdmin ? (
+                    <>
+                        <Box style={{ display: 'flex' }}>
+                            <CssBaseline />
+                            {/* App bar */}
+                            <AppBar position='fixed' open={open}>
+                                <Toolbar sx={{ justifyContent: 'space-between' }}>
+                                    <Box style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <IconButton
+                                            color="inherit"
+                                            aria-label="open drawer"
+                                            onClick={toggleDrawer}
+                                            edge="start"
+                                        >
+                                            <MenuIcon />
+                                        </IconButton>
+                                        <Typography variant="h6" noWrap component="div" sx={{ display: 'flex', alignItems: 'center' }}>
+                                            Admin Dashboard
                                         </Typography>
-                                    </ListItemButton>
-                                    <Menu
-                                        id="user-menu"
-                                        anchorEl={anchorEl}
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleClose}
-                                    >
-                                        <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                                    </Menu>
-                                </Box>
-                            </Toolbar>
-                        </AppBar>
+                                    </Box>
+                                    <Box style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <ListItemButton
+                                            onClick={handleClick}
+                                            aria-controls="user-menu"
+                                            aria-haspopup="true"
+                                        >
+                                            <AccountCircleIcon style={{ marginRight: 10 }} />
+                                            <Typography>
+                                                {
+                                                    user.username.charAt(0).toUpperCase() + user.username.slice(1)
+                                                }
+                                            </Typography>
+                                        </ListItemButton>
+                                        <Menu
+                                            id="user-menu"
+                                            anchorEl={anchorEl}
+                                            open={Boolean(anchorEl)}
+                                            onClose={handleClose}
+                                            style={{ marginTop: '14px' }}
+                                        >
+                                            <MenuItem style={{ width:'110px' }} onClick={handleProfile}>Profile</MenuItem>
+                                            <MenuItem style={{ width:'110px' }} onClick={handleLogout}>Logout</MenuItem>
+                                        </Menu>
+                                    </Box>
+                                </Toolbar>
+                            </AppBar>
 
-                        {/* Drawer */}
-                        <Drawer variant='permanent' open={open}>
-                            <DrawerHeader />
-                            <List disablePadding sx={{ display: 'block' }}>
-                                {renderListItemButton('Dashboard', <DashboardIcon />, 'Dashboard')}
-                                {renderListItemButton('Admin', <AccountBoxIcon />, 'Admin')}
-                                {renderListItemButton('User Profile', <PeopleIcon />, 'User Profile')}
-                                {renderListItemButton('Courses', <MenuBookIcon />, 'Courses')}
-                                {renderListItemButton('Orders', <ListAltIcon />, 'Orders')}
-                                {renderListItemButton('Notifications', <CircleNotificationsIcon />, 'Notifications')}
-                            </List>
-                            <Divider sx={{ border: 1 }} />
-                            <List sx={{ marginTop: 'auto', overflow: 'hidden' }}>
-                                {renderListItemButton('Profile', <AccountCircleIcon />, 'Profile')}
-                                {renderListItemButton('Settings', <SettingsIcon />, 'Settings')}
-                            </List>
-                        </Drawer>
+                            {/* Drawer */}
+                            <Drawer variant='permanent' open={open}>
+                                <DrawerHeader />
+                                <List disablePadding sx={{ display: 'block' }}>
+                                    {renderListItemButton('Dashboard', <DashboardIcon />, 'Dashboard', open, handleListItemClick)}
+                                    {renderListItemButton('Admin', <AccountBoxIcon />, 'Admin', open, handleListItemClick)}
+                                    {renderListItemButton('User Profile', <PeopleIcon />, 'User Profile', open, handleListItemClick)}
+                                    {renderListItemButton('Courses', <MenuBookIcon />, 'Courses', open, handleListItemClick)}
+                                    {renderListItemButton('Orders', <ListAltIcon />, 'Orders', open, handleListItemClick)}
+                                    {renderListItemButton('Notifications', <CircleNotificationsIcon />, 'Notifications', open, handleListItemClick)}
+                                </List>
+                                <Divider sx={{ border: 1 }} />
+                                <List sx={{ marginTop: 'auto', overflow: 'hidden' }}>
+                                    {renderListItemButton('Profile', <AccountCircleIcon />, 'Profile', open, handleListItemClick)}
+                                    {renderListItemButton('Settings', <SettingsIcon />, 'Settings', open, handleListItemClick)}
+                                </List>
+                            </Drawer>
 
-                        {/* Content */}
-                        <Box sx={{
-                            backgroundColor: (theme) =>
-                                theme.palette.mode === 'light'
-                                    ? theme.palette.grey[100]
-                                    : theme.palette.grey[900],
-                            flexGrow: 1,
-                            height: '100vh',
-                            overflow: 'auto',
-                        }}>
-                            <LoadingBar color="#f11946" ref={ref} shadow={true} />
-                            <DashboardContent
-                                user={user}
-                                selectedItem={selectedItem}
-                                DrawerHeader={DrawerHeader}
-                                setSelectedItem={setSelectedItem}
-                            />
+                            {/* Content */}
+                            <Box sx={{
+                                backgroundColor: (theme) =>
+                                    theme.palette.mode === 'light'
+                                        ? theme.palette.grey[100]
+                                        : theme.palette.grey[900],
+                                flexGrow: 1,
+                                height: '100vh',
+                                overflow: 'auto',
+                            }}>
+                                <LoadingBar color="#f11946" ref={ref} shadow={true} />
+                                <DashboardContent
+                                    user={user}
+                                    selectedItem={selectedItem}
+                                    DrawerHeader={DrawerHeader}
+                                    setSelectedItem={setSelectedItem}
+                                />
+                            </Box>
                         </Box>
-                    </Box>
-                </>
-            ) : (
-                <>
-                </>
-            )}
-
+                    </>
+                ) : (
+                    <>
+                    </>
+                )
+            )
+            }
         </>
     );
 };

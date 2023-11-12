@@ -107,7 +107,7 @@ const NavbarComponent = ({ toggleBackground }) => {
 
                     <Navbar.Collapse id='responsive-navbar-nav'>
                         <Nav className='me-auto'>
-                            <Navbar.Brand style={{ marginBottom: "5px"}}>
+                            <Navbar.Brand style={{ marginBottom: "5px" }}>
                                 <Link className='navbar-brand-link' to='/'>
                                     <img src={logo} className='e-learn-logo' alt='logo' />
                                     E-Learn
@@ -115,19 +115,19 @@ const NavbarComponent = ({ toggleBackground }) => {
                             </Navbar.Brand>
                             <Nav.Link className='navbar-link' as={Link} to='/homepage'>Home</Nav.Link>
                             <Nav.Link className='navbar-link' as={Link} to='/'>About Us</Nav.Link>
-                            <NavDropdown style={{ display: 'flex', flexDirection:'column',justifyContent:'center', alignItems:'flex-start' }} className='navbar-link-dropdown' title='Courses' id='basic-nav-dropdown' >
-                                    <div>
-                                        <NavDropdown.Item className='nav-dropdown-item'>
-                                            <Link className='navbar-action-link' to='/homepage#section4'>
-                                                All Courses
-                                            </Link>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item className='nav-dropdown-item'>Something</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item className='nav-dropdown-item'>
-                                            Separated link
-                                        </NavDropdown.Item>
-                                    </div>
+                            <NavDropdown style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }} className='navbar-link-dropdown' title='Courses' id='basic-nav-dropdown' >
+                                <div>
+                                    <NavDropdown.Item className='nav-dropdown-item'>
+                                        <Link className='navbar-action-link' to='/homepage#section4'>
+                                            All Courses
+                                        </Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-dropdown-item'>Something</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item className='nav-dropdown-item'>
+                                        Separated link
+                                    </NavDropdown.Item>
+                                </div>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
@@ -162,8 +162,8 @@ const NavbarComponent = ({ toggleBackground }) => {
                                     }
                                     id='user-dropdown'
                                 >
-                                    <NavDropdown.Item className='nav-dropdown-item'>Profile</NavDropdown.Item>
-                                    <NavDropdown.Item className='nav-dropdown-item' onClick={handleLogout}>Logout</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-dropdown-item' style={{ width: '200px' }}>Profile</NavDropdown.Item>
+                                    <NavDropdown.Item className='nav-dropdown-item' style={{ width: '200px' }} onClick={handleLogout}>Logout</NavDropdown.Item>
                                 </NavDropdown>
                             </Navbar.Brand>
                         </Button>
