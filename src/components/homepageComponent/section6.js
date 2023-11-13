@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import Slider from 'react-slick';
-import { Typography, IconButton } from '@mui/material';
+import { Typography, IconButton, Box } from '@mui/material';
 import CourseCard from './Cards';
 import LoadingComponent from '../loadingComponent/LoadingComponent';
+import '../../assets/css/HomepageSection.css'
 import { URL } from '../../App'
 import { useApp } from '../../context/AuthContext';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
@@ -37,14 +38,16 @@ const Section6 = () => {
     const arr = [1, 2, 3, 4];
 
     var settings = {
-        swipe: false,
+        // swipe: false,
+        swipeToSlide: true,
         dots: true,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 0,
-        // autoplay: true,
+        autoplay: true,
         speed: 2000,
+        draggable: true,
         autoplaySpeed: 3000,
         cssEase: 'linear',
         nextArrow: <NextArrow />,
@@ -146,21 +149,19 @@ const Section6 = () => {
 
     return (
         <>
-            <div style={{ padding: '5%' }}>
-                <div>
-                    <Typography variant='h5'>
-                        My Course Details:
-                    </Typography>
-                    <Slider {...settings} style={{ display: 'flex', alignItems: 'center' }}>
-                        {!loading
-                            ? course
-                                .filter((el) => userCourses.includes(el._id))
-                                .map((el, i) => <CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
-                            : arr.map((el, i) => <LoadingComponent key={i} />)
-                        }
-                    </Slider>
-                </div>
-            </div>
+            <Box style={{ padding: '2%' }} sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Typography variant='h5'>
+                    My Course Details:
+                </Typography>
+                <Slider {...settings}>
+                    {!loading
+                        ? course
+                            .filter((el) => userCourses.includes(el._id))
+                            .map((el, i) => <CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
+                        : arr.map((el, i) => <LoadingComponent key={i} />)
+                    }
+                </Slider>
+            </Box>
         </>
     );
 };
