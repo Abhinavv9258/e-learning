@@ -8,10 +8,13 @@ import {
     CardContent,
     CardMedia,
     Typography,
-    Box
+    Box,
+    Divider,
 } from '@mui/material';
 
 import '../loadingComponent/LoadingComponent.css';
+
+import '../../assets/css/HomepageSection.css'
 
 import LoadingComponent from '../loadingComponent/LoadingComponent';
 import ViewCourse from '../modals/ViewCourse';
@@ -138,10 +141,8 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                         <LoadingComponent />
                     </>
                 ) : (
-                    <>
-                        <Card className="course-card"
-                            sx={{ m: 2, p: 2, boxShadow: 3, height: 380, maxWidth: 300 }}
-                        >
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Card className="course-card">
                             <CardHeader sx={{ height: '160px', p: 0 }}
                                 title={
                                     <CardMedia
@@ -158,7 +159,7 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                             />
 
                             <CardContent
-                                style={{ padding: 0, width: '250px' }}
+                                sx={{ padding: 0, width: '250px', height: '120px' }}
                             >
                                 <Typography
                                     fontSize="sm"
@@ -182,17 +183,19 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                                     {title}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
+                            <Divider sx={{ border: 1 }} />
+
+                            <CardActions sx={{ justifyContent: 'space-between' }}>
                                 {/* <Button size="small" color="primary" onClick={toggleCourse}>
                                     View
                                 </Button> */}
                                 {user && isCourseAdded ? (
-                                    <Button size="small" color="primary" onClick={toggleCourse}>
+                                    <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
                                         View Course
                                     </Button>
                                 ) : user ? (
                                     <>
-                                        <Button size="small" color="primary" onClick={addCourseToUser}>
+                                        <Button size="small" sx={{ color: '#970C10' }} onClick={addCourseToUser}>
                                             Add Course
                                         </Button>
                                         {price === 0 ? (
@@ -213,7 +216,7 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
 
                                 ) : (
                                     <>
-                                        <Button size="small" color="primary" onClick={toggle}>
+                                        <Button size="small" sx={{ color: '#970C10' }} onClick={toggle}>
                                             Add Course
                                         </Button>
                                         {price === 0 ? (
@@ -242,7 +245,7 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                             setLoginPopUp={setLoginPopUp}
                         />
                         <ViewCourse modal={modal} courseDetails={courseDetails} toggleCourse={toggleCourse} />
-                    </>
+                    </Box>
                 )}
 
 
