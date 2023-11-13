@@ -274,13 +274,9 @@
 
 
 /* course-list */
-.course-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly; */
-    margin: 20px;
+.slick-slider {
+    display: flex !important;
+    align-items: center !important;
 }
 
 .course-card {

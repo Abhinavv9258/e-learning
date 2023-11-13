@@ -124,14 +124,16 @@ const Homepage = ({ toggleBackground }) => {
     }, []);
 
     var settings = {
-        swipe: false,
+        // swipe: true,
+        swipeToSlide: true,
         dots: true,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 0,
         autoplay: true,
-        speed: 2000,
+        speed: 3000,
+        draggable: true,
         autoplaySpeed: 3000,
         cssEase: 'linear',
         responsive: [
@@ -179,104 +181,22 @@ const Homepage = ({ toggleBackground }) => {
             <Section2 id="section2" toggleBackground={toggleBackground} />
 
             {/* All Courses */}
-            {/* <Section3 id="section3" /> */}
+            <Section3 id="section3" />
 
             {/* Web Development Category Courses */}
-            {/* <Section4 id="section4" /> */}
+            <Section4 id="section4" />
 
             {/* Programming Language Category Courses */}
-            {/* <Section5 id="section5" />   */}
+            <Section5 id="section5" />  
 
             {/* User Registered Courses */}
-            {/* {user ? (
+            {user ? (
                 <>
                     <Section6 />
                 </>
             ) : (
                 null
-            )} */}
-
-            <Box style={{ padding: '5%' }}>
-                <Typography variant='h5'>
-                    Course Details:
-                </Typography>
-                <Slider {...settings}
-                    className='course-list'>
-                    {
-                        course?.map((el, i) =>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}
-                                {...el} course={course[i]} key={el._id} >
-                                <Card className="course-card">
-                                    <CardHeader sx={{ height: '160px', p: 0 }}
-                                        title={
-                                            <CardMedia
-                                                component="img"
-                                                alt={course[i].title}
-                                                image={JSON.parse(course[i].thumbnail).base64}
-                                                style={{
-                                                    objectFit: 'cover',
-                                                    borderRadius: '5px',
-                                                    border: '1px solid '
-                                                }}
-                                            />
-                                        }
-                                    />
-                                    <CardContent
-                                        sx={{ padding: 0, width: '250px', height: '120px' }}
-                                    >
-                                        <Typography
-                                            fontSize="sm"
-                                            fontWeight="bold"
-                                            color="#a7a7a7"
-                                            textTransform={"capitalize"}
-                                        >
-                                            {course[i].category}
-                                        </Typography>
-                                        <Typography
-                                            fontSize="sm"
-                                        >
-                                            {course[i].subCategory}
-                                        </Typography>
-                                        <Typography
-                                            fontSize="lg"
-                                            fontWeight="bold"
-                                            mb={2}
-                                            textTransform={"capitalize"}
-                                        >
-                                            {course[i].title}
-                                        </Typography>
-                                    </CardContent>
-                                    <Divider sx={{ border: 1 }} />
-                                    <CardActions sx={{ justifyContent: 'space-between' }}>
-                                        <Button
-                                            sx={{ color: '#970C10' }}
-                                            onClick={() => toggleCourse(course[i])}
-                                        >
-                                            View Course
-                                        </Button>
-                                        {course[i].price === 0 ? (
-                                            <>
-                                                <Button variant="contained" color="success">
-                                                    <Box><TbDiscountCheckFilled size={20} /> FREE</Box>
-                                                </Button>
-
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Button variant="contained" color="primary">
-                                                    <Box><TbDiscountCheckFilled size={20} />{course[i].price}</Box>
-                                                </Button>
-                                            </>
-                                        )}
-                                    </CardActions>
-                                </Card>
-                            </Box>)
-                    }
-                </Slider>
-            </Box>
-
-            <ViewCourse modal={modal} courseDetails={courseDetails} toggleCourse={toggleCourse} />
-
+            )}
 
             {/* Footer */}
             <Footer />
