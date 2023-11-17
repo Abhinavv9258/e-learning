@@ -186,16 +186,13 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                             <Divider sx={{ border: 1 }} />
 
                             <CardActions sx={{ justifyContent: 'space-between' }}>
-                                {/* <Button size="small" color="primary" onClick={toggleCourse}>
-                                    View
-                                </Button> */}
                                 {user && isCourseAdded ? (
                                     <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
                                         View Course
                                     </Button>
                                 ) : user ? (
                                     <>
-                                        <Button size="small" sx={{ color: '#970C10' }} onClick={addCourseToUser}>
+                                        <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
                                             Add Course
                                         </Button>
                                         {price === 0 ? (
@@ -213,7 +210,6 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                                             </>
                                         )}
                                     </>
-
                                 ) : (
                                     <>
                                         <Button size="small" sx={{ color: '#970C10' }} onClick={toggle}>
@@ -234,7 +230,6 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                                             </>
                                         )}
                                     </>
-
                                 )}
 
                             </CardActions>
