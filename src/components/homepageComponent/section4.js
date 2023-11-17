@@ -34,7 +34,7 @@ const Section4 = () => {
 
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState([]);
-    const arr = [1, 2, 3, 4];
+    const arr = [1, 2, 3, 4, 5];
 
     var settings = {
         // swipe: false,
@@ -83,7 +83,6 @@ const Section4 = () => {
         ],
     };
 
-
     const fetchData = () => {
         try {
             fetch(`${URL}/api/courses/`, {
@@ -125,17 +124,15 @@ const Section4 = () => {
                     Development Course Details:
                 </Typography>
                 <Slider {...settings}>
-                    {/* {course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)} */}
                     {!loading
-                        ? course?.map((el, i) =>
+                        ? course?.map(
+                            (el, i) =>
                             (el.category === 'Web Development' || el.category === 'Development') &&
                             (<CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
-
-                        )
-                        : arr.map((el, i) => <LoadingComponent key={i} />)
+                        ) : arr.map((el, i) => <LoadingComponent key={i} />)
                     }
                 </Slider>
-                \            </Box>
+            </Box>
         </>
     );
 };

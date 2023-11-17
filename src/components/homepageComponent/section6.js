@@ -35,7 +35,7 @@ const Section6 = () => {
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState([]);
     const [userCourses, setUserCourses] = useState([]);
-    const arr = [1, 2, 3, 4];
+    const arr = [1, 2, 3, 4, 5];
 
     var settings = {
         // swipe: false,
