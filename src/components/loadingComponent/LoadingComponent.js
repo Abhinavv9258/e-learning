@@ -15,7 +15,7 @@ const LoadingComponent = () => {
     return (
         <>
             <Card
-                sx={{ m: 2, p: 2, boxShadow: 3, height: 380 }}
+                sx={{ m: 2, p: 2, boxShadow: 3, height: 380}}
             >
                 <CardHeader
                     title={
