@@ -123,13 +123,13 @@ const Section3 = () => {
                 <Typography variant='h5'>
                     Course Details:
                 </Typography>
-                <Slider {...settings}>
+                <div {...settings} style={{display:'flex','flex-wrap':'wrap'}}>
                     {/* {course?.map((el) => <CourseCard {...el} loading={loading} key={el._id} />)} */}
                     {!loading
                         ? course?.map((el, i) => <CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
                         : arr.map((el, i) => <LoadingComponent key={i} />)
                     }
-                </Slider>
+                </div>
             </Box>
         </>
     );

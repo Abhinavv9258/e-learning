@@ -153,14 +153,14 @@ const Section6 = () => {
                 <Typography variant='h5'>
                     My Course Details:
                 </Typography>
-                <Slider {...settings}>
+                <div {...settings} style={{display:'flex','flex-wrap':'wrap'}}>
                     {!loading
                         ? course
                             .filter((el) => userCourses.includes(el._id))
                             .map((el, i) => <CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
                         : arr.map((el, i) => <LoadingComponent key={i} />)
                     }
-                </Slider>
+                </div>
             </Box>
         </>
     );

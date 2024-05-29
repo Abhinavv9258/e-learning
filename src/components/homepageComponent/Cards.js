@@ -10,6 +10,7 @@ import {
     Typography,
     Box,
     Divider,
+    Tooltip
 } from '@mui/material';
 
 import '../loadingComponent/LoadingComponent.css';
@@ -143,20 +144,25 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                 ) : (
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Card className="course-card">
-                            <CardHeader sx={{ height: '160px', p: 0 }}
-                                title={
-                                    <CardMedia
-                                        component="img"
-                                        alt={title}
-                                        image={base64Thumbnail}
-                                        style={{
-                                            objectFit: 'cover',
-                                            borderRadius: '5px',
-                                            border: '1px solid '
-                                        }}
+                            <Tooltip title={title}>
+                                <div>
+                                    <CardHeader sx={{ height: '160px', p: 0 }}
+                                        title={
+                                            <CardMedia
+                                                component="img"
+                                                alt={title}
+                                                image={base64Thumbnail}
+                                                style={{
+                                                    objectFit: 'cover',
+                                                    borderRadius: '5px',
+                                                    border: '1px solid '
+                                                }}
+                                            />
+                                        }
                                     />
-                                }
-                            />
+                                </div>
+                            </Tooltip>
+
 
                             <CardContent
                                 sx={{ padding: 0, width: '250px', height: '120px' }}
@@ -212,8 +218,8 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                                     </>
                                 ) : (
                                     <>
-                                        <Button size="small" sx={{ color: '#970C10' }} onClick={toggle}>
-                                            Add Course
+                                        <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
+                                            View Details
                                         </Button>
                                         {price === 0 ? (
                                             <>
@@ -242,8 +248,6 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                         <ViewCourse modal={modal} courseDetails={courseDetails} toggleCourse={toggleCourse} />
                     </Box>
                 )}
-
-
         </>
     );
 };
