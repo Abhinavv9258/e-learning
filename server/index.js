@@ -17,7 +17,6 @@ const { courseRoutes } = require("./routes/courses.route");
 const { sendMail } = require("./routes/sendmail.route");
 
 
-
 app.use(cors({
     credentials: true,
     origin: [`${process.env.REACT_APP_CLIENT_URL}`, `${process.env.REACT_APP_SERVER_URL}`]
@@ -145,6 +144,142 @@ app.use("/api", sendMail);
 // })
 
 */
+
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
+// const webhookSecret = process.env.WEBHOOK_SECRET;
+
+
+// stripe integration
+/* create subscription api */
+// const createStripeSession = async (price) => {
+//     try {
+//         const session = await stripe.checkout.sessions.create({
+//             payment_method_types: ["card"],
+//             line_items: [
+//                 {
+//                     price_data: {
+//                         currency: "inr", // Set currency to INR
+//                         product_data: {
+//                             name: "Course Payment",
+//                         },
+//                         unit_amount: price * 100, // Convert price to cents
+//                     },
+//                     quantity: 1,
+//                 },
+//             ],
+//             mode: "payment",
+//             success_url: `${process.env.REACT_APP_CLIENT_URL}/success`,
+//             cancel_url: `${process.env.REACT_APP_CLIENT_URL}/cancel`,
+//         });
+//         return session;
+//     } catch (error) {
+//         console.error('Error creating Stripe session:', error);
+//         throw error;
+//     }
+// };
+
+
+const createStripeSession = async (price, options = {}) => {
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: [
+                {
+                    price_data: {
+                        currency: options.currency || "inr",
+                        product_data: {
+                            name: options.productName || " Payment",
+                        },
+                        unit_amount: price * 100,
+                    },
+                    quantity: 1,
+                },
+            ],
+            mode: options.mode || "payment",
+            success_url: options.successUrl || `${process.env.REACT_APP_CLIENT_URL}/success`,
+            cancel_url: options.cancelUrl || `${process.env.REACT_APP_CLIENT_URL}/cancel`,
+            ...options.additionalFields,
+        });
+        return session;
+    } catch (error) {
+        console.error('Error creating Stripe session:', error);
+        throw error;
+    }
+};
+
+
+const createPaymentIntent = async (price, sessionOptions) => {
+    try {
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: price * 100, // Convert price to the smallest currency unit
+            currency: 'inr',
+            metadata: {
+                integration_check: 'accept_a_payment',
+                ...sessionOptions.metadata,
+            },
+            receipt_email: sessionOptions.customer_email,
+        });
+        return paymentIntent;
+    } catch (error) {
+        console.error('Error creating payment intent:', error);
+        throw error;
+    }
+};
+
+
+const updateUserSubscription = async (userId, sessionId, price) => {
+    try {
+        // Fetch the user based on the userId
+        const user = await userModel.findById(userId);
+
+        if (user) {
+            // Create a new subscription entry
+            const newSubscription = {
+                sessionId: sessionId,
+                price: price,
+                enrolledAt: new Date(),
+            };
+
+            // Update the subscriptionEnrolled array in the user document
+            user.subscriptionEnrolled.push(newSubscription);
+            await updateUserSubscriptionDetails(userId, newSubscription.sessionId, newSubscription.price);
+            // Save the updated user document
+            await user.save();
+        }
+    } catch (error) {
+        console.error('Error updating user subscription:', error);
+        throw error; // Rethrow the error for proper error handling
+    }
+};
+
+async function updateUserSubscriptionDetails(userId, sessionId, price) {
+    await userModel.updateOne(
+        { _id: userId },
+        {
+            $set: {
+                "subscription.sessionId": sessionId,
+                "subscription.price": price,
+            }
+        }
+    );
+}
+
+app.post("/api/v1/create-checkout-course", async (req, res) => {
+    const { price, sessionOptions } = req.body;
+
+    try {
+        // const session = await createStripeSession(price,sessionOptions);
+        const paymentIntent = await createPaymentIntent(price, sessionOptions);
+        res.json({ clientSecret: paymentIntent.client_secret });
+        // await updateUserSubscription(userId, session.id, price);
+        // res.json({ session });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
 
 // error handler
 app.use((err, req, res, next) => {

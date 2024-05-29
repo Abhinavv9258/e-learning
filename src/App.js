@@ -13,6 +13,9 @@ import AdminLoginPage from './pages/AdminLoginPage'
 import AdminDashboard from './pages/AdminDashboard'
 // import AdminDemo from './pages/AdminDemo'
 import Homepage from './pages/Homepage';
+import Success from './pages/Success';
+import Cancel from './pages/Cancel';
+import Payment from './pages/Payment';
 import NotFound from "./components/Error/NotFound";
 
 // importing styles
@@ -42,6 +45,9 @@ const App = () => {
             <Routes>
                 <Route path='/' element={<Index toggleBackground={toggleBackground} />} />
                 <Route path='/homepage' element={<Homepage toggleBackground={toggleBackground} />} />
+                <Route path='/payment' element={<Payment />} />
+                <Route path='/cancel' element={<Cancel />} />
+                <Route path='/success' element={<Success />} />
                 <Route path='/index' element={<Index toggleBackground={toggleBackground} />} />
                 <Route path='/register-page' element={<RegisterPage toggleBackground={toggleBackground} />} />
                 <Route path='/user-login-page' element={<UserLoginPage toggleBackground={toggleBackground} />} />
