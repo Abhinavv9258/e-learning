@@ -32,6 +32,11 @@ const Homepage = ({ toggleBackground }) => {
     // const navigate = useNavigate();
     const { user } = useApp();
 
+    React.useEffect(() => {
+        // Scroll to the top of the page
+        window.scrollTo(0, 0);
+    }, []); 
+
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
     );

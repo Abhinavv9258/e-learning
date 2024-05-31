@@ -14,6 +14,11 @@ const RegisterPage = ({ toggleBackground }) => {
 
     useWebsiteTitle('E-Learn || Register');
 
+    React.useEffect(() => {
+        // Scroll to the top of the page
+        window.scrollTo(0, 0);
+    }, []); 
+
     const [isDarkBackground] = React.useState(
         localStorage.getItem('isDarkBackground') === 'true' ? true : false
     );

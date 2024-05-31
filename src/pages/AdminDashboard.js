@@ -166,6 +166,11 @@ const AdminDashboard = () => {
     const navigate = useNavigate();
     const { user, setUser } = useApp();
 
+    React.useEffect(() => {
+        // Scroll to the top of the page
+        window.scrollTo(0, 0);
+    }, []); 
+
     // for top loading bar
     const ref = React.useRef(null);
 

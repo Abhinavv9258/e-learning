@@ -52,6 +52,11 @@ const CheckoutForm = ({ clientSecret, courseDetails }) => {
     const base64Thumbnail = thumbnailData.base64;
     const navigate = useNavigate();
 
+    React.useEffect(() => {
+        // Scroll to the top of the page
+        window.scrollTo(0, 0);
+    }, []); 
+
     useEffect(() => {
         if (stripe) {
             const pr = stripe.paymentRequest({
