@@ -48,7 +48,6 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
 
     const addCourseToUser = async () => {
         const courseId = course._id;
-        console.log(course);
         const token = localStorage.getItem('access_token');
         try {
             const url = `${URL}/api/users/add-course/${user._id}`;
