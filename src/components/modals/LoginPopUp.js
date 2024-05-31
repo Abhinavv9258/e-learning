@@ -17,6 +17,7 @@ const LoginPopUp = ({ open, onClose, setLoginPopUp }) => {
     const handleLogin = () => {
         setLoginPopUp(false);
         navigate('/user-login-page');
+        window.location.reload();
     }
 
     return (

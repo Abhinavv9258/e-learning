@@ -23,9 +23,17 @@ import CloseIcon from '@mui/icons-material/Close';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { URL } from '../../App';
+import { useApp } from '../../context/AuthContext'
+
+import './Modals.css';
+import LoginPopUp from './LoginPopUp';
 
 
 const Example = ({ modal, toggleCourse, courseDetails }) => {
+
+    const { user } = useApp();
+    const [loginPopUp, setLoginPopUp] = React.useState(false);
+
     // const sections = ['About', 'Instructor', 'Syllabus', 'Enrollment Options'];
     const [activeSection, setActiveSection] = useState('About');
     // const [underlineStyle, setUnderlineStyle] = useState({});
@@ -46,37 +54,49 @@ const Example = ({ modal, toggleCourse, courseDetails }) => {
     const checkout = async (price) => {
         setLoading(true);
         setError(null);
-        try {
-            const sessionOptions = {
-                customer_email: "customer@example.com",
-                metadata: {
-                    courseId: "course123",
-                    userId: "user123",
-                },
-            };
-            const response = await fetch(`${URL}/api/v1/create-checkout-course`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ price, sessionOptions }),
-            });
+        if (!user) {
+            setLoginPopUp(!loginPopUp);
+        } else {
+            try {
+                const sessionOptions = {
+                    customer_email: "customer@example.com",
+                    metadata: {
+                        courseId: "course123",
+                        userId: "user123",
+                    },
+                };
+                const response = await fetch(`${URL}/api/v1/create-checkout-course`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ price, sessionOptions }),
+                });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to create payment intent');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to create payment intent');
+                }
+
+                const { clientSecret } = await response.json();
+
+                navigate('/payment', { state: { clientSecret, courseDetails } });
+                setClientSecret(clientSecret);
+            } catch (e) {
+                console.error("Error during checkout:", e);
+                setError(e.message || 'An error occurred during checkout. Please try again.');
+            } finally {
+                setLoading(false);
             }
-
-            const { clientSecret } = await response.json();
-
-            navigate('/payment', { state: { clientSecret, courseDetails } });
-            setClientSecret(clientSecret);
-        } catch (e) {
-            console.error("Error during checkout:", e);
-            setError(e.message || 'An error occurred during checkout. Please try again.');
-        } finally {
-            setLoading(false);
         }
+        setLoading(false);
+    };
+
+    const handleClick = (price) => {
+        setLoading(true);
+        setTimeout(() => {
+            checkout(price);
+        }, 2000);
     };
 
     // const checkout = async (price) => {
@@ -102,7 +122,6 @@ const Example = ({ modal, toggleCourse, courseDetails }) => {
     //             console.log("error: ", e);
     //         })
     // }
-
 
     return (
         <>
@@ -179,32 +198,52 @@ const Example = ({ modal, toggleCourse, courseDetails }) => {
                             </Typography>
                         </>}
                         {activeSection === 'Instructor' && <>
-                            Instructor
+                            <Typography>
+                            Our instructors are industry experts with extensive experience in software development. They bring real-world insights and practical knowledge to the classroom, ensuring that you learn the most relevant and up-to-date skills. Each instructor is passionate about teaching and committed to helping you succeed in your career.
+                            </Typography>
                         </>}
                         {activeSection === 'Syllabus' && <>
-                            Syllabus
+                            <Typography>
+                            This course covers fundamental and advanced topics in software development. You will learn programming languages, algorithms, data structures, software engineering principles, web development, and database management. The syllabus is designed to build a strong foundation and progressively introduce more complex concepts and technologies.
+                            </Typography>
                         </>}
                         {activeSection === 'Enrollment Options' && <>
-                            Enrollment Options
+                            <Typography>
+                            We offer flexible enrollment options to suit your needs. Choose from full-time or part-time schedules, with both in-person and online classes available. Enroll today to start your journey towards becoming a proficient software developer, with access to comprehensive resources and support throughout your learning experience.
+                            </Typography>
                         </>}
                     </ModalBody>
 
                     <ModalFooter style={{ 'padding': '16px' }}>
-                        <Button color="primary" disabled>
+                        <Button color="primary" disabled sx={{ border: 2 }}>
                             <AddShoppingCartIcon /> Add to Cart
                         </Button>{' '}
-                        {/* <Button color="secondary"
-                            onClick={() => checkout(Number(courseDetails.price))}
-                        >
-                            <FlashOnIcon /> Buy Now
-                        </Button> */}
-                        <Button color="secondary" onClick={() => checkout(courseDetails.price)} disabled={loading}>
-                            {loading ? 'Processing...' : 'Checkout'}
+                        <Button
+                            sx={{ border: 2 }}
+                            color={loading ? 'primary' : 'secondary'}
+                            onClick={() => handleClick(courseDetails.price)} disabled={loading}>
+                            {loading ?
+                                (
+                                    <>
+                                        <Box className="loader2"
+                                            sx={{ mr: 1 }}
+                                        ></Box> Processing...
+                                    </>
+                                ) : (
+                                    <>
+                                        <FlashOnIcon /> Checkout
+                                    </>
+                                )
+                            }
                         </Button>
                     </ModalFooter>
-                </Modal>
+                </Modal >
             ) : (null)}
-
+            <LoginPopUp
+                open={loginPopUp}
+                onClose={checkout}
+                setLoginPopUp={setLoginPopUp}
+            />
         </>
     );
 }

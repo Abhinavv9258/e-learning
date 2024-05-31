@@ -1,0 +1,35 @@
+/* ViewCourse */
+/* Loader */
+.loader2 {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    color: #257DD4;
+    /* color: rgba(0, 0, 0, 0.26); Default color */
+    position: relative;
+}
+
+.loader2::before {
+    content: '';
+    left: 34px;
+    bottom: 18px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #257DD4;
+    /* border: 2px solid rgba(0, 0, 0, 0.26); Default border color */
+    border-bottom-color: white;
+    box-sizing: border-box;
+    animation: rotation2 0.6s linear infinite;
+}
+
+@keyframes rotation2 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

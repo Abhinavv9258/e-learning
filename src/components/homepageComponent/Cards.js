@@ -19,7 +19,6 @@ import '../../assets/css/HomepageSection.css'
 
 import LoadingComponent from '../loadingComponent/LoadingComponent';
 import ViewCourse from '../modals/ViewCourse';
-import LoginPopUp from "../modals/LoginPopUp";
 
 import { URL } from '../../App';
 
@@ -126,12 +125,6 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
         // eslint-disable-next-line
     }, []);
 
-    const [loginPopUp, setLoginPopUp] = React.useState(false);
-
-    const toggle = () => {
-        setLoginPopUp(!loginPopUp);
-    };
-
 
     return (
         <>
@@ -191,60 +184,61 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                             <Divider sx={{ border: 1 }} />
 
                             <CardActions sx={{ justifyContent: 'space-between' }}>
-                                {user && isCourseAdded ? (
-                                    <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
-                                        View Course
-                                    </Button>
-                                ) : user ? (
-                                    <>
+                                {user && isCourseAdded ?
+                                    (
                                         <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
-                                            Add Course
+                                            View Course
                                         </Button>
-                                        {price === 0 ? (
-                                            <>
-                                                <Button variant="contained" color="success">
-                                                    <Box><TbDiscountCheckFilled size={20} /> FREE</Box>
-                                                </Button>
+                                    ) : user ? (
+                                        <>
+                                            <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
+                                                Add Course
+                                            </Button>
+                                            {price === 0 ? (
+                                                <>
+                                                    <Button variant="contained" color="success">
+                                                        <Box><TbDiscountCheckFilled size={20} /> FREE</Box>
+                                                    </Button>
 
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Button variant="contained" color="primary">
-                                                    <Box><TbDiscountCheckFilled size={20} />{price}</Box>
-                                                </Button>
-                                            </>
-                                        )}
-                                    </>
-                                ) : (
-                                    <>
-                                        <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
-                                            View Details
-                                        </Button>
-                                        {price === 0 ? (
-                                            <>
-                                                <Button variant="contained" color="success">
-                                                    <Box><TbDiscountCheckFilled size={20} /> FREE</Box>
-                                                </Button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Button variant="contained" color="primary">
+                                                        <Box><TbDiscountCheckFilled size={20} />{price}</Box>
+                                                    </Button>
+                                                </>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Button size="small" sx={{ color: '#970C10' }} onClick={toggleCourse}>
+                                                View Details
+                                            </Button>
+                                            {price === 0 ? (
+                                                <>
+                                                    <Button variant="contained" color="success">
+                                                        <Box><TbDiscountCheckFilled size={20} /> FREE</Box>
+                                                    </Button>
 
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Button variant="contained" color="primary">
-                                                    <Box><TbDiscountCheckFilled size={20} />{price}</Box>
-                                                </Button>
-                                            </>
-                                        )}
-                                    </>
-                                )}
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Button variant="contained" color="primary">
+                                                        <Box><TbDiscountCheckFilled size={20} />{price}</Box>
+                                                    </Button>
+                                                </>
+                                            )}
+                                        </>
+                                    )
+                                }
 
                             </CardActions>
                         </Card>
-                        <LoginPopUp
-                            open={loginPopUp}
-                            onClose={toggle}
-                            setLoginPopUp={setLoginPopUp}
+                        <ViewCourse
+                            modal={modal}
+                            courseDetails={courseDetails}
+                            toggleCourse={toggleCourse}
                         />
-                        <ViewCourse modal={modal} courseDetails={courseDetails} toggleCourse={toggleCourse} />
                     </Box>
                 )}
         </>
