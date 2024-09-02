@@ -93,7 +93,6 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
     const [isCourseAdded, setIsCourseAdded] = React.useState(false);
 
     const checkCourse = async () => {
-        console.log(course.title);
         try {
             const token = localStorage.getItem('access_token');
             const url = `${URL}/api/users/check-course/${user._id}`;
@@ -135,7 +134,7 @@ const CourseCard = ({ course, thumbnail, subCategory, title, category, loading, 
                     </>
                 ) : (
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Card className="course-card">
+                        <Card className="course-card" sx={{ minWidth: 300 }}>
                             <Tooltip title={title}>
                                 <div>
                                     <CardHeader sx={{ height: '160px', p: 0 }}

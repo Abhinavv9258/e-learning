@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
-
 import Slider from 'react-slick';
+
 import { Typography, IconButton, Box } from '@mui/material';
-import CourseCard from './Cards';
-import LoadingComponent from '../loadingComponent/LoadingComponent';
-import '../../assets/css/HomepageSection.css'
-import { URL } from '../../App'
-import { useApp } from '../../context/AuthContext';
+
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+
+import '../../assets/css/HomepageSection.css';
+
+import CourseCard from './Cards';
+import LoadingComponent from '../loadingComponent/LoadingComponent';
+
+import { URL } from '../../App';
+import { useApp } from '../../context/AuthContext';
+
 
 const NextArrow = (props) => {
     const { onClick } = props;
     return (
-        <IconButton onClick={onClick} className="slick-arrow next" >
+        <IconButton onClick={onClick} className="slick-arrow next">
             <KeyboardDoubleArrowRightIcon className="slick-next-arrow" />
         </IconButton>
     );
@@ -28,61 +33,12 @@ const PrevArrow = (props) => {
     );
 };
 
-
 const Section6 = () => {
-
     const { user } = useApp();
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState([]);
     const [userCourses, setUserCourses] = useState([]);
     const arr = [1, 2, 3, 4, 5];
-
-    var settings = {
-        // swipe: false,
-        swipeToSlide: true,
-        dots: true,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        initialSlide: 0,
-        autoplay: true,
-        speed: 2000,
-        draggable: true,
-        autoplaySpeed: 3000,
-        cssEase: 'linear',
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 1030,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 900,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 720,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    };
 
     const fetchData = () => {
         try {
@@ -106,7 +62,6 @@ const Section6 = () => {
                     setLoading(false);
                 });
         } catch (error) {
-            // console.error('Error:', error);
             setLoading(false);
         }
     };
@@ -129,7 +84,6 @@ const Section6 = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                // console.log(data.enrolledCourseIds);
                 setUserCourses(data.enrolledCourseIds);
             } else {
                 setUserCourses([]);
@@ -140,27 +94,94 @@ const Section6 = () => {
         }
     };
 
-
     useEffect(() => {
         setLoading(true);
         fetchData();
         fetchUserEnrolledCourses();
     }, [user]);
 
+    const enrolledCourses = course.filter((el) => userCourses.includes(el._id));
+    const slidesToShow = loading ? 4 : Math.min(enrolledCourses, 4);
+    const infinite = loading || enrolledCourses > 4;
+    const autoplay = loading || enrolledCourses > 1;
+
+    // Adjust the slider settings
+    const settings = {
+        infinite,
+        speed: 500,
+        slidesToShow,
+        slidesToScroll: 1,
+        initialSlide: 0,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+        autoplay,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 1450,
+                settings: {
+                    slidesToShow: loading ? 3 : Math.min(enrolledCourses, 3),
+                    slidesToScroll: 1,
+                    infinite: loading || enrolledCourses > 3,
+                }
+            },
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: loading ? 3 : Math.min(enrolledCourses, 3),
+                    slidesToScroll: 1,
+                    infinite: loading || enrolledCourses > 3,
+                }
+            },
+            {
+                breakpoint: 1120,
+                settings: {
+                    slidesToShow: loading ? 2 : Math.min(enrolledCourses, 2),
+                    slidesToScroll: 1,
+                    infinite: loading || enrolledCourses > 2,
+                }
+            },
+            {
+                breakpoint: 800,
+                settings: {
+                    slidesToShow: loading ? 1 : Math.min(enrolledCourses, 1),
+                    slidesToScroll: 1,
+                    infinite: loading || enrolledCourses > 1,
+                }
+            }
+        ]
+    };
+
     return (
         <>
             <Box style={{ padding: '2%' }} sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography variant='h5'>
-                    My Course Details:
+                    My Course Details: {enrolledCourses.length}
                 </Typography>
-                <div {...settings} style={{display:'flex','flex-wrap':'wrap'}}>
-                    {!loading
-                        ? course
-                            .filter((el) => userCourses.includes(el._id))
-                            .map((el, i) => <CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
-                        : arr.map((el, i) => <LoadingComponent key={i} />)
-                    }
-                </div>
+                <Box className='slider-container'>
+                    {!loading ? (
+                        enrolledCourses.length > 0 ? (
+                            <Slider {...settings}>
+                                {enrolledCourses.map((el, i) => (
+                                    <CourseCard {...el} course={course[i]} loading={loading} key={el._id} />
+                                ))}
+                            </Slider>
+                        ) : (
+                            <Box style={{ padding: '20px', textAlign: 'center' }}>
+                                <Typography variant='h6'>
+                                    You have not enrolled in any courses yet.
+                                </Typography>
+                                <Typography variant='body1'>
+                                    Please add courses to view them here.
+                                </Typography>
+                            </Box>
+                        )
+                    ) : (
+                        <Slider {...settings}>
+                            {arr.map((el, i) => <LoadingComponent key={i} />)}
+                        </Slider>
+                    )}
+                </Box>
             </Box>
         </>
     );

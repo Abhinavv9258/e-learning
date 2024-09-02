@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import Slider from "react-slick";
 
-import Slider from 'react-slick';
 import { Typography, IconButton, Box } from '@mui/material';
-import CourseCard from './Cards';
-import LoadingComponent from '../loadingComponent/LoadingComponent';
-import { URL } from '../../App'
-import '../../assets/css/HomepageSection.css'
-
 
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+
+import '../../assets/css/HomepageSection.css'
+
+import CourseCard from './Cards';
+import LoadingComponent from '../loadingComponent/LoadingComponent';
+
+import { URL } from '../../App'
+
 
 const NextArrow = (props) => {
     const { onClick } = props;
@@ -36,52 +39,53 @@ const Section3 = () => {
     const [course, setCourse] = useState([]);
     const arr = [1, 2, 3, 4, 5];
 
-    var settings = {
-        // swipe: false,
-        swipeToSlide: true,
-        dots: true,
+
+    const settings = {
         infinite: true,
+        speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 0,
-        autoplay: true,
-        speed: 2000,
-        draggable: true,
-        autoplaySpeed: 3000,
-        cssEase: 'linear',
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
+        autoplay: true,
+        autoplaySpeed: 3000,
         responsive: [
             {
-                breakpoint: 1200,
+                breakpoint: 1450,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
-                },
+                    infinite: true,
+                }
             },
             {
-                breakpoint: 1030,
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 1120,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
-                },
+                    infinite: false,
+                }
             },
             {
-                breakpoint: 900,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 720,
+                breakpoint: 800,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                },
-            },
-        ],
+                    infinite: false,
+                }
+            }
+        ]
     };
+
 
     const fetchData = () => {
         try {
@@ -123,9 +127,18 @@ const Section3 = () => {
                 <Typography variant='h5'>
                     Course Details:
                 </Typography>
-                <div style={{ display: 'flex', 'flex-wrap': 'wrap' }}>
-                    {course?.map((el, i) => <CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)}
-                </div>
+                <Box className='slider-container' >
+                    <Slider {...settings} >
+                        {!loading
+                            ? course?.map(
+                                (el, i) =>
+                                    (<CourseCard {...el} course={course[i]} loading={loading} key={el._id} />)
+                            ) : arr.map(
+                                (el, i) => <LoadingComponent key={i} />
+                            )
+                        }
+                    </Slider>
+                </Box>
             </Box>
         </>
     );
